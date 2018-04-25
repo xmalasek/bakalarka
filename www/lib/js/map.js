@@ -80,9 +80,18 @@ $(document).ready(function() {
     getUsers();
 });
 
+
+
+
+
+
 $(window).resize(function () {
     $('#map').css('height', ($(window).height() - 40));
 }).resize();
+
+
+
+
 
 function geoLocate() {
     map.locate({setView: true, maxZoom: 17});
