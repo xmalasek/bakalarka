@@ -1,0 +1,104 @@
+{**
+ * @param string   $basePath web base path
+ * @param array    $flashes  flash messages
+ *}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>{ifset title}{include title|stripHtml} | {/ifset}</title>
+
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link type="text/css" rel="stylesheet" href="{$basePath}/lib/css/materialize.css"  media="screen,projection"/>
+	<link type="text/css" rel="stylesheet" href="{$basePath}/lib/css/style.css"  media="screen,projection"/>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript" src="{$basePath}/lib/js/materialize.js"></script>
+	<script src="https://nette.github.io/resources/js/netteForms.min.js"></script>
+
+
+    {block head}{/block}
+</head>
+
+<body>
+    <div class="">
+	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+
+    <ul id="slide-out" class="sidenav sidenav-fixed">
+        <li><div class="logo">
+                <div class="background">
+                    <img src="{$basePath}/picture/intro.jpg">
+                </div>
+            </div></li>
+
+        <li><a href="#!"><i class="material-icons">add_box</i>Nahlásit závadu</a></li>
+        <li><div class="divider"></div></li>
+        <li><a class="subheader"><i class="material-icons">layers</i>Vrstvy</a></li>
+            <ul>
+                <li><a class="subitems waves-effect" href="#!">Eletrická zařízení</a></li>
+                <li><a class="waves-effect" href="#!">Městský mobiliář</a></li>
+                <li><a class="waves-effect" href="#!">Místa zájmu</a></li>
+                <li><a class="waves-effect" href="#!">Odpadové hospodářství</a></li>
+            </ul>
+    </ul>
+
+    <header>
+        <nav class="light-blue lighten-1">
+            <div class="nav-wrapper">
+                <div class="col s12">
+                    <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                    <a href="#" class="brand-logo center">Aplikace pro nahlašování závad s obecním majetkem</a>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li><a href="{$basePath}/admin/"><i class="material-icons">account_box</i></a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="row">
+            <div class="col s12">
+                {include content}
+            </div>
+        </div>
+    </main>
+
+     <!--
+
+    <footer class="page-footer blue-grey lighten-2">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Bakalářská práce</h5>
+                    <p class="grey-text text-lighten-4">Obsahem tohoto webu je bakalářská práce na témea: Webová aplikace pro nahlašovaní záavad s obecním majetkem.</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                Vytvořil Adam Malášek
+            </div>
+        </div>
+    </footer>
+
+    -->
+
+    </div>
+
+
+	{block scripts}
+
+        <script src="https://nette.github.io/resources/js/netteForms.min.js"></script>
+        <script type="application/javascript">
+            $(document).ready(function(){
+                $('.sidenav').sidenav();
+            });
+        </script>
+	{/block}
+
+</body>
+</html>
