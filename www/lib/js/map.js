@@ -35,6 +35,8 @@ L.control.zoom({ position: 'bottomright' }).addTo(map);
 
 */
 
+
+
 var map, newUser, users, mapquest, firstLoad;
 
 firstLoad = true;
