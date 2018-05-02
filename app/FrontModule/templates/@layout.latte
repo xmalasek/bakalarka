@@ -13,10 +13,20 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link type="text/css" rel="stylesheet" href="{$basePath}/lib/css/materialize.css"  media="screen,projection"/>
 	<link type="text/css" rel="stylesheet" href="{$basePath}/lib/css/style.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="lib/leaflet/plugins/leaflet.markercluster/MarkerCluster.css" />
+    <link type="text/css" rel="stylesheet" href="lib/leaflet/plugins/leaflet.markercluster/MarkerCluster.Default.css" />
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript" src="{$basePath}/lib/js/materialize.js"></script>
+    <script type="text/javascript" src="{$basePath}/lib/js/jquery.nette.js"></script>
 	<script src="https://nette.github.io/resources/js/netteForms.min.js"></script>
+
+    <link rel="stylesheet" href="{$basePath}/lib/leaflet/leaflet.css" />
+    <script src="{$basePath}/lib/leaflet/leaflet.js"></script>
+
+    <script type="text/javascript" src="{$basePath}/lib/js/jquery.js"></script>
+    <script type="text/javascript" src="{$basePath}/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{$basePath}/lib/leaflet/plugins/leaflet.markercluster/leaflet.markercluster.js"></script>
 
 
     {block head}{/block}
@@ -33,14 +43,14 @@
                 </div>
             </div></li>
 
-        <li><a href="#!"><i class="material-icons">add_box</i>Nahlásit závadu</a></li>
+        <li><a n:href="Fault:"><i class="material-icons">add_box</i>Nahlásit závadu</a></li>
         <li><div class="divider"></div></li>
         <li><a class="subheader"><i class="material-icons">layers</i>Vrstvy</a></li>
             <ul>
-                <li><a class="subitems waves-effect" href="#!">Eletrická zařízení</a></li>
-                <li><a class="waves-effect" href="#!">Městský mobiliář</a></li>
-                <li><a class="waves-effect" href="#!">Místa zájmu</a></li>
-                <li><a class="waves-effect" href="#!">Odpadové hospodářství</a></li>
+                <li><a class="subitems waves-effect" n:href="Eletric:">Eletrická zařízení</a></li>
+                <li><a class="waves-effect" n:href="Furniture:">Městský mobiliář</a></li>
+                <li><a class="waves-effect" n:href="Interest:">Místa zájmu</a></li>
+                <li><a class="waves-effect" n:href="Waste:">Odpadové hospodářství</a></li>
             </ul>
     </ul>
 
@@ -49,7 +59,7 @@
             <div class="nav-wrapper">
                 <div class="col s12">
                     <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-                    <a href="#" class="brand-logo center">Aplikace pro nahlašování závad s obecním majetkem</a>
+                    <a n:href="Homepage:" class="brand-logo center">Nahlašování závad na obencím majetku</a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
                         <li><a href="{$basePath}/admin/"><i class="material-icons">account_box</i></a></li>
 

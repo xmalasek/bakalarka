@@ -5,11 +5,17 @@
 
 {block content}
 
+    <a class="waves-effect waves-light btn" onclick="$('#addmeModal'); initRegistration(); return false;" ><i class="material-icons right" >add</i>Přidej bod do mapy</a>
+    <div id="map"></div>
+
+
 {/block}
 
 {* JS kod pro konkretni Presenter *}
 {block scripts}
     {include parent}
+    <script src="{$basePath}/lib/js/map.js">
+    </script>
 
 {/block}
 

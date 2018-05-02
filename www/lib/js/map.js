@@ -1,41 +1,3 @@
-/*
-
-var map = L.map('map').setView([49.316735, 16.483175], 14);
-
-
-var googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
-        maxZoom: 20,
-        subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
-    }).addTo(map);
-
-var googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
-        maxZoom: 20,
-        subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
-    }).addTo(map);
-
-var googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
-        maxZoom: 20,
-        subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
-    }).addTo(map);
-
-var googleTerrain = L.tileLayer('http://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', {
-        maxZoom: 20,
-        subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
-    }).addTo(map);
-
-
-var baseMaps = {
-    "Google Street": googleStreets,
-    "Google Hybrid": googleHybrid,
-    "Google Sat": googleSat,
-    "Google Terrain": googleTerrain
-};
-L.control.layers(baseMaps).addTo(map);
-L.control.zoom({ position: 'bottomright' }).addTo(map);
-
-*/
-
-
 
 var map, newUser, users, mapquest, firstLoad;
 
@@ -76,21 +38,14 @@ map.addControl(new L.Control.Scale());
 
 $(document).ready(function() {
     $.ajaxSetup({cache:false});
-    $('#map').css('height', ($(window).height() - 40));
+    $('#map').css('height', ($(window).height() - 50));
     getUsers();
 });
 
 
-
-
-
-
 $(window).resize(function () {
-    $('#map').css('height', ($(window).height() - 40));
+    $('#map').css('height', ($(window).height() - 50));
 }).resize();
-
-
-
 
 
 function geoLocate() {

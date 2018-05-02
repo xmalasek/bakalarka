@@ -1,13 +1,13 @@
 <?php
 
-namespace AdminModule;
+namespace FrontModule;
 
 use Nette;
 
 
-class HomepagePresenter extends BasePresenter
+class EletricPresenter extends Nette\Application\UI\Presenter
 {
-   public function __construct()
+    public function __construct()
     {
         parent::__construct();
     }

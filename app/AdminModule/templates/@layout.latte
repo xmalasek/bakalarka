@@ -18,6 +18,20 @@
 	<script type="text/javascript" src="{$basePath}/lib/js/materialize.js"></script>
 	<script src="https://nette.github.io/resources/js/netteForms.min.js"></script>
 
+	<link type="text/css" rel="stylesheet" href="lib/leaflet/plugins/leaflet.markercluster/MarkerCluster.css" />
+	<link type="text/css" rel="stylesheet" href="lib/leaflet/plugins/leaflet.markercluster/MarkerCluster.Default.css" />
+
+	<script type="text/javascript" src="{$basePath}/lib/js/jquery.nette.js"></script>
+
+	<link rel="stylesheet" href="{$basePath}/lib/leaflet/leaflet.css" />
+	<script src="{$basePath}/lib/leaflet/leaflet.js"></script>
+
+	<script type="text/javascript" src="{$basePath}/lib/js/jquery.js"></script>
+	<script type="text/javascript" src="{$basePath}/lib/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="{$basePath}/lib/leaflet/plugins/leaflet.markercluster/leaflet.markercluster.js"></script>
+
+
+
 	<meta name="robots" content="noindex,nofollow">
 	<meta name="googlebot" content="nosnippet,noarchive">
 
@@ -44,6 +58,23 @@
 				<li><a class="waves-effect" href="#!">Městský mobiliář</a></li>
 				<li><a class="waves-effect" href="#!">Místa zájmu</a></li>
 				<li><a class="waves-effect" href="#!">Odpadové hospodářství</a></li>
+
+			<li class="white">
+				<ul class="collapsible collapsible-accordion">
+					<li>
+						<a class="collapsible-header waves-effect waves-blue"><i class="material-icons">folder_open</i>A submenu <i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
+						<div class="collapsible-body">
+							<ul>
+								<li><a class="waves-effect waves-blue" href="#"><i class="material-icons">fullscreen</i>Full Screen</a></li>
+								<li><a class="waves-effect waves-blue" href="#"><i class="material-icons">swap_horiz</i>Horizontal Menu</a></li>
+								<li><div class="divider"></div></li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+			</li>
+
+
 			<li><div class="divider"></div></li>
 			<li><a class="subheader"><i class="material-icons">edit</i>Editace</a></li>
 			<li><a href="#!">Přidat vrstvu</a></li>
@@ -53,6 +84,8 @@
 			<li><a href="#!">Přidat závadu</a></li>
 			<li><a href="#!">Zobrazit závady</a></li>
 		</ul>
+
+
 
 		<header>
 			<nav class="indigo darken-4">
@@ -79,14 +112,23 @@
 		</main>
 
 		<footer>
-			Paticka
+
 		</footer>
 	</div>
 
 	{block scripts}
 		<script type="application/javascript">
             $(document).ready(function(){
-                $('.sidenav').sidenav();
+                $('.button-collapse').sidenav({
+                        menuWidth: 300, // Default is 300
+                        edge: 'left', // Choose the horizontal origin
+                        closeOnClick: false, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+                        draggable: true // Choose whether you can drag to open on touch screens
+                    }
+                );
+                // START OPEN
+                $('.button-collapse').sidenav('show');
+
             });
 		</script>
 	{/block}

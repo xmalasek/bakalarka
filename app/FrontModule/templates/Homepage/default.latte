@@ -1,22 +1,15 @@
 
 {block title}
-	Front - Homepage - default
+    Front - Homepage - default
 {/block}
 
 {block content}
 
-    <link rel="stylesheet" href="{$basePath}/lib/leaflet/leaflet.css" />
-    <script src="{$basePath}/lib/leaflet/leaflet.js"></script>
-    <script type="text/javascript" src="{$basePath}lib/leaflet/plugins/leaflet.markercluster/leaflet.markercluster.js"></script>
 
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="lib/leaflet/plugins/leaflet.markercluster/leaflet.markercluster.js"></script>
 
     <!-- <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Norican">
     <link type="text/css" rel="stylesheet" href="lib/bootstrap/css/bootstrap.css"> -->
-    <link type="text/css" rel="stylesheet" href="lib/leaflet/plugins/leaflet.markercluster/MarkerCluster.css" />
-    <link type="text/css" rel="stylesheet" href="lib/leaflet/plugins/leaflet.markercluster/MarkerCluster.Default.css" />
+
 
     <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvqWribdiuAeKUeUed_Z87ziYtk5C1k3E&callback=initMap"></script>
     <script src="http://maps.google.com/maps/api/js?v=3&sensor=false"></script>
@@ -39,6 +32,25 @@
 
 
 
+    <a n:href="changeFoo!">changeFoo</a>
+
+    {snippet pokus}
+        {$foo}
+    {/snippet}
+
+
+    <script>
+        
+        $(function () {
+
+            $('a.ajax').live('click', function () {
+                $.get(this.href);
+            })
+                return false;
+        })
+
+
+    </script>
 
     <div id="map"></div>
     <div id="loading-mask" class="modal-backdrop" style="display:none;"></div>
@@ -47,6 +59,9 @@
             <img src="img/ajax-loader.gif">
         </div>
     </div>
+
+
+
 
 
 

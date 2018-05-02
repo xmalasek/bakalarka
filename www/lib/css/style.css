@@ -1,7 +1,8 @@
-body {
+ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
+
 }
 
 
@@ -19,8 +20,11 @@ header, main, footer {
 
 #map {
 
+    
+    height: 800px;
 
-    height:800px;
+
+
 
     }
 
@@ -59,6 +63,14 @@ header, main, footer {
     -webkit-border-radius: 5px 5px 5px 5px;
     border-radius: 5px 5px 5px 5px;
 }
+
+
+
+
+
+
+
+
 
 
 
