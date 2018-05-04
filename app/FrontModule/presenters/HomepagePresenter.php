@@ -18,26 +18,9 @@ class HomepagePresenter extends BasePresenter
      */
 
 
-    private $foo = 'any value';
-
-
-    public function handleChangeFoo()
-    {
-
-      $this->foo = 'pokus';
-
-      if ($this->isAjax()){
-
-          $this->invalidateControl('pokus');
-
-
-      }
-
-    }
-
 
     public function renderDefault()
     {
-        $this->template->foo = $this->foo;
+
     }
 }

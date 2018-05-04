@@ -31,27 +31,6 @@
 -->
 
 
-
-    <a n:href="changeFoo!">changeFoo</a>
-
-    {snippet pokus}
-        {$foo}
-    {/snippet}
-
-
-    <script>
-        
-        $(function () {
-
-            $('a.ajax').live('click', function () {
-                $.get(this.href);
-            })
-                return false;
-        })
-
-
-    </script>
-
     <div id="map"></div>
     <div id="loading-mask" class="modal-backdrop" style="display:none;"></div>
     <div id="loading" style="display:none;">

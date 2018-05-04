@@ -19,4 +19,22 @@ class FurniturePresenter extends Nette\Application\UI\Presenter
     {
 
     }
+
+
+
+    public function handleInsertUser()
+    {
+
+        $this->foo = 'pokus';
+
+        if ($this->isAjax()){
+
+            $this->invalidateControl('pokus');
+
+
+        }
+
+    }
+
+
 }
