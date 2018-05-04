@@ -9,17 +9,30 @@ use Nette\Application\Routers\RouteList;
 
 class RouterFactory
 {
-	use Nette\StaticClass;
+    use Nette\StaticClass;
 
-	/**
-	 * @return Nette\Application\IRouter
-	 */
-	public static function createRouter()
-	{
-		$router = new RouteList;
+    /**
+     * @return Nette\Application\IRouter
+     */
+    public static function createRouter()
+    {
+        $router = new RouteList;
 
-		/* Admin module */
-        $router[] = new Route('admin/<presenter>/<action>/[<id>/]', [
+        /* Admin module */
+        $router[] = new Route('panel/odhlaseni/', [
+            'presenter' => 'Sign',
+            'action' => 'out',
+            'id' => null,
+            'module' => 'Admin'
+        ]);
+        $router[] = new Route('panel/prihlaseni/', [
+            'presenter' => 'Sign',
+            'action' => 'in',
+            'id' => null,
+            'module' => 'Admin'
+        ]);
+
+        $router[] = new Route('panel/<presenter>/<action>/[<id>/]', [
             'presenter' => 'Homepage',
             'action' => 'default',
             'id' => null,
@@ -34,6 +47,6 @@ class RouterFactory
             'module' => 'Front'
         ]);
 
-		return $router;
-	}
+        return $router;
+    }
 }

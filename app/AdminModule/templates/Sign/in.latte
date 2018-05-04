@@ -1,0 +1,62 @@
+{block title}
+    Přihlášení
+{/block}
+
+
+{block content}
+    <div class="container">
+        <div class="row" style="margin-top: 70px; width: 100%;">
+        </div>
+        <div class="row" style="width: 100%;">
+            <div class="col s1 m3 l3">
+            </div>
+            <div class="col s10 m6 l6 white z-depth-5">
+                {form signInForm}
+                    <ul class="errors" n:if="$form->hasErrors()">
+                        <li n:foreach="$form->errors as $error">{$error}</li>
+                    </ul>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <img class="materialboxed" width="179" src="{$basePath}/admin/images/logo_login_page.jpg" style="margin: 0 auto;">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">person</i>
+                            {input username}
+                            {label username /}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">lock</i>
+                            {input password}
+                            {label password /}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            {input submit class => [btn, col, s12]}
+                        </div>
+                    </div>
+                {/form}
+            </div>
+            <div class="col s1 m3 l3">
+            </div>
+        </div>
+    </div>
+{/block}
+
+
+{block scripts}
+    {include parent}
+    <script type="application/javascript">
+    </script>
+{/block}
+
+
+{block head}
+    <style>
+    </style>
+{/block}

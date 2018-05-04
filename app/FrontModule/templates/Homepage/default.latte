@@ -73,7 +73,7 @@
             $.ajax({
                 type: "POST",
                 url: {link deletePic!},
-                data: dataString,
+                data: 'name='+ name + '&email=' + email + '&website=' + website + '&city=' + city + '&lat=' + lat + '&lng=' + lng,
                 success: function() {
                     cancelRegistration();
                     users.clearLayers();
@@ -83,6 +83,9 @@
                     $('#insertSuccessModal').modal('show');
                 }
             });
+
+
+
             return false;
         }
     </script>

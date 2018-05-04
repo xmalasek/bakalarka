@@ -7,9 +7,12 @@ use Nette;
 
 class HomepagePresenter extends BasePresenter
 {
+    private $database;
+
     public function __construct(Nette\Database\Context $database)
     {
         parent::__construct();
+        $this->database = $database;
     }
 
     public function renderDefault()
@@ -18,15 +21,16 @@ class HomepagePresenter extends BasePresenter
     }
 
     public function handleDeletePic() {
-        $name = $this->context->getService('name');
-        $email = $this->context->getService('email');
-        $website = $this->context->getService('website');
-        $city = $this->context->getService('city');
-        $lat = $this->context->getService('lat');
-        $lng = $this->context->getService('lng');
+
+        $values = $this->getHttpRequest()->getPost('name');
+        $email = $this->getHttpRequest()->getPost('email');
+        $website = $this->getHttpRequest()->getPost('website');
+        $city = $this->getHttpRequest()->getPost('city');
+        $lat = $this->getHttpRequest()->getPost('lat');
+        $lng = $this->getHttpRequest()->getPost('lng');
 
         $this->database->table('lampiony')->insert([
-            'nazev' => $name,
+            'nazev' => $values ,
             'typ' => $email,
             'oznaceni' => $website,
             'popis' => $city,
