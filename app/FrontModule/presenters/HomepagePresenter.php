@@ -18,12 +18,12 @@ class HomepagePresenter extends BasePresenter
     }
 
     public function handleDeletePic() {
-        $name = $this->context->httpRequest->getPost('name');
-        $email = $this->context->httpRequest->getPost('email');
-        $website = $this->context->httpRequest->getPost('website');
-        $city = $this->context->httpRequest->getPost('city');
-        $lat = $this->context->httpRequest->getPost('lat');
-        $lng = $this->context->httpRequest->getPost('lng');
+        $name = $this->context->getService('name');
+        $email = $this->context->getService('email');
+        $website = $this->context->getService('website');
+        $city = $this->context->getService('city');
+        $lat = $this->context->getService('lat');
+        $lng = $this->context->getService('lng');
 
         $this->database->table('lampiony')->insert([
             'nazev' => $name,
