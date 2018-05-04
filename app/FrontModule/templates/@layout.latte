@@ -17,19 +17,19 @@
     <link type="text/css" rel="stylesheet" href="lib/leaflet/plugins/leaflet.markercluster/MarkerCluster.Default.css" />
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    {*<script type="text/javascript" src="{$basePath}/lib/js/jquery.js"></script>*}
 	<script type="text/javascript" src="{$basePath}/lib/js/materialize.js"></script>
-    <script type="text/javascript" src="{$basePath}/lib/js/jquery.nette.js"></script>
+    {*<script type="text/javascript" src="{$basePath}/lib/js/jquery.nette.js"></script>*}
 	<script src="https://nette.github.io/resources/js/netteForms.min.js"></script>
 
     <link rel="stylesheet" href="{$basePath}/lib/leaflet/leaflet.css" />
     <script src="{$basePath}/lib/leaflet/leaflet.js"></script>
 
-    <script type="text/javascript" src="{$basePath}/lib/js/jquery.js"></script>
     <script type="text/javascript" src="{$basePath}/lib/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="{$basePath}/lib/leaflet/plugins/leaflet.markercluster/leaflet.markercluster.js"></script>
 
 
-    {block head}{/block}
+    {include head}
 </head>
 
 <body>
@@ -101,8 +101,6 @@
 
 
 	{block scripts}
-
-        <script src="https://nette.github.io/resources/js/netteForms.min.js"></script>
         <script type="application/javascript">
             $(document).ready(function(){
                 $('.sidenav').sidenav();

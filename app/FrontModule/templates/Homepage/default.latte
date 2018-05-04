@@ -35,7 +35,7 @@
     <div id="loading-mask" class="modal-backdrop" style="display:none;"></div>
     <div id="loading" style="display:none;">
         <div class="loading-indicator">
-            <img src="img/ajax-loader.gif">
+            {*<img src="img/ajax-loader.gif">*}
         </div>
     </div>
 
@@ -48,14 +48,13 @@
 
 {/block}
 
-{* JS kod pro konkretni Presenter *}
 {block scripts}
     {include parent}
-    <script src="{$basePath}/lib/js/map.js">
+    <script src="{$basePath}/lib/js/map.js"></script>
+    <script type="application/javascript">
     </script>
 {/block}
 
 {block head}
 
-    {* CSS kod pro konkretni Presenter *}
 {/block}

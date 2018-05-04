@@ -39,7 +39,7 @@ map.addControl(new L.Control.Scale());
 $(document).ready(function() {
     $.ajaxSetup({cache:false});
     $('#map').css('height', ($(window).height() - 50));
-    getUsers();
+    // getUsers(); //TODO odkomentovat
 });
 
 
