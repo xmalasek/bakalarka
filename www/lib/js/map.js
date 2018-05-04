@@ -64,40 +64,6 @@ function cancelRegistration() {
     map.removeEventListener('click', onMapClick);
 }
 
-function insertUser() {
-    $("#loading-mask").show();
-    $("#loading").show();
-    var name = $("#name").val();
-    var email = $("#email").val();
-    var website = $("#website").val();
-    var city = $("#city").val();
-    var lat = $("#lat").val();
-    var lng = $("#lng").val();
-    if (name.length == 0) {
-        alert("Name is required!");
-        return false;
-    }
-    if (email.length == 0) {
-        alert("Email is required!");
-        return false;
-    }
-    var dataString = 'name='+ name + '&email=' + email + '&website=' + website + '&city=' + city + '&lat=' + lat + '&lng=' + lng;
-    $.ajax({
-        type: "POST",
-        url: "insert_user.php",
-        data: dataString,
-        success: function() {
-            cancelRegistration();
-            users.clearLayers();
-            getUsers();
-            $("#loading-mask").hide();
-            $("#loading").hide();
-            $('#insertSuccessModal').modal('show');
-        }
-    });
-    return false;
-}
-
 function getUsers() {
     $.getJSON("get_users.php", function (data) {
         for (var i = 0; i < data.length; i++) {

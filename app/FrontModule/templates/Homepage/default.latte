@@ -52,6 +52,39 @@
     {include parent}
     <script src="{$basePath}/lib/js/map.js"></script>
     <script type="application/javascript">
+        function insertUser() {
+            $("#loading-mask").show();
+            $("#loading").show();
+            var name = $("#name").val();
+            var email = $("#email").val();
+            var website = $("#website").val();
+            var city = $("#city").val();
+            var lat = $("#lat").val();
+            var lng = $("#lng").val();
+            if (name.length == 0) {
+                alert("Name is required!");
+                return false;
+            }
+            if (email.length == 0) {
+                alert("Email is required!");
+                return false;
+            }
+            var dataString = 'name='+ name + '&email=' + email + '&website=' + website + '&city=' + city + '&lat=' + lat + '&lng=' + lng;
+            $.ajax({
+                type: "POST",
+                url: {link deletePic},
+                data: dataString,
+                success: function() {
+                    cancelRegistration();
+                    users.clearLayers();
+                    getUsers();
+                    $("#loading-mask").hide();
+                    $("#loading").hide();
+                    $('#insertSuccessModal').modal('show');
+                }
+            });
+            return false;
+        }
     </script>
 {/block}
 
