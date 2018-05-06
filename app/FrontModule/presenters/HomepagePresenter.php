@@ -20,7 +20,9 @@ class HomepagePresenter extends BasePresenter
 
     }
 
-    public function handleDeletePic() {
+
+    // TODO zmenit dle vrtsvy handle*****
+    public function handleInsertUser() {
 
         $values = $this->getHttpRequest()->getPost('name');
         $email = $this->getHttpRequest()->getPost('email');
@@ -39,4 +41,25 @@ class HomepagePresenter extends BasePresenter
         ]);
 
     }
+
+    public function handleGetUser() {
+
+        $values = $this->getHttpRequest()->getPost('name');
+        $email = $this->getHttpRequest()->getPost('email');
+        $website = $this->getHttpRequest()->getPost('website');
+        $city = $this->getHttpRequest()->getPost('city');
+        $lat = $this->getHttpRequest()->getPost('lat');
+        $lng = $this->getHttpRequest()->getPost('lng');
+
+        $this->database->table('lampiony')->insert([
+            'nazev' => $values ,
+            'typ' => $email,
+            'oznaceni' => $website,
+            'popis' => $city,
+            'latitude' => $lat,
+            'longitude' => $lng,
+        ]);
+
+    }
+
 }

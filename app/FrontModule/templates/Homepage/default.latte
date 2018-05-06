@@ -84,10 +84,42 @@
                 }
             });
 
-
-
             return false;
         }
+
+        function getUsers() {
+            $.getJSON({link getUser!}, function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    var location = new L.LatLng(data[i].lat, data[i].lng);
+                    var name = data[i].name;
+                    var website = data[i].website;
+                    if (data[i].website.length > 7) {
+                        var title = "<div style='font-size: 18px; color: #0078A8;'><a href='"+ data[i].website +"' target='_blank'>"+ data[i].name + "</a></div>";
+                    }
+                    else {
+                        var title = "<div style='font-size: 18px; color: #0078A8;'>"+ data[i].name +"</div>";
+                    }
+                    if (data[i].city.length > 0) {
+                        var city = "<div style='font-size: 14px;'>"+ data[i].city +"</div>";
+                    }
+                    else {
+                        var city = "";
+                    }
+                    var marker = new L.Marker(location, {
+                        title: name
+                    });
+                    marker.bindPopup("<div style='text-align: center; margin-left: auto; margin-right: auto;'>"+ title + city +"</div>", {maxWidth: '400'});
+                    users.addLayer(marker);
+                }
+            }).complete(function() {
+                if (firstLoad == true) {
+                    map.fitBounds(users.getBounds());
+                    firstLoad = false;
+                };
+            });
+        }
+
+
     </script>
 {/block}
 
