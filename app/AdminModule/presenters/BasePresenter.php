@@ -21,7 +21,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     {
         $user = $this->getUser();
         if ($user->isLoggedIn()) {
-            $this->template->user = array(
+            $this->template->logged_user = array(
                 'id' => $user->getIdentity()->getId(),
                 'email' => $user->getIdentity()->email,
                 'name' => $user->getIdentity()->name,

@@ -1,11 +1,11 @@
 <?php
 
-namespace FrontModule;
+namespace AdminModule;
 
 use Nette;
 
 
-class HomepagePresenter extends BasePresenter
+class EletricPresenter extends BasePresenter
 {
     private $database;
 
@@ -19,7 +19,6 @@ class HomepagePresenter extends BasePresenter
     {
 
     }
-
 
     // TODO zmenit dle vrtsvy handle*****
     public function handleInsertUser() {
@@ -49,6 +48,4 @@ class HomepagePresenter extends BasePresenter
 
 
     }
-
-
 }
