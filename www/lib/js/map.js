@@ -67,29 +67,7 @@ function cancelRegistration() {
 }
 
 
-function onMapClick(e) {
-    var markerLocation = new L.LatLng(e.latlng.lat, e.latlng.lng);
-    var marker = new L.Marker(markerLocation);
-    newUser.clearLayers();
-    newUser.addLayer(marker);
-    var form =  '<form id="inputform" enctype="multipart/form-data" class="well">'+
-        '<label><strong>Název:</strong> <i></i></label>'+
-        '<input type="text" class="span3" placeholder="Název" id="name" name="name" />'+
-        '<label><strong>Typ:</strong> <i></i></label>'+
-        '<input type="text" class="span3" placeholder="Typ" id="email" name="email" />'+
-        '<label><strong>Označení:</strong></label>'+
-        '<input type="text" class="span3" placeholder="Označení" id="city" name="city" />'+
-        '<label><strong>Popis:</strong></label>'+
-        '<input type="text" class="span3" placeholder="Popis" id="website" name="website" value="" />'+
-        '<input style="display: none;" type="text" id="lat" name="lat" value="'+e.latlng.lat.toFixed(6)+'" />'+
-        '<input style="display: none;" type="text" id="lng" name="lng" value="'+e.latlng.lng.toFixed(6)+'" /><br><br>'+
-        '<div class="row-fluid">'+
-        '<div class="span6" style="text-align:center;"><button type="button" class="btn" onclick="cancelRegistration()">Storno</button></div>'+
-        '<div class="span6" style="text-align:center;"><button type="button" class="btn btn-primary" onclick="insertUser()">Odeslat</button></div>'+
-        '</div>'+
-        '</form>';
-    marker.bindPopup(form).openPopup();
-}
+
 
 
 
