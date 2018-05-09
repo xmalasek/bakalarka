@@ -30,7 +30,7 @@ class EletricPresenter extends BasePresenter
         $lat = $this->getHttpRequest()->getPost('lat');
         $lng = $this->getHttpRequest()->getPost('lng');
 
-        $this->database->table('lampiony')->insert([
+        $this->database->table('eletric')->insert([
             'nazev' => $values ,
             'typ' => $email,
             'oznaceni' => $website,

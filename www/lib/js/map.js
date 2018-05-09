@@ -38,13 +38,15 @@ map.addControl(new L.Control.Scale());
 
 $(document).ready(function() {
     $.ajaxSetup({cache:false});
-    $('#map').css('height', ($(window).height() - 50));
+    $('#map').css('height', ($(window).height() - 200));
     // getUsers(); //TODO odkomentovat
 });
 
 
 $(window).resize(function () {
-    $('#map').css('height', ($(window).height() - 50));
+    $('#map').css('height', ($(window).height() - 200));
+    $('#map').css('height', ($(window).width() - 200));
+
 }).resize();
 
 
