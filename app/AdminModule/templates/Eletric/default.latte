@@ -4,7 +4,7 @@
 
 {block content_menu}
 
-    <li><a class="waves-effect waves-light" onclick="$('#addmeModal'); initRegistration(); return false;" ><i class="material-icons right" >add_location</i></a></li>
+    <li xmlns="http://www.w3.org/1999/html"><a class="waves-effect waves-light" onclick="$('#addmeModal'); initRegistration(); return false;" ><i class="material-icons right" >add_location</i></a></li>
     <li><a class="waves-effect waves-light" ><i class="material-icons" >import_export</i></a></li>
     <li><a class="waves-effect waves-light" ><i class="material-icons" >search</i></a></li>
 
@@ -18,16 +18,105 @@
 
     <div id="map"></div>
 
+    <div class="row">
+        <form class="col s12">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input placeholder="Název" id="title" type="text" class="validate">
+                    <label for="title">Název</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input placeholder="Ulice" id="title" type="text" class="validate">
+                    <label for="title">Ulice</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <select>
+                        <option value="" disabled selected>Typ elektrického zařízení</option>
+                        <option value="1">Lampa</option>
+                        <option value="2">Rozhlas</option>
+                    </select>
+                    <label>Svítidlo</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input placeholder="Označení" id="title" type="text" class="validate">
+                    <label for="title">Označení</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input placeholder=1 id="organizer" type="number" class="validate">
+                    <label for="organizer">Počet</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <select>
+                        <option value="" disabled selected>Stav</option>
+                        <option value="1">Nový</option>
+                        <option value="2">Opotřebovaný</option>
+                        <option value="2">Starý</option>
+                    </select>
+                    <label>Stav</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <select>
+                        <option value="" disabled selected>Svítidlo</option>
+                        <option value="1">Žárovka</option>
+                        <option value="2">Led</option>
+                    </select>
+                    <label>Svítidlo</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <select>
+                        <option value="" disabled selected>Stožár</option>
+                        <option value="1">Betonový</option>
+                        <option value="2">Železný</option>
+                        <option value="3">Dřevěný</option>
+                    </select>
+                    <label>Svítidlo</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea id="description" class="materialize-textarea" length="200"></textarea>
+                    <label for="description">Popis</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <button class="btn waves-effect waves-light" type="submit" name="action" onclick="cancelRegistration()">Storno<i class="material-icons right">cancel</i>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <button class="btn waves-effect waves-light" type="cancel" name="action" onclick="insertUser()">Submit<i class="material-icons right">send</i>
+                </div>
+            </div>
+        </form>
+    </div>
+
 {/block}
 
 {* JS kod pro konkretni Presenter *}
 {block scripts}
     {include parent}
-    <script src="{$basePath}/lib/js/map.js"></script>
+
+
+
+
     <script type="application/javascript">
         function insertUser() {
-            $("#loading-mask").show();
-            $("#loading").show();
             var name = $("#name").val();
             var email = $("#email").val();
             var website = $("#website").val();
@@ -51,9 +140,6 @@
                     cancelRegistration();
                     users.clearLayers();
                     getUsers();
-                    $("#loading-mask").hide();
-                    $("#loading").hide();
-                    $('#insertSuccessModal').modal('show');
                 }
             });
 
@@ -97,24 +183,44 @@
             var marker = new L.Marker(markerLocation);
             newUser.clearLayers();
             newUser.addLayer(marker);
-            var form =  '<form id="inputform" enctype="multipart/form-data" class="well">'+
-                '<label><strong>Název:</strong> <i></i></label>'+
-                '<input type="text" class="span3" placeholder="Název" id="name" name="name" />'+
-                '<label><strong>Typ:</strong> <i></i></label>'+
-                '<input type="text" class="span3" placeholder="Ulice" id="email" name="email" />'+
-                '<label><strong>Označení:</strong></label>'+
-                '<input type="text" class="span3" placeholder="Typ" id="city" name="city" />'+
-                '<label><strong>Popis:</strong></label>'+
-                '<input type="text" class="span3" placeholder="Svitidlo" id="website" name="website" value="" />'+
-                '<input type="text" class="span3" placeholder="Pocet" id="website" name="website" value="" />'+
-                '<input type="text" class="span3" placeholder="Svitidlo" id="website" name="website" value="" />'+
-                '<input style="display: none;" type="text" id="lat" name="lat" value="'+e.latlng.lat.toFixed(6)+'" />'+
-                '<input style="display: none;" type="text" id="lng" name="lng" value="'+e.latlng.lng.toFixed(6)+'" /><br><br>'+
-                '<div class="row-fluid">'+
-                '<div class="span6" style="text-align:center;"><button type="button" class="btn" onclick="cancelRegistration()">Storno</button></div>'+
-                '<div class="span6" style="text-align:center;"><button type="button" class="btn btn-primary" onclick="insertUser()">Odeslat</button></div>'+
-                '</div>'+
-                '</form>';
+            var form =
+                '<div class="markerDetail">'+
+                '                <div class="row">\n' +
+                '                <form class="col s12">\n' +
+                '                <div class="row">\n' +
+                '                <div class="input-field col s12">\n' +
+                '                <input placeholder="Název" id="title" type="text" class="validate">\n' +
+                '                <label for="title">Název</label>\n' +
+                '                </div>\n' +
+                '                </div>\n' +
+                '                <div class="row">\n' +
+                '                <div class="input-field col s12">\n' +
+                '                <input placeholder="Ulice" id="title" type="text" class="validate">\n' +
+                '                <label for="title">Ulice</label>\n' +
+                '                </div>\n' +
+                '                </div>\n' +
+                '                <div class="row">\n' +
+                '                <div class="input-field col s12">\n' +
+                '                <textarea id="description" class="materialize-textarea" length="200"></textarea>\n' +
+                '                <label for="description">Popis</label>\n' +
+                '                </div>\n' +
+                '                </div>\n' +
+                '                <div class="row">\n' +
+                '                <div class="input-field col s12">\n' +
+                '                <button class="btn waves-effect waves-light" type="submit" name="action" onclick="cancelRegistration()">Storno<i class="material-icons right">cancel</i>\n' +
+                '                </div>\n' +
+                '                </div>\n' +
+                '\n' +
+                '                <div class="row">\n' +
+                '                <div class="input-field col s12">\n' +
+                '                <button class="btn waves-effect waves-light" type="cancel" name="action" onclick="insertUser()">Submit<i class="material-icons right">send</i>\n' +
+                '                </div>\n' +
+                '                </div>\n' +
+                '                </form>\n'+
+                '                </div>\n'+
+                '                </div>\n'
+
+               ;
             marker.bindPopup(form).openPopup();
         }
 

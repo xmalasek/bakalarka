@@ -18,23 +18,6 @@ map = new L.Map('map', {
     layers: [mapquest, users, newUser]
 });
 
-// GeoLocation Control
-function geoLocate() {
-    map.locate({setView: true, maxZoom: 17});
-}
-var geolocControl = new L.control({
-    position: 'topright'
-});
-geolocControl.onAdd = function (map) {
-    var div = L.DomUtil.create('div', 'leaflet-control-zoom leaflet-control');
-    div.innerHTML = '<a class="leaflet-control-geoloc" href="#" onclick="geoLocate(); return false;" title="My location"></a>';
-    return div;
-};
-
-map.addControl(geolocControl);
-map.addControl(new L.Control.Scale());
-
-//map.locate({setView: true, maxZoom: 3});
 
 $(document).ready(function() {
     $.ajaxSetup({cache:false});
@@ -49,10 +32,6 @@ $(window).resize(function () {
 
 }).resize();
 
-
-function geoLocate() {
-    map.locate({setView: true, maxZoom: 17});
-}
 
 function initRegistration() {
     map.addEventListener('click', onMapClick);
