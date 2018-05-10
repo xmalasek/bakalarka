@@ -14,11 +14,21 @@ class EletricPresenter extends BasePresenter
     {
         parent::__construct();
         $this->database = $database;
+
+
     }
 
     public function renderDefault()
     {
-        $this->template->eletric = $this->database->table('eletric');
+
+    }
+
+    public function renderShow()
+    {
+        $eletric = $this->database->table('eletric');
+        $this->template->eletric = $eletric;
+
+
     }
 
     // TODO zmenit dle vrtsvy handle*****
@@ -33,8 +43,8 @@ class EletricPresenter extends BasePresenter
         $stav = $this->getHttpRequest()->getPost('stav');
         $stozar = $this->getHttpRequest()->getPost('stozar');
         $popis = $this->getHttpRequest()->getPost('popis');
-        $latitude = $this->getHttpRequest()->getPost('latitude');
-        $longitude = $this->getHttpRequest()->getPost('longitude');
+        $lat = $this->getHttpRequest()->getPost('lat');
+        $lng = $this->getHttpRequest()->getPost('lng');
 
 
 
@@ -48,26 +58,48 @@ class EletricPresenter extends BasePresenter
             'stav' => $stav,
             'stozar' => $stozar,
             'popis' => $popis,
-            'latitude' => $latitude,
-            'longitude' => $longitude,
+            'lat' => $lat,
+            'lng' => $lng,
         ]);
 
     }
 
     public function handleGetUser() {
 
+//        $data=$this->database->table('eletric');
+//
+//        $array = $this->database->table('eletric')->fetchPairs($data);
+//
+//        $value = Json::encode($array, Json::PRETTY);
+//
+//        $this->sendJson($value);
+//
+//
+//        $select = $this->database->table('eletric');
+//
+//        $rows = array();
+//
+//        while($r = $select->fetchAssoc("id")) {
+//            $rows[] = $r;
+//        }
 
 
-        $this->template->eletric = $this->database->table('eletric');
-
-        $result = $this->database->table('eletric');
-
-        $row = $result->fetch();
-
-        print Json::encode($row);
 
 
 
+
+//        $result = $this->database->query('SELECT * FROM eletric');
+
+
+        $select = $this->database->table('eletric');
+
+        $rows = array();
+
+        while($r = $select->fetch(\PDO::FETCH_ASSOC)) {
+            $rows[] = $r;
+        }
+
+        print Json::encode($rows);
 
 
 

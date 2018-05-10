@@ -1,0 +1,71 @@
+{block title}
+    Admin - Eletric - eletric - show
+{/block}
+
+{block content_menu}
+
+    <li><a class="waves-effect waves-light" n:href="Eletric:default" ><i class="material-icons" >backspace</i></a></li>
+    <li><a class="waves-effect waves-light" ><i class="material-icons" >search</i></a></li>
+
+{/block}
+
+{block content}
+
+    <h2>Eletrická zařízení</h2>
+
+
+
+
+    <table class="centered highlight">
+
+        <thead>
+        <tr>
+            <th>Název</th>
+            <th>Ulice</th>
+            <th>Typ</th>
+            <th>Svítidlo</th>
+            <th>Označení</th>
+            <th>Počet</th>
+            <th>Stav</th>
+            <th>Stožár</th>
+            <th>Popis</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {foreach $eletric as $device}
+        <tr>
+            <td>{$device -> nazev}</td>
+            <td>{$device -> ulice}</td>
+            <td>{$device -> typ}</td>
+            <td>{$device -> svitidlo}</td>
+            <td>{$device -> oznaceni}</td>
+            <td>{$device -> pocet}</td>
+            <td>{$device -> stav}</td>
+            <td>{$device -> stozar}</td>
+            <td>{$device -> popis}</td>
+            <td><a class="waves-effect waves-light" ><i class="material-icons" >delete</i></a></td>
+            <td><a class="waves-effect waves-light" ><i class="material-icons" >update</i></a></td>
+        </tr>
+        {/foreach}
+        </tbody>
+    </table>
+
+
+{/block}
+
+
+{* JS kod pro konkretni Presenter *}
+{block scripts}
+{include parent}
+
+
+
+{/block}
+
+{block head}
+
+    {* CSS kod pro konkretni Presenter *}
+{/block}

@@ -3,7 +3,7 @@ var map, newUser, users, mapquest, firstLoad;
 
 firstLoad = true;
 
-//users = new L.FeatureGroup();
+users = new L.FeatureGroup();
 users = new L.MarkerClusterGroup({spiderfyOnMaxZoom: true, showCoverageOnHover: false, zoomToBoundsOnClick: true});
 newUser = new L.LayerGroup();
 
@@ -19,11 +19,9 @@ map = new L.Map('map', {
 });
 
 
-$(document).ready(function() {
-    $.ajaxSetup({cache:false});
-    $('#map').css('height', ($(window).height() - 200));
-    // getUsers(); //TODO odkomentovat
-});
+L.marker([49.3130650, 16.4777650]).addTo(map)
+    .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+    .openPopup();
 
 
 $(window).resize(function () {

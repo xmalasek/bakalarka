@@ -5,7 +5,7 @@
 {block content_menu}
 
     <li><a class="waves-effect waves-light" onclick="$('#addmeModal'); initRegistration(); return false;" ><i class="material-icons right" >add_location</i></a></li>
-    <li><a class="waves-effect waves-light" ><i class="material-icons" >import_export</i></a></li>
+    <li><a class="waves-effect waves-light" n:href="Show"><i class="material-icons" >import_export</i></a></li>
     <li><a class="waves-effect waves-light" ><i class="material-icons" >search</i></a></li>
 
 {/block}
@@ -23,7 +23,101 @@
 {block scripts}
     {include parent}
 
-{/block}
+<script type="application/javascript">
+
+    $(document).ready(function() {
+        $.ajaxSetup({ cache:false});
+        $('#map').css('height', ($(window).height() - 200));
+        getUsers();
+    });
+
+
+    function getUsers() {
+        $.getJSON({link getUser!}, function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    var location = new L.LatLng(data[i].lat, data[i].lng);
+                    var nazev = data[i].nazev;
+                    var ulice = data[i].ulice;
+                    var typ = data[i].typ;
+                    var svitidlo = data[i].svitidlo;
+                    var oznaceni = data[i].oznaceni;
+                    var pocet = data[i].pocet;
+                    var stav = data[i].stav;
+                    var stozar = data[i].stozar;
+                    var popis = data[i].popis;
+
+                    var marker = new L.Marker(location, {
+                        title: nazev
+                    });
+                    marker.bindPopup("<div style='text-align: center; margin-left: auto; margin-right: auto;'>"+ nazev + ulice + ulice + typ + svitidlo + oznaceni + pocet + stav + stozar + popis +"</div>", { maxWidth: '400'});
+                    users.addLayer(marker);
+                }
+                // }).complete(function() {
+                //     if (firstLoad == true) {
+                //         map.fitBounds(users.getBounds());
+                //         firstLoad = false;
+                //     };
+                // });
+            }
+        )}
+
+
+    function onMapClick(e) {
+        var markerLocation = new L.LatLng(e.latlng.lat, e.latlng.lng);
+        var marker = new L.Marker(markerLocation);
+        newUser.clearLayers();
+        newUser.addLayer(marker);
+        var form =
+            '<div class="markerDetail">'+
+            '<input placeholder="Nazev" id="nazev" name="nazev" type="text" >\n' +
+            '<input placeholder="Ulice" id="ulice" name="ulice" type="text" >\n' +
+            '<input placeholder="Typ" id="typ" name="typ" type="text">\n' +
+            '<input placeholder="Svitidlo" id="svitidlo" name="svitidlo" type="text">\n' +
+            '<input placeholder="Oznaceni" id="oznaceni" name="oznaceni" type="text">\n' +
+            '<input placeholder="Pocet" id="pocet" name="pocet" type="text">\n' +
+            '<input placeholder="Stav" id="stav" name="stav" type="text">\n' +
+            '<input placeholder="Stozar" id="stozar" name="stozar" type="text">\n' +
+            '<input placeholder="Popis" id="popis" name="popis" type="text">'+
+            '<input style="display: none;" type="text" id="lat" name="lat" value="'+e.latlng.lat.toFixed(6)+'" />'+
+            '<input style="display: none;" type="text" id="lng" name="lng" value="'+e.latlng.lng.toFixed(6)+'" /><br><br>'+
+            '   <button class="btn waves-effect waves-light" type="submit" name="action" onclick="cancelRegistration()">Storno<i class="material-icons right">cancel</i>\n'+
+            '                <button class="btn waves-effect waves-light" type="cancel" name="action" onclick="insertDevice()">Submit<i class="material-icons right">send</i>\n' +
+            '                </div>\n';
+        marker.bindPopup(form).openPopup();
+    }
+
+    function insertDevice() {
+        var nazev = $("#nazev").val();
+        var ulice = $("#ulice").val();
+        var typ= $("#typ").val();
+        var svitidlo = $("#svitidlo").val();
+        var oznaceni = $("#oznaceni").val();
+        var pocet = $("#pocet").val();
+        var stav = $("#stav").val();
+        var stozar = $("#stozar").val();
+        var popis = $("#popis").val();
+        var lat = $("#lat").val();
+        var lng = $("#lng").val();
+
+        var dataString = 'nazev='+ nazev + '&ulice=' + ulice + '&typ=' + typ + '&svitidlo=' + svitidlo + '&oznaceni=' + oznaceni+ '&pocet=' + pocet+ '&stav' + stav+ '&stozar=' + stozar + '&popis=' + popis + '&lat=' + lat + '&lng=' + lng;
+        $.ajax({
+
+            type: "POST",
+            url: {link insertUser!},
+            data: 'nazev='+ nazev + '&ulice=' + ulice + '&typ=' + typ + '&svitidlo=' + svitidlo + '&oznaceni=' + oznaceni+ '&pocet=' + pocet+ '&stav=' + stav+ '&stozar=' + stozar + '&popis=' + popis + '&lat=' + lat + '&lng=' + lng,
+            success: function() {
+                cancelRegistration();
+                users.clearLayers();
+                getUsers();
+            }
+        });
+
+        return false;
+    }
+
+    </script>
+
+    {/block}
 
 {block head}
 
