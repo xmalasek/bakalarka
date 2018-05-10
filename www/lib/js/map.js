@@ -13,7 +13,7 @@ mapquest = new L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', 
 });
 
 map = new L.Map('map', {
-    center: new L.LatLng(49.316735, 16.483175),
+    center: new L.LatLng(49.3130650, 16.4777650),
     zoom: 15,
     layers: [mapquest, users, newUser]
 });

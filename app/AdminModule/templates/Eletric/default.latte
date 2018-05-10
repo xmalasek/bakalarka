@@ -4,8 +4,8 @@
 
 {block content_menu}
 
-    <li xmlns="http://www.w3.org/1999/html"><a class="waves-effect waves-light" onclick="$('#addmeModal'); initRegistration(); return false;" ><i class="material-icons right" >add_location</i></a></li>
-    <li><a class="waves-effect waves-light" ><i class="material-icons" >import_export</i></a></li>
+    <li xmlns="http://www.w3.org/1999/html"><a class="waves-effect waves-light" onclick=" initRegistration(); return false;" ><i class="material-icons right" >add_location</i></a></li>
+    <li><a class="waves-effect waves-light" onclick="pokus()"><i class="material-icons" >import_export</i></a></li>
     <li><a class="waves-effect waves-light" ><i class="material-icons" >search</i></a></li>
 
 {/block}
@@ -15,96 +15,120 @@
         Mapa eletrická zařízení
     </p>
 
+    {*{foreach $eletric as $post}*}
+        {*<div class="post">*}
+
+            {*<h2>{$post->nazev}</h2>*}
+
+            {*<div>{$post->ulice}</div>*}
+        {*</div>*}
+    {*{/foreach}*}
+
 
     <div id="map"></div>
 
-    <div class="row">
-        <form class="col s12">
-            <div class="row">
-                <div class="input-field col s12">
-                    <input placeholder="Název" id="title" type="text" class="validate">
-                    <label for="title">Název</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <input placeholder="Ulice" id="title" type="text" class="validate">
-                    <label for="title">Ulice</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <select>
-                        <option value="" disabled selected>Typ elektrického zařízení</option>
-                        <option value="1">Lampa</option>
-                        <option value="2">Rozhlas</option>
-                    </select>
-                    <label>Svítidlo</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <input placeholder="Označení" id="title" type="text" class="validate">
-                    <label for="title">Označení</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <input placeholder=1 id="organizer" type="number" class="validate">
-                    <label for="organizer">Počet</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <select>
-                        <option value="" disabled selected>Stav</option>
-                        <option value="1">Nový</option>
-                        <option value="2">Opotřebovaný</option>
-                        <option value="2">Starý</option>
-                    </select>
-                    <label>Stav</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <select>
-                        <option value="" disabled selected>Svítidlo</option>
-                        <option value="1">Žárovka</option>
-                        <option value="2">Led</option>
-                    </select>
-                    <label>Svítidlo</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <select>
-                        <option value="" disabled selected>Stožár</option>
-                        <option value="1">Betonový</option>
-                        <option value="2">Železný</option>
-                        <option value="3">Dřevěný</option>
-                    </select>
-                    <label>Svítidlo</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <textarea id="description" class="materialize-textarea" length="200"></textarea>
-                    <label for="description">Popis</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <button class="btn waves-effect waves-light" type="submit" name="action" onclick="cancelRegistration()">Storno<i class="material-icons right">cancel</i>
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="input-field col s12">
-                    <button class="btn waves-effect waves-light" type="cancel" name="action" onclick="insertUser()">Submit<i class="material-icons right">send</i>
-                </div>
-            </div>
-        </form>
-    </div>
+
+
+
+    {*<div class="row">*}
+        {*<form class="col s12">*}
+            {*<div class="row">*}
+                {*<div class="input-field col s12">*}
+                    {*<input placeholder="Název" id="title" type="text">*}
+                    {*<label for="title">Název</label>*}
+                {*</div>*}
+            {*</div>*}
+            {*<div class="row">*}
+                {*<div class="input-field col s12">*}
+                    {*<input placeholder="Ulice" id="title" type="text">*}
+                    {*<label for="title">Ulice</label>*}
+                {*</div>*}
+            {*</div>*}
+            {*<div class="row">*}
+                {*<div class="input-field col s12">*}
+                    {*<select>*}
+                        {*<option value="" disabled selected>Typ elektrického zařízení</option>*}
+                        {*<option value="1">Lampa</option>*}
+                        {*<option value="2">Rozhlas</option>*}
+                    {*</select>*}
+                    {*<label>Svítidlo</label>*}
+                {*</div>*}
+            {*</div>*}
+            {*<div class="row">*}
+                {*<div class="input-field col s12">*}
+                    {*<input placeholder="Označení" id="title" type="text">*}
+                    {*<label for="title">Označení</label>*}
+                {*</div>*}
+            {*</div>*}
+            {*<div class="row">*}
+                {*<div class="input-field col s12">*}
+                    {*<input placeholder=1 id="organizer" type="number">*}
+                    {*<label for="organizer">Počet</label>*}
+                {*</div>*}
+            {*</div>*}
+            {*<div class="row">*}
+                {*<div class="input-field col s12">*}
+                    {*<select>*}
+                        {*<option value="" disabled selected>Stav</option>*}
+                        {*<option value="1">Nový</option>*}
+                        {*<option value="2">Opotřebovaný</option>*}
+                        {*<option value="2">Starý</option>*}
+                    {*</select>*}
+                    {*<label>Stav</label>*}
+                {*</div>*}
+            {*</div>*}
+            {*<div class="row">*}
+                {*<div class="input-field col s12">*}
+                    {*<select>*}
+                        {*<option value="" disabled selected>Svítidlo</option>*}
+                        {*<option value="1">Žárovka</option>*}
+                        {*<option value="2">Led</option>*}
+                    {*</select>*}
+                    {*<label>Svítidlo</label>*}
+                {*</div>*}
+            {*</div>*}
+            {*<div class="row">*}
+                {*<div class="input-field col s12">*}
+                    {*<select>*}
+                        {*<option value="" disabled selected>Stožár</option>*}
+                        {*<option value="1">Betonový</option>*}
+                        {*<option value="2">Železný</option>*}
+                        {*<option value="3">Dřevěný</option>*}
+                    {*</select>*}
+                    {*<label>Svítidlo</label>*}
+                {*</div>*}
+            {*</div>*}
+            {*<div class="row">*}
+                {*<div class="input-field col s12">*}
+                    {*<textarea id="description" class="materialize-textarea" length="200"></textarea>*}
+                    {*<label for="description">Popis</label>*}
+                {*</div>*}
+            {*</div>*}
+            {*<div class="row">*}
+                {*<div class="input-field col s12">*}
+                    {*<button class="btn waves-effect waves-light" type="submit" name="action" onclick="cancelRegistration()">Storno<i class="material-icons right">cancel</i>*}
+                {*</div>*}
+            {*</div>*}
+
+            {*<div class="row">*}
+                {*<div class="input-field col s12">*}
+                    {*<button class="btn waves-effect waves-light" type="cancel" name="action" onclick="insertUser()">Submit<i class="material-icons right">send</i>*}
+                {*</div>*}
+            {*</div>*}
+        {*</form>*}
+    {*</div>*}
+
+    {*<input placeholder="Nazev" id="nazev" type="text">*}
+    {*<input placeholder="Ulice" id="ulice" type="text">*}
+    {*<input placeholder="Typ" id="typ" type="text">*}
+    {*<input placeholder="Svitidlo" id="svitidlo" type="text">*}
+    {*<input placeholder="Oznaceni" id="oznaceni" type="text">*}
+    {*<input placeholder="Pocet" id="pocet" type="text">*}
+    {*<input placeholder="Stav" id="stav" type="text">*}
+    {*<input placeholder="Stozar" id="stozar" type="text">*}
+    {*<input placeholder="Popis" id="popis" type="text">*}
+
 
 {/block}
 
@@ -116,58 +140,26 @@
 
 
     <script type="application/javascript">
-        function insertUser() {
-            var name = $("#name").val();
-            var email = $("#email").val();
-            var website = $("#website").val();
-            var city = $("#city").val();
-            var lat = $("#lat").val();
-            var lng = $("#lng").val();
-            if (name.length == 0) {
-                alert("Name is required!");
-                return false;
-            }
-            if (email.length == 0) {
-                alert("Email is required!");
-                return false;
-            }
-            var dataString = 'name='+ name + '&email=' + email + '&website=' + website + '&city=' + city + '&lat=' + lat + '&lng=' + lng;
-            $.ajax({
-                type: "POST",
-                url: {link insertUser!},
-                data: 'name='+ name + '&email=' + email + '&website=' + website + '&city=' + city + '&lat=' + lat + '&lng=' + lng,
-                success: function() {
-                    cancelRegistration();
-                    users.clearLayers();
-                    getUsers();
-                }
-            });
 
-            return false;
-        }
 
         function getUsers() {
             $.getJSON({link getUser!}, function (data) {
                 for (var i = 0; i < data.length; i++) {
-                    var location = new L.LatLng(data[i].lat, data[i].lng);
-                    var name = data[i].name;
-                    var website = data[i].website;
-                    if (data[i].website.length > 7) {
-                        var title = "<div style='font-size: 18px; color: #0078A8;'><a href='"+ data[i].website +"' target='_blank'>"+ data[i].name + "</a></div>";
-                    }
-                    else {
-                        var title = "<div style='font-size: 18px; color: #0078A8;'>"+ data[i].name +"</div>";
-                    }
-                    if (data[i].city.length > 0) {
-                        var city = "<div style='font-size: 14px;'>"+ data[i].city +"</div>";
-                    }
-                    else {
-                        var city = "";
-                    }
+                    var location = new L.LatLng(data[i].latitude, data[i].longitude);
+                    var nazev = data[i].nazev;
+                    var ulice = data[i].ulice;
+                    var typ = data[i].typ;
+                    var svitidlo = data[i].svitidlo;
+                    var oznaceni = data[i].oznaceni;
+                    var pocet = data[i].pocet;
+                    var stav = data[i].stav;
+                    var stozar = data[i].stozar;
+                    var popis = data[i].popis;
+
                     var marker = new L.Marker(location, {
                         title: name
                     });
-                    marker.bindPopup("<div style='text-align: center; margin-left: auto; margin-right: auto;'>"+ title + city +"</div>", { maxWidth: '400'});
+                    marker.bindPopup("<div style='text-align: center; margin-left: auto; margin-right: auto;'>"+ nazev + ulice + ulice + typ + svitidlo + oznaceni + pocet + stav + stozar + popis +"</div>", { maxWidth: '400'});
                     users.addLayer(marker);
                 }
             }).complete(function() {
@@ -185,44 +177,52 @@
             newUser.addLayer(marker);
             var form =
                 '<div class="markerDetail">'+
-                '                <div class="row">\n' +
-                '                <form class="col s12">\n' +
-                '                <div class="row">\n' +
-                '                <div class="input-field col s12">\n' +
-                '                <input placeholder="Název" id="title" type="text" class="validate">\n' +
-                '                <label for="title">Název</label>\n' +
-                '                </div>\n' +
-                '                </div>\n' +
-                '                <div class="row">\n' +
-                '                <div class="input-field col s12">\n' +
-                '                <input placeholder="Ulice" id="title" type="text" class="validate">\n' +
-                '                <label for="title">Ulice</label>\n' +
-                '                </div>\n' +
-                '                </div>\n' +
-                '                <div class="row">\n' +
-                '                <div class="input-field col s12">\n' +
-                '                <textarea id="description" class="materialize-textarea" length="200"></textarea>\n' +
-                '                <label for="description">Popis</label>\n' +
-                '                </div>\n' +
-                '                </div>\n' +
-                '                <div class="row">\n' +
-                '                <div class="input-field col s12">\n' +
-                '                <button class="btn waves-effect waves-light" type="submit" name="action" onclick="cancelRegistration()">Storno<i class="material-icons right">cancel</i>\n' +
-                '                </div>\n' +
-                '                </div>\n' +
-                '\n' +
-                '                <div class="row">\n' +
-                '                <div class="input-field col s12">\n' +
+                '<input placeholder="Nazev" id="nazev" name="nazev" type="text" >\n' +
+                '<input placeholder="Ulice" id="ulice" name="ulice" type="text" >\n' +
+                '<input placeholder="Typ" id="typ" name="typ" type="text">\n' +
+                '<input placeholder="Svitidlo" id="svitidlo" name="svitidlo" type="text">\n' +
+                '<input placeholder="Oznaceni" id="oznaceni" name="oznaceni" type="text">\n' +
+                '<input placeholder="Pocet" id="pocet" name="pocet" type="text">\n' +
+                '<input placeholder="Stav" id="stav" name="stav" type="text">\n' +
+                '<input placeholder="Stozar" id="stozar" name="stozar" type="text">\n' +
+                '<input placeholder="Popis" id="popis" name="popis" type="text">'+
+                '<input style="display: none;" type="text" id="latitude" name="latitude" value="'+e.latlng.lat.toFixed(6)+'" />'+
+                '<input style="display: none;" type="text" id="longitude" name="longitude" value="'+e.latlng.lng.toFixed(6)+'" /><br><br>'+
+                '   <button class="btn waves-effect waves-light" type="submit" name="action" onclick="cancelRegistration()">Storno<i class="material-icons right">cancel</i>\n'+
                 '                <button class="btn waves-effect waves-light" type="cancel" name="action" onclick="insertUser()">Submit<i class="material-icons right">send</i>\n' +
-                '                </div>\n' +
-                '                </div>\n' +
-                '                </form>\n'+
-                '                </div>\n'+
-                '                </div>\n'
-
-               ;
+                '                </div>\n';
             marker.bindPopup(form).openPopup();
         }
+
+        function insertUser() {
+            var nazev = $("#nazev").val();
+            var ulice = $("#ulice").val();
+            var typ= $("#typ").val();
+            var svitidlo = $("#svitidlo").val();
+            var oznaceni = $("#oznaceni").val();
+            var pocet = $("#pocet").val();
+            var stav = $("#stav").val();
+            var stozar = $("#stozar").val();
+            var popis = $("#popis").val();
+            var latitude = $("#latitude").val();
+            var longitude = $("#longitude").val();
+
+            var dataString = 'nazev='+ nazev + '&ulice=' + ulice + '&typ=' + typ + '&svitidlo=' + svitidlo + '&oznaceni=' + oznaceni+ '&pocet=' + pocet+ '&stav' + stav+ '&stozar=' + stozar + '&popis=' + popis + '&latitude=' + latitude + '&longitude=' + longitude;
+            $.ajax({
+
+                type: "POST",
+                url: {link insertUser!},
+                data: 'nazev='+ nazev + '&ulice=' + ulice + '&typ=' + typ + '&svitidlo=' + svitidlo + '&oznaceni=' + oznaceni+ '&pocet=' + pocet+ '&stav=' + stav+ '&stozar=' + stozar + '&popis=' + popis + '&latitude=' + latitude + '&longitude=' + longitude,
+                success: function() {
+                    cancelRegistration();
+                    users.clearLayers();
+                    {link getUser!}
+                }
+            });
+
+            return false;
+        }
+
 
     </script>
 
