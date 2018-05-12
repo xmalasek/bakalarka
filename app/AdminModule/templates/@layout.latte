@@ -37,7 +37,7 @@
 
 <body>
 	<div class="">
-		<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+
 
 		<ul id="slide-out" class="sidenav sidenav-fixed">
 			<li>
@@ -59,21 +59,21 @@
 				<li><a class="waves-effect" n:href="Interest:">Místa zájmu</a></li>
 				<li><a class="waves-effect" n:href="Waste:">Odpadové hospodářství</a></li>
 
-			<li class="no-padding">
-				<ul class="collapsible collapsible-accordion">
-					<li>
-						<a class="collapsible-header">Vrstvy<i class="material-icons">layers</i></a>
-						<div class="collapsible-body">
-							<ul>
-								<li><a class="subitems waves-effect" n:href="Eletric">Eletrická zařízení</a></li>
-								<li><a class="waves-effect" n:href="Furniture:">Městský mobiliář</a></li>
-								<li><a class="waves-effect" n:href="Interest:">Místa zájmu</a></li>
-								<li><a class="waves-effect" n:href="Waste:">Odpadové hospodářství</a></li>
-							</ul>
-						</div>
-					</li>
-				</ul>
-			</li>
+			{*<li class="no-padding">*}
+				{*<ul class="collapsible collapsible-accordion">*}
+					{*<li>*}
+						{*<a class="collapsible-header">Vrstvy<i class="material-icons">layers</i></a>*}
+						{*<div class="collapsible-body">*}
+							{*<ul>*}
+								{*<li><a class="subitems waves-effect" n:href="Eletric">Eletrická zařízení</a></li>*}
+								{*<li><a class="waves-effect" n:href="Furniture:">Městský mobiliář</a></li>*}
+								{*<li><a class="waves-effect" n:href="Interest:">Místa zájmu</a></li>*}
+								{*<li><a class="waves-effect" n:href="Waste:">Odpadové hospodářství</a></li>*}
+							{*</ul>*}
+						{*</div>*}
+					{*</li>*}
+				{*</ul>*}
+			{*</li>*}
 
 
 			<li><div class="divider"></div></li>
@@ -93,9 +93,8 @@
 				<div class="nav-wrapper">
 					<div class="col s12">
 
-							<ul class="left">
-                                {include content_menu}
-							</ul>
+						{include content_menu}
+
 
 						<a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 						<a n:href="Homepage:" class="brand-logo center">WEB AP Čebín</a>
@@ -111,6 +110,8 @@
 			<div class="row">
 				<div class="col s12">
                     {include content}
+
+					<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
 				</div>
 			</div>
 		</main>

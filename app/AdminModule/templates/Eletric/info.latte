@@ -1,0 +1,126 @@
+{block title}
+    Admin - Eletric - eletric - info
+{/block}
+
+{block content_menu}
+    <ul class="left">
+        <li><a class="waves-effect waves-light" n:href="Eletric:show" ><i class="material-icons" >backspace</i></a></li>
+    </ul>
+{/block}
+
+{block content}
+<table class="highlight">
+
+{foreach $eletric as $device}
+    <h3>{$device -> nazev}</h3>
+
+    <tr>
+        <th>Název</th>
+        <td>{$device -> nazev}</td>
+    </tr>
+    <tr>
+        <th>Ulice</th>
+        <td>{$device -> ulice}</td>
+    </tr>
+    <tr>
+        <th>Typ</th>
+        <td>{$device -> typ}</td>
+    </tr>
+    <tr>
+        <th>Svítidlo</th>
+        <td>{$device -> svitidlo}</td>
+    </tr>
+    <tr>
+        <th>Označení</th>
+        <td>{$device -> oznaceni}</td>
+    </tr>
+    <tr>
+        <th>Počet</th>
+        <td>{$device -> pocet}</td>
+    </tr>
+    <tr>
+        <th>Stav</th>
+        <td>{$device -> stav}</td>
+    </tr>
+    <tr>
+        <th>Stožár</th>
+        <td>{$device -> stozar}</td>
+    </tr>
+    <tr>
+        <th>Popis</th>
+        <td>{$device -> popis}</td>
+    </tr>
+
+</tr>
+
+    </table>
+
+
+
+
+{/foreach}
+
+    <div id="map"></div>
+
+{/block}
+
+
+{* JS kod pro konkretni Presenter *}
+{block scripts}
+
+
+<script type="application/javascript">
+
+    var map, newUser, users, mapquest, firstLoad;
+
+    firstLoad = true;
+
+    users = new L.FeatureGroup();
+    users = new L.MarkerClusterGroup({ spiderfyOnMaxZoom: true, showCoverageOnHover: false, zoomToBoundsOnClick: true});
+    newUser = new L.LayerGroup();
+
+    mapquest = new L.tileLayer('http://{ s}.tile.openstreetmap.org/{ z}/{ x}/{ y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    });
+
+    map = new L.Map('map', {
+        {foreach $eletric as $device}
+        center: new L.LatLng({$device -> lat}, {$device -> lng}),
+        zoom: 18,
+        layers: [mapquest, users, newUser]
+        {/foreach}
+    });
+
+
+
+    $(document).ready(function(){
+
+            $('.sidenav').sidenav();
+            $('.collapsible').collapsible();
+            $('select').formSelect();
+            $.ajaxSetup({ cache:false});
+            $('#map').css('height', ($(window).height() - 400));
+            getDevice();
+
+        });
+
+
+        function getDevice() {
+            {foreach $eletric as $device}
+            L.marker([{$device -> lat}, {$device -> lng}]).addTo(map)
+                .bindPopup("<div style='text-align: center; margin-left: auto; margin-right: auto;'>" +
+                        {syntax off}'{/syntax} <b>Název:</b> {$device->nazev|noescape} <br> <b>Ulice:</b>{$device -> ulice|noescape}{syntax off}'{/syntax}+
+                    "</div>");
+            {/foreach}
+
+        }
+
+    </script>
+
+{/block}
+
+{block head}
+
+    {* CSS kod pro konkretni Presenter *}
+{/block}

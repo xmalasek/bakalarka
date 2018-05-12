@@ -26,14 +26,25 @@ header, main, footer {
 
     }
 
+ .mapy {
+
+
+     height: 500px;
+     /*width: 1200px;*/
+
+ }
+
+
+
+
 .legend i { width : 5em; float : left }
 
 
 
 
  .markerDetail {
-     width: 300px;
-     height: 600px;
+     width: 150px;
+
 
  }
 

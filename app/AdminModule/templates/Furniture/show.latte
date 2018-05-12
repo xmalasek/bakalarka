@@ -3,10 +3,10 @@
 {/block}
 
 {block content_menu}
-
+<ul class="left">
     <li><a class="waves-effect waves-light" n:href="Furniture:default" ><i class="material-icons" >backspace</i></a></li>
     <li><a class="waves-effect waves-light" ><i class="material-icons" >search</i></a></li>
-
+</ul>
 {/block}
 
 {block content}
@@ -45,7 +45,7 @@
                 <td>{$device -> stav}</td>
                 <td>{$device -> popis}</td>
                 <td><a class="waves-effect waves-light" ><i class="material-icons" >delete</i></a></td>
-                <td><a class="waves-effect waves-light" ><i class="material-icons" >update</i></a></td>
+                <td><a class="waves-effect waves-light" ><i class="material-icons" >edit</i></a></td>
             </tr>
         {/foreach}
         </tbody>

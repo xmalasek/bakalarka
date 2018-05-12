@@ -3,8 +3,9 @@
 namespace AdminModule;
 
 use Nette;
+use Nette\Application\Responses\JsonResponse;
 use Nette\Utils\Json;
-
+use Tracy\Debugger;
 
 class EletricPresenter extends BasePresenter
 {
@@ -15,95 +16,164 @@ class EletricPresenter extends BasePresenter
         parent::__construct();
         $this->database = $database;
 
-
     }
 
     public function renderDefault()
     {
-
+        $this->template->eletric = $this->database->table('eletric');
     }
 
     public function renderShow()
     {
-        $eletric = $this->database->table('eletric');
-        $this->template->eletric = $eletric;
+        $this->template->eletric = $this->database->table('eletric');
+
+    }
+
+    public function renderAdd()
+    {
 
 
     }
 
-    // TODO zmenit dle vrtsvy handle*****
-    public function handleInsertUser() {
+    public function renderInfo($deviceId){
 
-        $nazev = $this->getHttpRequest()->getPost('nazev');
-        $ulice = $this->getHttpRequest()->getPost('ulice');
-        $typ = $this->getHttpRequest()->getPost('typ');
-        $svitidlo = $this->getHttpRequest()->getPost('svitidlo');
-        $oznaceni = $this->getHttpRequest()->getPost('oznaceni');
-        $pocet = $this->getHttpRequest()->getPost('pocet');
-        $stav = $this->getHttpRequest()->getPost('stav');
-        $stozar = $this->getHttpRequest()->getPost('stozar');
-        $popis = $this->getHttpRequest()->getPost('popis');
+
+
+        $device = $this->database->table('eletric')->where('id', $deviceId);
+
+        if (!$device) {
+            $this->error('Příspěvek nebyl nalezen');
+        }else{
+
+            $this->template->eletric = $device;
+
+        }
+
+
+
+    }
+
+    public function handleAdd() {
+
         $lat = $this->getHttpRequest()->getPost('lat');
+
         $lng = $this->getHttpRequest()->getPost('lng');
 
-
-
-        $this->database->table('eletric')->insert([
-            'nazev' => $nazev ,
-            'ulice' => $ulice,
-            'typ' => $typ,
-            'svitidlo' => $svitidlo,
-            'oznaceni' => $oznaceni,
-            'pocet' => $pocet,
-            'stav' => $stav,
-            'stozar' => $stozar,
-            'popis' => $popis,
-            'lat' => $lat,
-            'lng' => $lng,
+        $this->database->table('pokus')->insert([
+            'x' => $lat ,
+            'y' => $lng,
         ]);
 
     }
 
-    public function handleGetUser() {
 
-//        $data=$this->database->table('eletric');
+
+    // TODO zmenit dle vrtsvy handle*****
+//    public function handleInsertUser() {
 //
-//        $array = $this->database->table('eletric')->fetchPairs($data);
-//
-//        $value = Json::encode($array, Json::PRETTY);
-//
-//        $this->sendJson($value);
+//        //TODO isAjax nette manual
 //
 //
-//        $select = $this->database->table('eletric');
+//        $nazev = $this->getHttpRequest()->getPost('nazev');
+//        $ulice = $this->getHttpRequest()->getPost('ulice');
+//        $typ = $this->getHttpRequest()->getPost('typ');
+//        $svitidlo = $this->getHttpRequest()->getPost('svitidlo');
+//        $oznaceni = $this->getHttpRequest()->getPost('oznaceni');
+//        $pocet = $this->getHttpRequest()->getPost('pocet');
+//        $stav = $this->getHttpRequest()->getPost('stav');
+//        $stozar = $this->getHttpRequest()->getPost('stozar');
+//        $popis = $this->getHttpRequest()->getPost('popis');
+//        $lat = $this->getHttpRequest()->getPost('lat');
+//        $lng = $this->getHttpRequest()->getPost('lng');
 //
-//        $rows = array();
 //
-//        while($r = $select->fetchAssoc("id")) {
-//            $rows[] = $r;
-//        }
+//
+//        $this->database->table('eletric')->insert([
+//            'nazev' => $nazev ,
+//            'ulice' => $ulice,
+//            'typ' => $typ,
+//            'svitidlo' => $svitidlo,
+//            'oznaceni' => $oznaceni,
+//            'pocet' => $pocet,
+//            'stav' => $stav,
+//            'stozar' => $stozar,
+//            'popis' => $popis,
+//            'lat' => $lat,
+//            'lng' => $lng,
+//        ]);
+//
+//    }
 
 
+    protected function createComponentInsertEletricForm(){
+
+        $form = (new InsertEletricFormFactory()) -> create();
+        $form['lat']->setValue($_POST["lat"]);
+        $form['lng']->setValue($_POST["lng"]);
+        $form->onSuccess[] = [$this, 'insertDeviceSucceeded'];
+        $this->flashMessage('Položka byla přidána.');
+        return $form;
 
 
+    }
 
+    public function insertDeviceSucceeded($form, $values){
 
-//        $result = $this->database->query('SELECT * FROM eletric');
+        $deviceId = $this->getParameter('deviceId');
 
+        if ($deviceId) {
+            $post = $this->database->table('posts')->get($deviceId);
+            $post->update($values);
+        } else {
 
-        $select = $this->database->table('eletric');
+        $this->database->table('eletric')->insert([
+            'nazev' => $values->nazev ,
+            'ulice' => $values->ulice,
+            'typ' => $values->typ,
+            'svitidlo' => $values->svitidlo,
+            'oznaceni' => $values->oznaceni,
+            'pocet' => $values->pocet,
+            'stav' => $values->stav,
+            'stozar' => $values->stozar,
+            'popis' => $values->popis,
+            'lat' => $values->lat,
+            'lng' => $values->lng,
+        ]);
 
-        $rows = array();
-
-        while($r = $select->fetch(\PDO::FETCH_ASSOC)) {
-            $rows[] = $r;
         }
 
-        print Json::encode($rows);
+        $this->flashMessage('Příspěvek byl úspěšně publikován.', 'success');
 
+        $this->redirect('Eletric:');
+
+
+    }
+
+    public function actionEdit($deviceId){
+
+        $device = $this->database->table('eletric')->get($deviceId);
+        if (!$device) {
+            $this->error('Příspěvek nebyl nalezen');
+        }
+
+
+        $form = (new InsertEletricFormFactory()) -> create();
+        $devices = $this->database->table('eletric')->where('field', $device);
+
+        $form['nazev']->setDefaultValue($devices->nazev);
 
 
 
 
     }
+
+    public function handleDelete($deviceId){
+
+        $this->database->table('eletric')->where('id', $deviceId)->delete();
+        $this->flashMessage('Zařízení bylo úspěšně odstraněno.', 'success');
+
+    }
+
+
+
 }

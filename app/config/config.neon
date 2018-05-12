@@ -14,3 +14,4 @@ session:
 services:
     authenticator: App\Model\MyAuthenticator
     router: App\RouterFactory::createRouter
+    - AdminModule\InsertEletricFormFactory

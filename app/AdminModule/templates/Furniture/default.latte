@@ -3,11 +3,11 @@
 {/block}
 
 {block content_menu}
-
+<ul class="left">
     <li><a class="waves-effect waves-light" onclick="$('#addmeModal'); initRegistration(); return false;" ><i class="material-icons right" >add_location</i></a></li>
     <li><a class="waves-effect waves-light" n:href="Show"><i class="material-icons" >import_export</i></a></li>
     <li><a class="waves-effect waves-light" ><i class="material-icons" >search</i></a></li>
-
+</ul>
 {/block}
 
 {block content}
@@ -103,7 +103,7 @@
         $.ajax({
 
             type: "POST",
-            url: {link insertUser!},
+            url: {link insertDevice!},
             data: 'nazev='+ nazev + '&ulice=' + ulice + '&typ=' + typ + '&svitidlo=' + svitidlo + '&oznaceni=' + oznaceni+ '&pocet=' + pocet+ '&stav=' + stav+ '&stozar=' + stozar + '&popis=' + popis + '&lat=' + lat + '&lng=' + lng,
             success: function() {
                 cancelRegistration();

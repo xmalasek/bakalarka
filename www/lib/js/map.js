@@ -19,9 +19,9 @@ map = new L.Map('map', {
 });
 
 
-L.marker([49.3130650, 16.4777650]).addTo(map)
-    .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-    .openPopup();
+// L.marker([49.3130650, 16.4777650]).addTo(map)
+//     .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+//     .openPopup();
 
 
 $(window).resize(function () {
@@ -42,6 +42,7 @@ function cancelRegistration() {
     $('#map').css('cursor', '');
     map.removeEventListener('click', onMapClick);
 }
+
 
 
 
