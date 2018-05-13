@@ -3,15 +3,15 @@
 {/block}
 
 {block content_menu}
-
+<ul class="left">
     <li><a class="waves-effect waves-light" n:href="Eletric:default" ><i class="material-icons" >backspace</i></a></li>
     <li><a class="waves-effect waves-light" ><i class="material-icons" >search</i></a></li>
-
+</ul>
 {/block}
 
 {block content}
 
-    <h2>Závady</h2>
+    <h5>Závady na elektrických zařízení</h5>
 
 
     <table class="centered highlight">
@@ -20,30 +20,29 @@
             <tr>
                 <th>ID závady</th>
                 <th>Popis závady</th>
+                <th>Název zařízení</th>
                 <th>ID zařízení</th>
-                <th>Svitidlo</th>
-                <th>Oznaceni</th>
-                <th>Pocet</th>
-                <th>Stav</th>
-                <th>Stozar</th>
-                <th>Popis</th>
+                <th>Označení</th>
+                <th></th>
+                <th></th>
+                <th></th>
+
             </tr>
             </thead>
 
             <tbody>
-            {*{foreach $eletric as $device}*}
-                {*<tr>*}
-                    {*<td>{$device -> nazev}</td>*}
-                    {*<td>{$device -> ulice}</td>*}
-                    {*<td>{$device -> typ}</td>*}
-                    {*<td>{$device -> svitidlo}</td>*}
-                    {*<td>{$device -> oznaceni}</td>*}
-                    {*<td>{$device -> pocet}</td>*}
-                    {*<td>{$device -> stav}</td>*}
-                    {*<td>{$device -> stozar}</td>*}
-                    {*<td>{$device -> popis}</td>*}
-                {*</tr>*}
-            {*{/foreach}*}
+            {foreach $eletric as $device}
+                <tr>
+                    <td>{$device -> id_error}</td>
+                    <td>{$device -> description}</td>
+                    <td>{$device -> nazev}</td>
+                    <td>{$device -> id_eletric}</td>
+                    <td>{$device -> oznaceni}</td>
+                    <td><a class="waves-effect waves-light" n:href="Delete! $device->id_eletric"><i class="material-icons" >delete</i></a></td>
+                    <td><a class="waves-effect waves-light" n:href="Info $device->id_error"><i class="material-icons" >info</i></a></td>
+
+                </tr>
+            {/foreach}
             </tbody>
     </table>
 

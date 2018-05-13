@@ -17,9 +17,7 @@
 	<link type="text/css" rel="stylesheet" href="{$basePath}/lib/leaflet/plugins/leaflet.markercluster/MarkerCluster.Default.css" />
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    {*<script type="text/javascript" src="{$basePath}/lib/js/jquery.js"></script>*}
 	<script type="text/javascript" src="{$basePath}/lib/js/materialize.js"></script>
-    {*<script type="text/javascript" src="{$basePath}/lib/js/jquery.nette.js"></script>*}
 	<script src="https://nette.github.io/resources/js/netteForms.min.js"></script>
 
 	<link rel="stylesheet" href="{$basePath}/lib/leaflet/leaflet.css" />
@@ -83,7 +81,7 @@
 			<li><div class="divider"></div></li>
 			<li><a class="subheader"><i class="material-icons">error</i>Závady</a></li>
 			<li><a href="#!">Přidat závadu</a></li>
-			<li><a href="#!">Zobrazit závady</a></li>
+			<li><a n:href="Fault:show">Zobrazit závady</a></li>
 		</ul>
 
 
@@ -132,6 +130,12 @@
                 $('.sidenav').sidenav();
                 $('.collapsible').collapsible();
                 $('select').formSelect();
+                $('.datepicker').datepicker();
+
+
+
+
+
                 // $('.button-collapse').sidenav({
                 //         menuWidth: 300, // Default is 300
                 //         edge: 'left', // Choose the horizontal origin
@@ -143,6 +147,11 @@
                 // $('.button-collapse').sidenav('show');
 
 
+            });
+
+            $('.datepicker').pickadate({
+                selectMonths: true,
+                selectYears: 15
             });
 
 
