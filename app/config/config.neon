@@ -17,3 +17,6 @@ services:
     - AdminModule\InsertEletricFormFactory
     - AdminModule\InsertFaultFormFactory
     - AdminModule\EditEletricFormFactory
+    - AdminModule\InsertFurnitureFormFactory
+    - AdminModule\InsertInterestFormFactory
+    - AdminModule\InsertWasteFormFactory
