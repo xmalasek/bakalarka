@@ -19,90 +19,175 @@ class FurniturePresenter extends BasePresenter
 
     public function renderDefault()
     {
-
+        $this->template->furniture = $this->database->table('furniture');
     }
 
     public function renderShow()
     {
-        $furniture = $this->database->table('furniture');
-        $this->template->furniture = $furniture;
+        $this->template->furniture = $this->database->table('furniture');
+
+    }
+
+    public function renderAdd()
+    {
 
 
     }
 
-    public function handleInsertDevice() {
+    public function renderInfo($id){
 
-        $nazev = $this->getHttpRequest()->getPost('nazev');
-        $ulice = $this->getHttpRequest()->getPost('ulice');
-        $typ = $this->getHttpRequest()->getPost('typ');
-        $oznaceni = $this->getHttpRequest()->getPost('oznaceni');
-        $pocet = $this->getHttpRequest()->getPost('pocet');
-        $material = $this->getHttpRequest()->getPost('material');
-        $stav = $this->getHttpRequest()->getPost('stav');
-        $popis = $this->getHttpRequest()->getPost('popis');
-        $lat = $this->getHttpRequest()->getPost('lat');
-        $lng = $this->getHttpRequest()->getPost('lng');
+        $device = $this->database->table('furniture')->where('id_furniture', $id);
 
+        if (!$device) {
+            $this->error('Příspěvek nebyl nalezen');
+            $this->redirect('Eletric:default');
+        }else{
+            $this->template->furniture = $device;
+        }
+    }
 
 
-        $this->database->table('furniture')->insert([
-            'nazev' => $nazev ,
-            'ulice' => $ulice,
-            'typ' => $typ,
-            'svitidlo' => $svitidlo,
-            'oznaceni' => $oznaceni,
-            'pocet' => $pocet,
-            'stav' => $stav,
-            'stozar' => $stozar,
-            'popis' => $popis,
-            'lat' => $lat,
-            'lng' => $lng,
+    public function renderFault()
+    {
+
+
+    }
+
+
+    public function actionFault($id){
+
+        $this['insertFaultForm']->setDefaults([
+            'id_device' => $id
         ]);
 
     }
 
-    public function handleGetUser() {
+    //Vytvoreni formulare InsertFurnitureForm
+    protected function createComponentInsertFurnitureForm(){
 
-//        $data=$this->database->table('eletric');
-//
-//        $array = $this->database->table('eletric')->fetchPairs($data);
-//
-//        $value = Json::encode($array, Json::PRETTY);
-//
-//        $this->sendJson($value);
-//
-//
-//        $select = $this->database->table('eletric');
-//
-//        $rows = array();
-//
-//        while($r = $select->fetchAssoc("id")) {
-//            $rows[] = $r;
-//        }
+        $form = (new InsertFurnitureFormFactory()) -> create();
+        $form->onSuccess[] = [$this, 'insertDeviceSucceeded'];
+        $form['lat']->setValue($_GET["lat"]);  //predani lat
+        $form['lng']->setValue($_GET["lng"]);  //predani lng
+        return $form;
 
+    }
 
+    //vlozeni do databaze furniture
+    public function insertDeviceSucceeded($form, $values){
+        $this->database->table('furniture')->insert([
+            'nazev' => $values->nazev ,
+            'ulice' => $values->ulice,
+            'typ' => $values->typ,
+            'oznaceni' => $values->oznaceni,
+            'pocet' => $values->pocet,
+            'material' => $values->material,
+            'stav' => $values->stav,
+            'popis' => $values->popis,
+            'lat' => $values->lat,
+            'lng' => $values->lng,
 
-
-
-
-//        $result = $this->database->query('SELECT * FROM eletric');
-
-
-//        $select = $this->database->table('eletric');
-//
-//        $rows = array();
-//
-//        while($r = $select->fetch(\PDO::FETCH_ASSOC)) {
-//            $rows[] = $r;
-//        }
-//
-//        print Json::encode($rows);
+        ]);
+        $this->redirect('Furniture:');
+    }
 
 
 
+    //Vytvoreni formulare InsertFaultForm - formular pro pridavani zavad
+    protected function createComponentInsertFaultForm(){
+
+        $form = (new InsertFaultFormFactory()) -> create();
+        $form->onSuccess[] = [$this, 'insertFaultSucceeded'];
+        return $form;
+
+    }
+
+    //vlozeni error + pridani error do furniture
+    public function insertFaultSucceeded($form, $values){
+
+        $data=
+            ['description' => $values->description ,
+                'datum' => $values->datum];
+
+        $error_id = $this->database->table('error')->insert($data)->id_error;
+
+        $this->database->table('furniture')
+            ->where('furniture', $values->id_device)
+            ->update([
+                'error_id' => $error_id
+            ]);
+
+        $this->redirect('Furniutre:default');
+
+    }
+
+    //vytvoreni formulare EdirFurnitureForm - editace mobiliare
+    protected function createComponentEditFurnitureForm(){
+
+        $form = (new EditFurnitureFormFactory()) -> create();
+        $form->onSuccess[] = [$this, 'updateDeviceSucceeded'];
+
+        return $form;
+    }
+
+    //update furniture device
+    public function updateDeviceSucceeded($form, $values){
+
+        $this->database->table('furniture')
+            ->where('id_furniture', $this->getParameter('id'))
+            ->update([
+
+                'nazev' => $values->nazev ,
+                'ulice' => $values->ulice,
+                'typ' => $values->typ,
+                'oznaceni' => $values->oznaceni,
+                'pocet' => $values->pocet,
+                'material' => $values->material,
+                'stav' => $values->stav,
+                'popis' => $values->popis,
+                'lat' => $values->lat,
+                'lng' => $values->lng,
+
+            ]);
+
+        $this->flashMessage('Položka byla úspěšně editována.');
+
+    }
+
+    //metoda actionEdit - vepsani hodnot z databaze do formulare
+    public function actionEdit($id){
+
+        $values = $this->database->table('furniture')->get($id);
+        if (!$values) {
+            $this->error('Příspěvek nebyl nalezen');
+        }
+
+        $this['editEletricForm']->setDefaults([
+
+            'nazev' => $values->nazev ,
+            'ulice' => $values->ulice,
+            'typ' => $values->typ,
+            'oznaceni' => $values->oznaceni,
+            'pocet' => $values->pocet,
+            'material' => $values->material,
+            'stav' => $values->stav,
+            'popis' => $values->popis,
+            'lat' => $values->lat,
+            'lng' => $values->lng,
+
+        ]);
 
 
     }
+
+    public function handleDelete($deviceId){
+
+        $this->database->table('furniture')->where('id_furniture', $deviceId)->delete();
+        $this->flashMessage('Zařízení bylo úspěšně odstraněno.', 'success');
+
+    }
+
+
 
 
 }

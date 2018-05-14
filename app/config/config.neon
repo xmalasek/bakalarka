@@ -15,8 +15,15 @@ services:
     authenticator: App\Model\MyAuthenticator
     router: App\RouterFactory::createRouter
     - AdminModule\InsertEletricFormFactory
-    - AdminModule\InsertFaultFormFactory
     - AdminModule\EditEletricFormFactory
+
+    - AdminModule\InsertFaultFormFactory
+
     - AdminModule\InsertFurnitureFormFactory
+    - AdminModule\EditFurnitureFormFactory
+
     - AdminModule\InsertInterestFormFactory
+    - AdminModule\EditInterestFormFactory
+
     - AdminModule\InsertWasteFormFactory
+    - AdminModule\EditWasteFormFactory

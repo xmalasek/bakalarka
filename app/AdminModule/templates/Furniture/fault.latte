@@ -1,0 +1,74 @@
+{block title}
+    Admin - Eletric - eletric - addFault
+{/block}
+
+{block content_menu}
+    <ul class="left">
+
+    </ul>
+{/block}
+
+{block content}
+
+
+    <h4>Přidat závadu na zařízení</h4>
+
+    <div class="row">
+        <form n:name=insertFaultForm class="col s12">
+
+            <div class="row show_types">
+                <div class="input-field col s12">
+                    {input description}
+                    {label description /}
+                </div>
+            </div>
+
+
+            <div class="row show_types">
+                <div class="input-field col s6">
+                    {label datum /}
+                    <input n:name="datum" type="date"/>
+                </div>
+                <div class="input-field col s6">
+                    {input id_device}
+                    {label id_device /}
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    {input submit class => [btn, col, s12]}
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+
+{/block}
+
+
+{* JS kod pro konkretni Presenter *}
+{block scripts}
+    {include parent}
+<script type="application/javascript">
+
+    $('.datepicker').pickadate({
+    selectMonths: true,
+    selectYears: 15
+    });
+
+    $(document).ready(function(){
+        $(".hide_type_1").hide();
+    });
+
+
+</script>
+
+{/block}
+
+{block head}
+
+    {* CSS kod pro konkretni Presenter *}
+{/block}

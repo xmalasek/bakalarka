@@ -93,22 +93,18 @@ class EletricPresenter extends BasePresenter
 //
 //    }
 
-    public function handleAddFault() {
-
-        $id_eletric = $this->getHttpRequest()->getPost('lat');
-
-        $lng = $this->getHttpRequest()->getPost('lng');
-
-        $this->database->table('pokus')->insert([
-            'x' => $lat ,
-            'y' => $lng,
-        ]);
-
-    }
-
-
-
-
+//    public function handleAddFault() {
+//
+//        $id_eletric = $this->getHttpRequest()->getPost('lat');
+//
+//        $lng = $this->getHttpRequest()->getPost('lng');
+//
+//        $this->database->table('pokus')->insert([
+//            'x' => $lat ,
+//            'y' => $lng,
+//        ]);
+//
+//    }
 
 
     protected function createComponentInsertEletricForm(){
@@ -176,17 +172,6 @@ class EletricPresenter extends BasePresenter
        $this->redirect('Eletric:default');
 
     }
-
-    public function insertEletricFault($id){
-
-        $this->database->table('eletric')
-            ->where('id_eletric', $id) // must be called before update()
-            ->update([
-                'error_id' => $id
-            ]);
-
-    }
-
 
     protected function createComponentEditEletricForm(){
 
