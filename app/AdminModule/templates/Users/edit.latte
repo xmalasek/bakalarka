@@ -1,0 +1,76 @@
+{block title}
+    Uživatelé
+{/block}
+
+{block content_menu}
+    <ul class="left">
+        <li><a class="waves-effect waves-light" n:href="Users:default" ><i class="material-icons" >backspace</i></a></li>
+        <li><a class="waves-effect waves-light" ><i class="material-icons" >search</i></a></li>
+    </ul>
+{/block}
+
+{block content}
+    <h4>Editovat uživatele</h4>
+
+    <div class="row">
+        <form n:name=editUserForm class="col s12">
+            <div class="row show_types">
+                <div class="input-field col s12 m2">
+                    {input degree}
+                    {label degree /}
+                </div>
+                <div class="input-field col s12 m4">
+                    {input name}
+                    {label name /}
+                </div>
+                <div class="input-field col s12 m6">
+                    {input surname}
+                    {label surname /}
+                </div>
+            </div>
+
+            <div class="row show_types">
+                <div class="input-field col s12">
+                    {input email}
+                    {label email /}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    {input password}
+                    {label password /}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    {input passwordVerifyOld}
+                    {label passwordVerifyOld /}
+                </div>
+            </div>
+
+            {*TODO ROLE*}
+
+            <div class="row">
+                <div class="input-field col s12">
+                    {input submit class => [btn, col, s12]}
+                </div>
+            </div>
+        </form>
+    </div>
+{/block}
+
+
+{* JS kod pro konkretni Presenter *}
+{block scripts}
+    {include parent}
+
+
+
+{/block}
+
+{block head}
+
+    {* CSS kod pro konkretni Presenter *}
+{/block}

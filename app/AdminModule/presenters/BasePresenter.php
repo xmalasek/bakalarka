@@ -27,6 +27,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
                 'name' => $user->getIdentity()->name,
                 'surname' => $user->getIdentity()->surname,
             );
+            $this->template->user_editor = $this->JeEditor();
+            $this->template->user_admin = $this->JeAdministrator();
         }
         parent::beforeRender();
     }
@@ -39,5 +41,27 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         if (!$this->getUser()->isLoggedIn()) {
             $this->redirect('Sign:in');
         }
+    }
+
+    protected function JeEditor()
+    {
+        $user = $this->getUser();
+        if ($user->isLoggedIn()) {
+            if ($user->getIdentity()->role == 2) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    protected function JeAdministrator()
+    {
+        $user = $this->getUser();
+        if ($user->isLoggedIn()) {
+            if ($user->getIdentity()->role == 1) {
+                return true;
+            }
+        }
+        return false;
     }
 }

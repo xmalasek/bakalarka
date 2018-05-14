@@ -1,0 +1,53 @@
+{block title}
+    Uživatelé
+{/block}
+
+{block content_menu}
+    <ul class="left">
+        <li><a class="waves-effect waves-light" n:href="Users:default" ><i class="material-icons" >backspace</i></a></li>
+        <li><a class="waves-effect waves-light" ><i class="material-icons" >search</i></a></li>
+    </ul>
+{/block}
+
+{block content}
+    <h4>Seznam uživatelů</h4>
+
+    {if $user_admin}
+        <a class="waves-effect waves-light btn green" href="{link Users:add}"><i class="material-icons right">person_add</i>Přidat uživatele</a>
+    {/if}
+
+    {foreach $users as $dbuser}
+        <ul class="collection">
+            <li class="collection-item avatar">
+                <img src="http://materializecss.com/images/yuna.jpg" alt="" class="circle">
+                <span class="title">{$dbuser->degree} {$dbuser->name} {$dbuser->surname}</span>
+                <p>{$dbuser->email}<br>
+                    {*TODO ROLE*}
+                </p>
+                {*{if $user_admin}*}
+                    <a href="{link Users:edit $dbuser->id}" class="secondary-content"><i class="material-icons">edit</i></a>
+                    <a href="TODO hadleDELETE" class="secondary-content" style="margin-right: 35px;"><i class="material-icons">delete</i></a>
+                {*{/if}*}
+
+                {*{elseif $dbuser->id == $user['id']}*}
+                    {*<a href="{link Users:edit $dbuser->id}" class="secondary-content"><i class="material-icons">edit</i></a>*}
+                {*{/if}*}
+
+            </li>
+        </ul>
+    {/foreach}
+{/block}
+
+
+{* JS kod pro konkretni Presenter *}
+{block scripts}
+    {include parent}
+
+
+
+{/block}
+
+{block head}
+
+    {* CSS kod pro konkretni Presenter *}
+{/block}
