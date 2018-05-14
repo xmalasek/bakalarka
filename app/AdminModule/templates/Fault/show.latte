@@ -42,8 +42,84 @@
                     <td><a class="waves-effect waves-light" n:href="Info $device->id_error"><i class="material-icons" >info</i></a></td>
 
                 </tr>
+
             {/foreach}
+            <tr></tr>
             </tbody>
+    </table>
+
+
+    <h5>Závady na městském mobiliáři</h5>
+
+
+    <table class="centered highlight">
+
+        <thead>
+        <tr>
+            <th>ID závady</th>
+            <th>Popis závady</th>
+            <th>Název zařízení</th>
+            <th>ID zařízení</th>
+            <th>Označení</th>
+            <th></th>
+            <th></th>
+            <th></th>
+
+        </tr>
+        </thead>
+
+        <tbody>
+        {foreach $furniture as $furn}
+            <tr>
+                <td>{$furn -> id_error}</td>
+                <td>{$furn -> description}</td>
+                <td>{$furn -> nazev}</td>
+                <td>{$furn -> id_furniture}</td>
+                <td>{$furn -> oznaceni}</td>
+                <td><a class="waves-effect waves-light" n:href="Delete! $furn->id_furniture"><i class="material-icons" >delete</i></a></td>
+                <td><a class="waves-effect waves-light" n:href="Info $furn->id_error"><i class="material-icons" >info</i></a></td>
+
+            </tr>
+
+        {/foreach}
+        <tr></tr>
+        </tbody>
+    </table>
+
+    <h5>Závady na místech zájmu</h5>
+
+
+    <table class="centered highlight">
+
+        <thead>
+        <tr>
+            <th>ID závady</th>
+            <th>Popis závady</th>
+            <th>Název zařízení</th>
+            <th>ID zařízení</th>
+            <th>Označení</th>
+            <th></th>
+            <th></th>
+            <th></th>
+
+        </tr>
+        </thead>
+
+        <tbody>
+        {foreach $interest as $int}
+            <tr>
+                <td>{$int -> id_error}</td>
+                <td>{$int -> description}</td>
+                <td>{$int -> nazev}</td>
+                <td>{$int -> id_interest}</td>
+                <td>{$int -> oznaceni}</td>
+                <td><a class="waves-effect waves-light" n:href="Delete! $int->id_interest"><i class="material-icons" >delete</i></a></td>
+                <td><a class="waves-effect waves-light" n:href="Info $int->id_error"><i class="material-icons" >info</i></a></td>
+
+            </tr>
+        {/foreach}
+        <tr></tr>
+        </tbody>
     </table>
 
 

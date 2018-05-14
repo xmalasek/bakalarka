@@ -11,7 +11,7 @@
 {block content}
 <table class="highlight">
 
-{foreach $furniture as $device}
+{foreach $interest as $device}
     <h3>{$device -> nazev}</h3>
 
     <tr>
@@ -23,28 +23,24 @@
         <td>{$device -> ulice}</td>
     </tr>
     <tr>
+        <th>Číslo popisné</th>
+        <td>{$device -> cp}</td>
+    </tr>
+    <tr>
         <th>Typ</th>
         <td>{$device -> typ}</td>
     </tr>
     <tr>
-        <th>Označení</th>
-        <td>{$device -> oznaceni}</td>
-    </tr>
-    <tr>
-        <th>Počet</th>
-        <td>{$device -> pocet}</td>
-    </tr>
-    <tr>
-        <th>Materiál</th>
-        <td>{$device -> material}</td>
-    </tr>
-    <tr>
-        <th>Stav</th>
-        <td>{$device -> stav}</td>
-    </tr>
-    <tr>
         <th>Popis</th>
         <td>{$device -> popis}</td>
+    </tr>
+    <tr>
+        <th>Telefon</th>
+        <td>{$device -> telefon}</td>
+    </tr>
+    <tr>
+        <th>Web</th>
+        <td>{$device -> web}</td>
     </tr>
 
 </tr>
@@ -81,7 +77,7 @@
     });
 
     map = new L.Map('map', {
-        {foreach $furniture as $device}
+        {foreach $interest as $device}
         center: new L.LatLng({$device -> lat}, {$device -> lng}),
         zoom: 18,
         layers: [mapquest, users, newUser]
@@ -103,7 +99,7 @@
 
 
         function getDevice() {
-            {foreach $furniture as $device}
+            {foreach $interest as $device}
             L.marker([{$device -> lat}, {$device -> lng}]).addTo(map)
                 .bindPopup("<div style='text-align: center; margin-left: auto; margin-right: auto;'>" +
                         {syntax off}'{/syntax} <b>Název:</b> {$device->nazev|noescape} <br> <b>Ulice:</b>{$device -> ulice|noescape}{syntax off}'{/syntax}+

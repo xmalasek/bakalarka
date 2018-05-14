@@ -66,9 +66,10 @@ class FurniturePresenter extends BasePresenter
     protected function createComponentInsertFurnitureForm(){
 
         $form = (new InsertFurnitureFormFactory()) -> create();
+        $form['lat']->setValue($_POST["lat"]);  //predani lat
+        $form['lng']->setValue($_POST["lng"]);  //predani lng
         $form->onSuccess[] = [$this, 'insertDeviceSucceeded'];
-        $form['lat']->setValue($_GET["lat"]);  //predani lat
-        $form['lng']->setValue($_GET["lng"]);  //predani lng
+
         return $form;
 
     }
@@ -112,12 +113,12 @@ class FurniturePresenter extends BasePresenter
         $error_id = $this->database->table('error')->insert($data)->id_error;
 
         $this->database->table('furniture')
-            ->where('furniture', $values->id_device)
+            ->where('id_furniture', $values->id_device)
             ->update([
                 'error_id' => $error_id
             ]);
 
-        $this->redirect('Furniutre:default');
+        $this->redirect('Furniture:default');
 
     }
 
@@ -162,7 +163,7 @@ class FurniturePresenter extends BasePresenter
             $this->error('Příspěvek nebyl nalezen');
         }
 
-        $this['editEletricForm']->setDefaults([
+        $this['editFurnitureForm']->setDefaults([
 
             'nazev' => $values->nazev ,
             'ulice' => $values->ulice,

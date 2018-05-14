@@ -1,10 +1,10 @@
 {block title}
-    Admin - Eletric - eletric - add
+    Admin - Eletric - eletric - edit
 {/block}
 
 {block content_menu}
     <ul class="left">
-        <li><a class="waves-effect waves-light" n:href="Eletric:default" ><i class="material-icons" >backspace</i></a></li>
+        <li><a class="waves-effect waves-light" n:href="Furniture:default" ><i class="material-icons" >backspace</i></a></li>
         <li><a class="waves-effect waves-light" ><i class="material-icons" >search</i></a></li>
     </ul>
 {/block}
@@ -12,12 +12,12 @@
 {block content}
 
 
-    <h4>Přidat městského mobiliáře</h4>
+    <h4>Editovat městský mobiliář</h4>
 
 
 
     <div class="row">
-        <form n:name=insertFurnitureForm class="col s12">
+        <form n:name=editInterestForm class="col s12">
 
 
             <div class="row show_types">
@@ -33,37 +33,30 @@
                     {label ulice /}
                 </div>
                 <div class="input-field col s6 m6 show_types">
+                    {label cp /}
+                    <input n:name="cp" type="number" />
+                </div>
+            </div>
+
+            <div class="row show_types">
+                <div class="input-field col s6">
                     {input typ}
                     {label typ /}
                 </div>
-            </div>
-
-            <div class="row show_types">
                 <div class="input-field col s6">
-                    {input oznaceni}
-                    {label oznaceni /}
-                </div>
-                <div class="input-field col s6">
-                    {label pocet /}
-                    <input n:name="pocet" type="number" />
-                </div>
-            </div>
-
-            <div class="row show_types">
-                <div class="input-field col s6 m6 show_type">
-                    {input material}
-                    {label material /}
-                </div>
-                <div class="input-field col s6 m6 show_type">
-                    {input stav}
-                    {label stav /}
-                </div>
-            </div>
-
-            <div class="row show_types">
-                <div class="input-field col s12">
+                    {input popis}
                     {label popis /}
-                    <input n:name="popis" type="text" class="materialize-textarea" data-length="120"/>
+                </div>
+            </div>
+
+            <div class="row show_types">
+                <div class="input-field col s6 m6 show_type">
+                    {input telefon}
+                    {label telefon /}
+                </div>
+                <div class="input-field col s6 m6 show_type">
+                    {input web}
+                    {label web /}
                 </div>
             </div>
 
@@ -84,16 +77,8 @@
                 </div>
             </div>
 
-
-
-
-
-
-
-
         </form>
     </div>
-
 
 
 {/block}

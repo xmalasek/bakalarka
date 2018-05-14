@@ -40,7 +40,21 @@ class FaultPresenter extends BasePresenter
            ->select('error.*')
            ->select('eletric.*')
            ->where('error.id_error = eletric.error_id');
+
+        $this->template->furniture=$this->database->table('furniture')
+            ->select('error.*')
+            ->select('furniture.*')
+            ->where('error.id_error = furniture.error_id');
+
+        $this->template->interest=$this->database->table('interest')
+            ->select('error.*')
+            ->select('interest.*')
+            ->where('error.id_error = interest.error_id');
+
     }
+
+
+
 
     public function renderInfo($errorId){
 

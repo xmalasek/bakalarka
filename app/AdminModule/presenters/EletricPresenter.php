@@ -110,9 +110,10 @@ class EletricPresenter extends BasePresenter
     protected function createComponentInsertEletricForm(){
 
         $form = (new InsertEletricFormFactory()) -> create();
+        $form['lat']->setValue($_POST["lat"]);
+        $form['lng']->setValue($_POST["lng"]);
         $form->onSuccess[] = [$this, 'insertDeviceSucceeded'];
-        $form['lat']->setValue($_GET["lat"]);
-        $form['lng']->setValue($_GET["lng"]);
+
 //        $this->flashMessage('Položka byla přidána.');
         return $form;
 

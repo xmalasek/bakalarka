@@ -4,15 +4,15 @@
 
 {block content_menu}
 <ul class="left">
-    <li><a class="waves-effect waves-light" onclick="$('#addmeModal'); initRegistration(); return false;" ><i class="material-icons right" >add_location</i></a></li>
-    <li><a class="waves-effect waves-light" n:href="Show"><i class="material-icons" >import_export</i></a></li>
+    <li><a class="waves-effect waves-light" onclick=" initRegistration(); return false;" ><i class="material-icons right" >add_location</i></a></li>
+    <li><a class="waves-effect waves-light" n:href="Show" ><i class="material-icons" >import_export</i></a></li>
     <li><a class="waves-effect waves-light" ><i class="material-icons" >search</i></a></li>
 </ul>
 {/block}
 
 {block content}
     <p>
-       Městský mobiliář + mapa
+       Městský mobiliář
     </p>
 
     <div id="map"></div>
@@ -33,33 +33,35 @@
 
 
     function getUsers() {
-        $.getJSON({link getUser!}, function (data) {
-                for (var i = 0; i < data.length; i++) {
-                    var location = new L.LatLng(data[i].lat, data[i].lng);
-                    var nazev = data[i].nazev;
-                    var ulice = data[i].ulice;
-                    var typ = data[i].typ;
-                    var svitidlo = data[i].svitidlo;
-                    var oznaceni = data[i].oznaceni;
-                    var pocet = data[i].pocet;
-                    var stav = data[i].stav;
-                    var stozar = data[i].stozar;
-                    var popis = data[i].popis;
 
-                    var marker = new L.Marker(location, {
-                        title: nazev
-                    });
-                    marker.bindPopup("<div style='text-align: center; margin-left: auto; margin-right: auto;'>"+ nazev + ulice + ulice + typ + svitidlo + oznaceni + pocet + stav + stozar + popis +"</div>", { maxWidth: '400'});
-                    users.addLayer(marker);
-                }
-                // }).complete(function() {
-                //     if (firstLoad == true) {
-                //         map.fitBounds(users.getBounds());
-                //         firstLoad = false;
-                //     };
-                // });
-            }
-        )}
+
+
+
+        {foreach $furniture as $device}
+        if ({$device->error_id}!= null) {
+
+            L.marker([{$device -> lat}, {$device -> lng}]).addTo(map)
+
+                .bindPopup(
+                        {*{syntax off}'{/syntax}<div style="text-align: center; margin-left: auto; margin-right: auto;">{syntax off}'{/syntax}+*}
+                        {syntax off}'{/syntax} <b>Název: </b> {$device->nazev|noescape} <br> <b>Ulice: </b>{$device -> ulice|noescape} <br> <b>Typ: </b>{$device -> typ|noescape} {syntax off}'{/syntax}
+                        {*{syntax off}'{/syntax}<br><br><a class="waves-effect waves-light btn small" href="fault/{$device->id_furniture}"><i class="material-icons right">add</i>nahlásit závadu</a>{syntax off}'{/syntax}*}
+                );
+            {*{syntax off}'{/syntax}</div>{syntax off}'{/syntax});*}
+
+        }else{
+
+            L.marker([{$device -> lat}, {$device -> lng}],{ opacity: 0.5}).addTo(map)
+
+                .bindPopup(
+                        {*{syntax off}'{/syntax}<div style="text-align: center; background: #99ebff; margin-left: auto; margin-right: auto;">{syntax off}'{/syntax}+*}
+                        {syntax off}'{/syntax} <b>Název:</b> {$device->nazev|noescape} <br> <b>Ulice:</b> {$device -> ulice|noescape}{syntax off}'{/syntax}+
+                        {syntax off}'{/syntax} <br><br><a class="waves-effect waves-light btn" href="fault/{$device->id_furniture}"><i class="material-icons right">add</i>Nahlásit závadu</a>{syntax off}'{/syntax}
+                        {*{syntax off}'{/syntax}</div>{syntax off}'{/syntax}*}
+                );
+        }
+        {/foreach}
+    }
 
 
     function onMapClick(e) {
@@ -67,52 +69,31 @@
         var marker = new L.Marker(markerLocation);
         newUser.clearLayers();
         newUser.addLayer(marker);
+
+        // var latitude = e.latlng.lat.toFixed(7);
+        // var longitude = e.latlng.lat.toFixed(7);
+
         var form =
             '<div class="markerDetail">'+
-            '<input placeholder="Nazev" id="nazev" name="nazev" type="text" >\n' +
-            '<input placeholder="Ulice" id="ulice" name="ulice" type="text" >\n' +
-            '<input placeholder="Typ" id="typ" name="typ" type="text">\n' +
-            '<input placeholder="Svitidlo" id="svitidlo" name="svitidlo" type="text">\n' +
-            '<input placeholder="Oznaceni" id="oznaceni" name="oznaceni" type="text">\n' +
-            '<input placeholder="Pocet" id="pocet" name="pocet" type="text">\n' +
-            '<input placeholder="Stav" id="stav" name="stav" type="text">\n' +
-            '<input placeholder="Stozar" id="stozar" name="stozar" type="text">\n' +
-            '<input placeholder="Popis" id="popis" name="popis" type="text">'+
-            '<input style="display: none;" type="text" id="lat" name="lat" value="'+e.latlng.lat.toFixed(6)+'" />'+
-            '<input style="display: none;" type="text" id="lng" name="lng" value="'+e.latlng.lng.toFixed(6)+'" /><br><br>'+
-            '   <button class="btn waves-effect waves-light" type="submit" name="action" onclick="cancelRegistration()">Storno<i class="material-icons right">cancel</i>\n'+
-            '                <button class="btn waves-effect waves-light" type="cancel" name="action" onclick="insertDevice()">Submit<i class="material-icons right">send</i>\n' +
-            '                </div>\n';
+            '<form action="add" method="post">'+
+            '<input style="display: none;" type="text" id="lat" name="lat" value="'+e.latlng.lat.toFixed(7)+'" />'+
+            '<input style="display: none;" type="text" id="lng" name="lng" value="'+e.latlng.lng.toFixed(7)+'" /><br><br>'+
+            '<button class="btn waves-effect waves-light" type="submit" name="action" onclick="">Přidat bod<i class="material-icons right">add</i>\n' +
+            '</form>'+
+            '</div>';
+
+//TODO linkovani na add + lat +lng
+        {*var form =*}
+        {*'<div class="markerDetail">'+*}
+        {*'<a class="waves-effect waves-light btn" href="add/{ latitude}"><i class="material-icons right">cloud</i>button</a>' +*}
+        {*'</div>';*}
+        {*{link Electric}:add ['lng' => '16.4587965', 'lat' => '42.4654654']}*}
+
         marker.bindPopup(form).openPopup();
-    }
 
-    function insertDevice() {
-        var nazev = $("#nazev").val();
-        var ulice = $("#ulice").val();
-        var typ= $("#typ").val();
-        var svitidlo = $("#svitidlo").val();
-        var oznaceni = $("#oznaceni").val();
-        var pocet = $("#pocet").val();
-        var stav = $("#stav").val();
-        var stozar = $("#stozar").val();
-        var popis = $("#popis").val();
-        var lat = $("#lat").val();
-        var lng = $("#lng").val();
-
-        var dataString = 'nazev='+ nazev + '&ulice=' + ulice + '&typ=' + typ + '&svitidlo=' + svitidlo + '&oznaceni=' + oznaceni+ '&pocet=' + pocet+ '&stav' + stav+ '&stozar=' + stozar + '&popis=' + popis + '&lat=' + lat + '&lng=' + lng;
-        $.ajax({
-
-            type: "POST",
-            url: {link insertDevice!},
-            data: 'nazev='+ nazev + '&ulice=' + ulice + '&typ=' + typ + '&svitidlo=' + svitidlo + '&oznaceni=' + oznaceni+ '&pocet=' + pocet+ '&stav=' + stav+ '&stozar=' + stozar + '&popis=' + popis + '&lat=' + lat + '&lng=' + lng,
-            success: function() {
-                cancelRegistration();
-                users.clearLayers();
-                getUsers();
-            }
+        $(".leaflet-popup-close-button").click(function() {
+            cancelRegistration();
         });
-
-        return false;
     }
 
     </script>
