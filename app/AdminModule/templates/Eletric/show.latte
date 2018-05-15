@@ -46,13 +46,28 @@
             <td>{$device -> stav}</td>
             <td>{$device -> stozar}</td>
             <td>{$device -> popis}</td>
-            <td><a class="waves-effect waves-light" n:href="Delete! $device->id_eletric"><i class="material-icons" >delete</i></a></td>
+            {*<td><a class="waves-effect waves-light" n:href="Delete! $device->id_eletric"><i class="material-icons" >delete</i></a></td>*}
+            <td><a class="waves-effect waves-light modal-trigger" href="#modal_delete{$device->id_eletric}"><i class="material-icons" >delete</i></a></td>
             <td><a class="waves-effect waves-light" n:href="Edit $device->id_eletric"><i class="material-icons" >edit</i></a></td>
             <td><a class="waves-effect waves-light" n:href="Info $device->id_eletric"><i class="material-icons" >info</i></a></td>
         </tr>
+
         {/foreach}
         </tbody>
     </table>
+
+
+{foreach $eletric as $device}
+    <div id="modal_delete{$device->id_eletric}" class="modal">
+        <div class="modal-content">
+            <h4>Opravdu chcete smazat zařízení?</h4>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-red btn-flat">Zrušit</a>
+            <a n:href="Delete! $device->id_eletric" class="modal-close waves-effect waves-green btn-flat">Potvrdit</a>
+        </div>
+    </div>
+{/foreach}
 
 
 {/block}
@@ -61,9 +76,11 @@
 {* JS kod pro konkretni Presenter *}
 {block scripts}
 {include parent}
-
-
-
+    <script type="application/javascript">
+        $(document).ready(function(){
+            $('.modal').modal();
+        });
+    </script>
 {/block}
 
 {block head}
