@@ -8606,7 +8606,7 @@ $jscomp.polyfill = function (e, r, p, m) {
   var _defaults = {
 
     // the default output format for the input field value
-    format: 'mmm dd, yyyy',
+    format: 'yyyy-mm-dd',
 
     // Used to create date object from current input string
     parse: null,
@@ -8657,16 +8657,16 @@ $jscomp.polyfill = function (e, r, p, m) {
 
     // internationalization
     i18n: {
-      cancel: 'Cancel',
-      clear: 'Clear',
+      cancel: 'Zrušit',
+      clear: 'Vymazat',
       done: 'Ok',
       previousMonth: '‹',
       nextMonth: '›',
-      months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-      monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-      weekdays: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-      weekdaysShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-      weekdaysAbbrev: ['S', 'M', 'T', 'W', 'T', 'F', 'S']
+      months: [ 'Leden', 'Únor', 'Březen', 'Duben', 'Květen', 'Červen', 'Červenec', 'Srpen', 'Září', 'Říjen', 'Listopad', 'Prosinec' ],
+      monthsShort: [ 'Led', 'Úno', 'Bře', 'Dub', 'Kvě', 'Čer', 'Čer', 'Srp', 'Zář', 'Říj', 'Lis', 'Pro' ],
+      weekdays: [ 'Neděle', 'Pondělí', 'Úterý', 'Středa', 'Čtvrtek', 'Pátek', 'Sobota' ],
+      weekdaysShort:  [ 'Ne', 'Po', 'Út', 'St', 'Čt', 'Pá', 'So' ],
+      weekdaysAbbrev: [ 'N', 'P', 'U', 'S', 'Č', 'P', 'S' ]
     },
 
     // events array

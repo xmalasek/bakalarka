@@ -27,7 +27,7 @@
             <div class="row show_types">
                 <div class="input-field col s6">
                     {label datum /}
-                    <input n:name="datum" type="date"/>
+                    <input n:name="datum" type="text" class="datepicker"/>
                 </div>
                 <div class="input-field col s6">
                     {input id_device}
@@ -53,17 +53,9 @@
 {block scripts}
     {include parent}
 <script type="application/javascript">
-
-    $('.datepicker').pickadate({
-    selectMonths: true,
-    selectYears: 15
-    });
-
     $(document).ready(function(){
-        $(".hide_type_1").hide();
+        $('.datepicker').datepicker();
     });
-
-
 </script>
 
 {/block}
