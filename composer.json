@@ -20,7 +20,8 @@
 		"nette/utils": "^2.5",
 		"latte/latte": "^2.4",
 		"tracy/tracy": "^2.4",
-		"contributte/recaptcha": "~2.1.0"
+		"contributte/recaptcha": "~2.1.0",
+		"uestla/recaptcha-control": "^7.0"
 	},
 	"require-dev": {
 		"nette/tester": "^2.0"

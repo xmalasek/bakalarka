@@ -27,3 +27,4 @@ services:
 
     - AdminModule\InsertWasteFormFactory
     - AdminModule\EditWasteFormFactory
+

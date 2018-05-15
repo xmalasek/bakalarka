@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5a235b8a70709fe7c4b6469c829cc296",
+    "content-hash": "9feb990f8b5c342ccf9764a250abfff9",
     "packages": [
         {
             "name": "contributte/recaptcha",
@@ -1308,6 +1308,58 @@
                 "profiler"
             ],
             "time": "2018-03-23T17:15:58+00:00"
+        },
+        {
+            "name": "uestla/recaptcha-control",
+            "version": "7.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/uestla/ReCaptchaControl.git",
+                "reference": "c8faff735549c380c2d5f527f02c9b171d4b2b48"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/uestla/ReCaptchaControl/zipball/c8faff735549c380c2d5f527f02c9b171d4b2b48",
+                "reference": "c8faff735549c380c2d5f527f02c9b171d4b2b48",
+                "shasum": ""
+            },
+            "require": {
+                "nette/di": "^2.4",
+                "nette/forms": "^2.4",
+                "nette/http": "^2.4",
+                "nette/php-generator": "^2.4",
+                "nette/utils": "^2.4",
+                "php": ">=5.6.0"
+            },
+            "require-dev": {
+                "guzzlehttp/guzzle": "^3.8",
+                "latte/latte": "^2.4",
+                "nette/bootstrap": "^2.4",
+                "nette/tester": "^2.0",
+                "php": ">= 7.0",
+                "tracy/tracy": "^2.4"
+            },
+            "suggest": {
+                "ext-curl": "Needed by the default ReCaptchaControl\\Http\\Requester"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "ReCaptchaControl": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "reCAPTCHA control for Nette Framework forms",
+            "homepage": "https://github.com/uestla/ReCaptchaControl",
+            "keywords": [
+                "Forms",
+                "nette",
+                "recaptcha"
+            ],
+            "time": "2018-02-19T23:25:39+00:00"
         }
     ],
     "packages-dev": [

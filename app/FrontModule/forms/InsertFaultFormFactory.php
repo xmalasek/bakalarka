@@ -21,7 +21,11 @@ class InsertFaultFormFactory
         $form->addText('datum', 'Datum zjištění závady.')
             ->setRequired('Datum musí být vyplněno!');
 
+        $form->addEmail('email', 'Váš email')
+            ->setRequired('Email musí být vyplněn!');
+
         $form->addHidden('id_device', 'null');
+
 
         $form->addSubmit('submit', 'Potvrdit');
 
