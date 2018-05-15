@@ -1,5 +1,5 @@
 {block title}
-    Admin - Eletric - eletric - addFault
+    Admin - Waste - waste - addFault
 {/block}
 
 {block content_menu}
@@ -18,8 +18,9 @@
 
             <div class="row show_types">
                 <div class="input-field col s12">
-                    {input description}
+                    {input description class => [validate]}
                     {label description /}
+                    <span class="helper-text" data-error="Povinné" data-success=""></span>
                 </div>
             </div>
 
@@ -27,13 +28,14 @@
             <div class="row show_types">
                 <div class="input-field col s6">
                     {label datum /}
-                    <input n:name="datum" type="text" class="datepicker"/>
+                    <input n:name="datum" type="text" class="datepicker validate"/>
+                    <span class="helper-text" data-error="Povinné" data-success=""></span>
                 </div>
                 <div class="input-field col s6">
-                    {input id_device}
-                    {label id_device /}
+                    {input email class => [validate]}
+                    {label email /}
+                    <span class="helper-text" data-error="Špatný formát emailové adresy" data-success="Formát odpovídá emailové adrese"></span>
                 </div>
-
             </div>
 
             <div class="row">
@@ -44,6 +46,7 @@
 
         </form>
     </div>
+
 
 
 {/block}

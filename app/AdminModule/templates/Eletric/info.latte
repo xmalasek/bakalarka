@@ -9,6 +9,8 @@
 {/block}
 
 {block content}
+    <script type="application/javascript" src="{$basePath}/lib/js/map.js"></script>
+
 <table class="highlight">
 
 {foreach $eletric as $device}
@@ -60,7 +62,7 @@
 
 {/foreach}
 
-    <div id="map"></div>
+    <div id="my_map_info"></div>
 
 {/block}
 
@@ -69,7 +71,9 @@
 {block scripts}
 
 
+
 <script type="application/javascript">
+
 
     var map, newUser, users, mapquest, firstLoad;
 
@@ -84,7 +88,7 @@
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     });
 
-    map = new L.Map('map', {
+    map = new L.Map('my_map_info', {
         {foreach $eletric as $device}
         center: new L.LatLng({$device -> lat}, {$device -> lng}),
         zoom: 18,
@@ -100,7 +104,7 @@
             $('.collapsible').collapsible();
             $('select').formSelect();
             $.ajaxSetup({ cache:false});
-            $('#map').css('height', ($(window).height() - 400));
+            $('#my_map_info').css('height', ($(window).height() - 400));
             getDevice();
 
         });

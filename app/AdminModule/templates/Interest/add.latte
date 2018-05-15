@@ -1,5 +1,5 @@
 {block title}
-    Admin - Eletric - eletric - add
+    Admin - Interest - interest - add
 {/block}
 
 {block content_menu}
@@ -20,54 +20,63 @@
         <form n:name=insertInterestForm class="col s12">
 
 
-            <div class="row show_types">
+            <div class="row ">
                 <div class="input-field col s12">
-                    {input nazev}
+                    {input nazev class => [validate]}
                     {label nazev /}
+                    <span class="helper-text" data-error="Povinné" data-success=""></span>
                 </div>
             </div>
 
-            <div class="row show_types">
-                <div class="input-field col s6 m6 show_types">
-                    {input ulice}
+            <div class="row ">
+                <div class="input-field col s6 m6 ">
+                    {input ulice class => [validate]}
                     {label ulice /}
+                    <span class="helper-text" data-error="Povinné" data-success=""></span>
                 </div>
-                <div class="input-field col s6 m6 show_types">
+                <div class="input-field col s6 m6 ">
                     {label cp /}
-                    <input n:name="cp" type="number" />
+                    <input n:name="cp" type="number" class="validate"/>
+                    <span class="helper-text" data-error="Povinné" data-success=""></span>
                 </div>
             </div>
 
-            <div class="row show_types">
+            <div class="row ">
                 <div class="input-field col s6">
-                    {input typ}
+                    {input typ class => [validate]}
                     {label typ /}
+                    <span class="helper-text" data-error="Povinné" data-success=""></span>
                 </div>
                 <div class="input-field col s6">
-                    {input popis}
+                    {input popis class => [validate]}
                     {label popis /}
+                    <span class="helper-text" data-error="Povinné" data-success=""></span>
                 </div>
             </div>
 
-            <div class="row show_types">
-                <div class="input-field col s6 m6 show_type">
-                    {input telefon}
+            <div class="row ">
+                <div class="input-field col s6 m6 >
+                    {input telefon class => [validate]}
                     {label telefon /}
+                    <span class="helper-text" data-error="Povinné" data-success=""></span>
                 </div>
-                <div class="input-field col s6 m6 show_type">
-                    {input web}
+                <div class="input-field col s6 m6 >
+                    {input web class => [validate]}
                     {label web /}
+                    <span class="helper-text" data-error="Povinné" data-success=""></span>
                 </div>
             </div>
 
-            <div class="row show_types">
+            <div class="row ">
                 <div class="input-field col s6">
-                    {input lat}
+                    {input lat class => [validate]}
                     {label lat /}
+                    <span class="helper-text" data-error="Povinné" data-success=""></span>
                 </div>
                 <div class="input-field col s6">
-                    {input lng}
+                    {input lng class => [validate]}
                     {label lng /}
+                    <span class="helper-text" data-error="Povinné" data-success=""></span>
                 </div>
             </div>
 

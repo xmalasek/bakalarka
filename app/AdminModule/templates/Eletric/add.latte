@@ -20,66 +20,76 @@
         <form n:name=insertEletricForm class="col s12">
 
 
-            <div class="row show_types">
+            <div class="row">
                 <div class="input-field col s12">
-                    {input nazev}
+                    {input nazev class => [validate]}
                     {label nazev /}
+                    <span class="helper-text" data-error="Povinné" data-success=""></span>
                 </div>
             </div>
 
-            <div class="row show_types">
-                <div class="input-field col s6 m6 show_types">
-                    {input ulice}
+            <div class="row">
+                <div class="input-field col s6 m6">
+                    {input ulice class => [validate]}
                     {label ulice /}
+                    <span class="helper-text" data-error="Povinné" data-success=""></span>
                 </div>
-                <div class="input-field col s6 m6 show_types">
-                    {input typ}
+                <div class="input-field col s6 m6">
+                    {input typ class => [validate]}
                     {label typ /}
+                    <span class="helper-text" data-error="Povinné" data-success=""></span>
                 </div>
             </div>
 
-            <div class="row show_types">
+            <div class="row">
                 <div class="input-field col s6">
-                    {input oznaceni}
+                    {input oznaceni class => [validate]}
                     {label oznaceni /}
+                    <span class="helper-text" data-error="Povinné" data-success=""></span>
                 </div>
                 <div class="input-field col s6">
                     {label pocet /}
-                    <input n:name="pocet" type="number" />
+                    <input n:name="pocet" type="number" class="validate" />
+                    <span class="helper-text" data-error="Povinné" data-success=""></span>
                 </div>
             </div>
 
-            <div class="row show_types">
-                <div class="input-field col s4 m4 show_type">
-                    {input svitidlo}
+            <div class="row">
+                <div class="input-field col s4 m4 ">
+                    {input svitidlo class => [validate]}
                     {label svitidlo /}
+                    <span class="helper-text" data-error="Povinné" data-success=""></span>
                 </div>
-                <div class="input-field col s4 m4 show_type">
-                    {input stav}
+                <div class="input-field col s4 m4 ">
+                    {input stav class => [validate]}
                     {label stav /}
+                    <span class="helper-text" data-error="Povinné" data-success=""></span>
                 </div>
-                <div class="input-field col s4 m4 show_type">
-                    {input stozar}
+                <div class="input-field col s4 m4 ">
+                    {input stozar class => [validate]}
                     {label stozar /}
+                    <span class="helper-text" data-error="Povinné" data-success=""></span>
                 </div>
             </div>
 
-            <div class="row show_types">
+            <div class="row">
                 <div class="input-field col s12">
                     {label popis /}
-                    <input n:name="popis" type="text" class="materialize-textarea" data-length="120"/>
+                    {input popis class => [validate]}
+                    <span class="helper-text" data-error="Povinné" data-success=""></span>
                 </div>
             </div>
 
-            <div class="row show_types">
+            <div class="row">
                 <div class="input-field col s6">
-                    {input lat}
-
+                    {input lat class => [validate]}
                     {label lat /}
+                    <span class="helper-text" data-error="Povinné" data-success=""></span>
                 </div>
                 <div class="input-field col s6">
-                    {input lng}
+                    {input lng class => [validate]}
                     {label lng /}
+                    <span class="helper-text" data-error="Povinné" data-success=""></span>
                 </div>
             </div>
 

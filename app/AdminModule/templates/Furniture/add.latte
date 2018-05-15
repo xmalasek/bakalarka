@@ -1,5 +1,5 @@
 {block title}
-    Admin - Eletric - eletric - add
+    Admin - Furniture - furniture - add
 {/block}
 
 {block content_menu}
@@ -20,60 +20,60 @@
         <form n:name=insertFurnitureForm class="col s12">
 
 
-            <div class="row show_types">
+            <div class="row">
                 <div class="input-field col s12">
-                    {input nazev}
+                    {input nazev class => [validate]}
                     {label nazev /}
                 </div>
             </div>
 
-            <div class="row show_types">
-                <div class="input-field col s6 m6 show_types">
-                    {input ulice}
+            <div class="row ">
+                <div class="input-field col s6 m6 ">
+                    {input ulice class => [validate]}
                     {label ulice /}
                 </div>
-                <div class="input-field col s6 m6 show_types">
-                    {input typ}
+                <div class="input-field col s6 m6 ">
+                    {input typ class => [validate]}
                     {label typ /}
                 </div>
             </div>
 
-            <div class="row show_types">
+            <div class="row ">
                 <div class="input-field col s6">
-                    {input oznaceni}
+                    {input oznaceni class => [validate]}
                     {label oznaceni /}
                 </div>
                 <div class="input-field col s6">
                     {label pocet /}
-                    <input n:name="pocet" type="number" />
+                    <input n:name="pocet" type="number" class="validate"/>
                 </div>
             </div>
 
-            <div class="row show_types">
-                <div class="input-field col s6 m6 show_type">
-                    {input material}
+            <div class="row ">
+                <div class="input-field col s6 m6 ">
+                    {input material class => [validate]}
                     {label material /}
                 </div>
-                <div class="input-field col s6 m6 show_type">
-                    {input stav}
+                <div class="input-field col s6 m6 ">
+                    {input stav class => [validate]}
                     {label stav /}
                 </div>
             </div>
 
-            <div class="row show_types">
+            <div class="row ">
                 <div class="input-field col s12">
                     {label popis /}
-                    <input n:name="popis" type="text" class="materialize-textarea" data-length="120"/>
+                    <input n:name="popis" type="text" class="validate" data-length="120"/>
                 </div>
             </div>
 
-            <div class="row show_types">
+            <div class="row ">
                 <div class="input-field col s6">
-                    {input lat}
+                    {input lat class => [validate]}
                     {label lat /}
                 </div>
                 <div class="input-field col s6">
-                    {input lng}
+                    {input lng class => [validate]}
                     {label lng /}
                 </div>
             </div>

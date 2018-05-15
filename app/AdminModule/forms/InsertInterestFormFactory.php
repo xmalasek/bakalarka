@@ -50,7 +50,7 @@ class InsertInterestFormFactory
 
 
 
-        $form->addText('popis', 'Popis elektrického zařízení')
+        $form->addText('popis', 'Popis místa')
             ->setRequired(false);
 
         $form->addText('telefon', 'Telefon')

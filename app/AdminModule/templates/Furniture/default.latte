@@ -1,5 +1,5 @@
 {block title}
-    Front - Furniture - furniture
+    Admin - Furniture - default
 {/block}
 
 {block content_menu}
@@ -23,7 +23,10 @@
 {block scripts}
     {include parent}
 
+    <script src="{$basePath}/lib/js/map.js"></script>
 <script type="application/javascript">
+
+
 
     $(document).ready(function() {
         $.ajaxSetup({ cache:false});

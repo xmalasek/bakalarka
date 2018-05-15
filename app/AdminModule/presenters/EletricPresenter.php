@@ -33,23 +33,7 @@ class EletricPresenter extends BasePresenter
     public function renderAdd()
     {
 
-
-
     }
-
-
-
-//    public function actionAdd(array $items)
-//    {
-//        $this['editEletricForm']->setDefaults([
-//
-//            'lat' => $items->lat,
-//            'lng' => $items->lng
-//
-//        ]);
-//
-//
-//    }
 
 
     public function renderFault()
@@ -58,7 +42,6 @@ class EletricPresenter extends BasePresenter
 
     }
 
-
     public function actionFault($id){
 
         $this['insertFaultForm']->setDefaults([
@@ -66,7 +49,6 @@ class EletricPresenter extends BasePresenter
         ]);
 
     }
-
 
     public function renderInfo($id){
 
@@ -79,32 +61,6 @@ class EletricPresenter extends BasePresenter
             $this->template->eletric = $device;
         }
     }
-
-//    public function handleAdd() {
-//
-//        $lat = $this->getHttpRequest()->getPost('lat');
-//
-//        $lng = $this->getHttpRequest()->getPost('lng');
-//
-//        $this->database->table('pokus')->insert([
-//            'x' => $lat ,
-//            'y' => $lng,
-//        ]);
-//
-//    }
-
-//    public function handleAddFault() {
-//
-//        $id_eletric = $this->getHttpRequest()->getPost('lat');
-//
-//        $lng = $this->getHttpRequest()->getPost('lng');
-//
-//        $this->database->table('pokus')->insert([
-//            'x' => $lat ,
-//            'y' => $lng,
-//        ]);
-//
-//    }
 
 
     protected function createComponentInsertEletricForm(){
@@ -234,7 +190,7 @@ class EletricPresenter extends BasePresenter
     public function handleDelete($deviceId){
 
         $this->database->table('eletric')->where('id_eletric', $deviceId)->delete();
-        $this->flashMessage('Zařízení bylo úspěšně odstraněno.', 'success');
+        $this->flashMessage('Zařízení bylo úspěšně odstraněno.', 'info');
 
     }
 

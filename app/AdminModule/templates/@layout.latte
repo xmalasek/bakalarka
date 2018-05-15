@@ -15,16 +15,14 @@
 	<link type="text/css" rel="stylesheet" href="{$basePath}/lib/css/style.css"  media="screen,projection"/>
 	<link type="text/css" rel="stylesheet" href="{$basePath}/lib/leaflet/plugins/leaflet.markercluster/MarkerCluster.css" />
 	<link type="text/css" rel="stylesheet" href="{$basePath}/lib/leaflet/plugins/leaflet.markercluster/MarkerCluster.Default.css" />
+	<link rel="stylesheet" href="{$basePath}/lib/leaflet/leaflet.css" />
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script type="text/javascript" src="{$basePath}/lib/js/materialize.js"></script>
 	<script src="https://nette.github.io/resources/js/netteForms.min.js"></script>
-
-	<link rel="stylesheet" href="{$basePath}/lib/leaflet/leaflet.css" />
 	<script src="{$basePath}/lib/leaflet/leaflet.js"></script>
-
-
 	<script type="text/javascript" src="{$basePath}/lib/leaflet/plugins/leaflet.markercluster/leaflet.markercluster.js"></script>
+
 
 	<meta name="robots" content="noindex,nofollow">
 	<meta name="googlebot" content="nosnippet,noarchive">
@@ -34,7 +32,14 @@
 </head>
 
 <body>
-	<div class="">
+	{*<script type="application/javascript">*}
+		{*$(document).ready(function(){*}
+			{*{foreach $flashes as $flash}*}
+				{*form_toast({$flash->message}, {$flash->type});*}
+			{*{/foreach}*}
+		{*});*}
+	{*</script>*}
+	<div>
 
 
 		<ul id="slide-out" class="sidenav sidenav-fixed">
@@ -110,7 +115,7 @@
 				<div class="col s12">
                     {include content}
 
-					<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+
 				</div>
 			</div>
 		</main>
@@ -122,11 +127,10 @@
 
 	{block scripts}
 
-		<script src="{$basePath}/lib/js/map.js"></script>
 		<script type="application/javascript">
-
-
             $(document).ready(function(){
+
+
 
                 $('.sidenav').sidenav();
                 $('.collapsible').collapsible();
@@ -134,6 +138,24 @@
 
             });
 
+            // function form_toast(msg, type) {
+            //     var icon = "";
+            //     switch(type) {
+            //         case 'warn':
+            //             icon = '<i class="material-icons">warning</i>';
+            //             break;
+            //         case 'fail':
+            //             icon = '<i class="material-icons">error_outline</i>';
+            //             break;
+            //         case 'info':
+            //             icon = '<i class="material-icons">done</i>';
+            //             break;
+            //         default:
+            //
+            //     }
+            //     var toastHTML = '<span>I am toast content</span>'.icon;
+            //     M.toast({ html: toastHTML});
+            // }
 
 
 		</script>

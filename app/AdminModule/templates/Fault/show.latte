@@ -11,116 +11,176 @@
 
 {block content}
 
-    <h5>Závady na elektrických zařízení</h5>
+    <div class="row">
+        <div class="col s12">
+            <ul class="tabs tabs-fixed-width">
+                <li class="tab col s3"><a class="active" href="#tab1">Elektrické zařízení</a></li>
+                <li class="tab col s3"><a href="#tab2">Městský mobiliář</a></li>
+                <li class="tab col s3"><a href="#tab3">Místa zájmu</a></li>
+                <li class="tab col s3"><a href="#tab4">Odpadové hospodářství</a></li>
+            </ul>
+        </div>
+        <div style="display: none;" id="my_tabs_content">
+            <div id="tab1" class="col s12">
+                <h5>Závady na elektrických zařízení</h5>
 
 
-    <table class="centered highlight">
+                <table class="centered highlight">
 
-            <thead>
-            <tr>
-                <th>ID závady</th>
-                <th>Popis závady</th>
-                <th>Název zařízení</th>
-                <th>ID zařízení</th>
-                <th>Označení</th>
-                <th></th>
-                <th></th>
-                <th></th>
+                    <thead>
+                    <tr>
+                        <th>ID závady</th>
+                        <th>Popis závady</th>
+                        <th>Název zařízení</th>
+                        <th>ID zařízení</th>
+                        <th>Označení</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
 
-            </tr>
-            </thead>
+                    </tr>
+                    </thead>
 
-            <tbody>
-            {foreach $eletric as $device}
-                <tr>
-                    <td>{$device -> id_error}</td>
-                    <td>{$device -> description}</td>
-                    <td>{$device -> nazev}</td>
-                    <td>{$device -> id_eletric}</td>
-                    <td>{$device -> oznaceni}</td>
-                    <td><a class="waves-effect waves-light" n:href="Delete! $device->id_eletric"><i class="material-icons" >delete</i></a></td>
-                    <td><a class="waves-effect waves-light" n:href="Info $device->id_error"><i class="material-icons" >info</i></a></td>
+                    <tbody>
+                    {foreach $eletric as $device}
+                        <tr>
+                            <td>{$device -> id_error}</td>
+                            <td>{$device -> description}</td>
+                            <td>{$device -> nazev}</td>
+                            <td>{$device -> id_eletric}</td>
+                            <td>{$device -> oznaceni}</td>
+                            <td><a class="waves-effect waves-light" n:href="Delete! $device->id_eletric"><i class="material-icons" >delete</i></a></td>
+                            <td><a class="waves-effect waves-light" n:href="Info $device->id_error"><i class="material-icons" >info</i></a></td>
 
-                </tr>
+                        </tr>
 
-            {/foreach}
-            <tr></tr>
-            </tbody>
-    </table>
-
-
-    <h5>Závady na městském mobiliáři</h5>
-
-
-    <table class="centered highlight">
-
-        <thead>
-        <tr>
-            <th>ID závady</th>
-            <th>Popis závady</th>
-            <th>Název zařízení</th>
-            <th>ID zařízení</th>
-            <th>Označení</th>
-            <th></th>
-            <th></th>
-            <th></th>
-
-        </tr>
-        </thead>
-
-        <tbody>
-        {foreach $furniture as $furn}
-            <tr>
-                <td>{$furn -> id_error}</td>
-                <td>{$furn -> description}</td>
-                <td>{$furn -> nazev}</td>
-                <td>{$furn -> id_furniture}</td>
-                <td>{$furn -> oznaceni}</td>
-                <td><a class="waves-effect waves-light" n:href="Delete! $furn->id_furniture"><i class="material-icons" >delete</i></a></td>
-                <td><a class="waves-effect waves-light" n:href="Info $furn->id_error"><i class="material-icons" >info</i></a></td>
-
-            </tr>
-
-        {/foreach}
-        <tr></tr>
-        </tbody>
-    </table>
-
-    <h5>Závady na místech zájmu</h5>
+                    {/foreach}
+                    <tr></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="tab2" class="col s12">
+                <h5>Závady na městském mobiliáři</h5>
 
 
-    <table class="centered highlight">
+                <table class="centered highlight">
 
-        <thead>
-        <tr>
-            <th>ID závady</th>
-            <th>Popis závady</th>
-            <th>Název zařízení</th>
-            <th>ID zařízení</th>
-            <th>Označení</th>
-            <th></th>
-            <th></th>
-            <th></th>
+                    <thead>
+                    <tr>
+                        <th>ID závady</th>
+                        <th>Popis závady</th>
+                        <th>Název zařízení</th>
+                        <th>ID zařízení</th>
+                        <th>Označení</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
 
-        </tr>
-        </thead>
+                    </tr>
+                    </thead>
 
-        <tbody>
-        {foreach $interest as $int}
-            <tr>
-                <td>{$int -> id_error}</td>
-                <td>{$int -> description}</td>
-                <td>{$int -> nazev}</td>
-                <td>{$int -> id_interest}</td>
+                    <tbody>
+                    {foreach $furniture as $furn}
+                        <tr>
+                            <td>{$furn -> id_error}</td>
+                            <td>{$furn -> description}</td>
+                            <td>{$furn -> nazev}</td>
+                            <td>{$furn -> id_furniture}</td>
+                            <td>{$furn -> oznaceni}</td>
+                            <td><a class="waves-effect waves-light" n:href="Delete! $furn->id_furniture"><i class="material-icons" >delete</i></a></td>
+                            <td><a class="waves-effect waves-light" n:href="Info $furn->id_error"><i class="material-icons" >info</i></a></td>
 
-                <td><a class="waves-effect waves-light" n:href="Delete! $int->id_interest"><i class="material-icons" >delete</i></a></td>
-                <td><a class="waves-effect waves-light" n:href="Info $int->id_error"><i class="material-icons" >info</i></a></td>
+                        </tr>
 
-            </tr>
-        {/foreach}
-        <tr></tr>
-        </tbody>
-    </table>
+                    {/foreach}
+                    <tr></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="tab3" class="col s12">
+                <h5>Závady na místech zájmu</h5>
+
+
+                <table class="centered highlight">
+
+                    <thead>
+                    <tr>
+                        <th>ID závady</th>
+                        <th>Popis závady</th>
+                        <th>Název zařízení</th>
+                        <th>ID zařízení</th>
+                        <th>Označení</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {foreach $interest as $int}
+                        <tr>
+                            <td>{$int -> id_error}</td>
+                            <td>{$int -> description}</td>
+                            <td>{$int -> nazev}</td>
+                            <td>{$int -> id_interest}</td>
+
+                            <td><a class="waves-effect waves-light" n:href="Delete! $int->id_interest"><i class="material-icons" >delete</i></a></td>
+                            <td><a class="waves-effect waves-light" n:href="Info $int->id_error"><i class="material-icons" >info</i></a></td>
+
+                        </tr>
+                    {/foreach}
+                    <tr></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="tab4" class="col s12">
+                <h5>Závady na místech zájmu</h5>
+
+
+                <table class="centered highlight">
+
+                    <thead>
+                    <tr>
+                        <th>ID závady</th>
+                        <th>Popis závady</th>
+                        <th>Název zařízení</th>
+                        <th>ID zařízení</th>
+                        <th>Označení</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {foreach $interest as $int}
+                        <tr>
+                            <td>{$int -> id_error}</td>
+                            <td>{$int -> description}</td>
+                            <td>{$int -> nazev}</td>
+                            <td>{$int -> id_interest}</td>
+
+                            <td><a class="waves-effect waves-light" n:href="Delete! $int->id_interest"><i class="material-icons" >delete</i></a></td>
+                            <td><a class="waves-effect waves-light" n:href="Info $int->id_error"><i class="material-icons" >info</i></a></td>
+
+                        </tr>
+                    {/foreach}
+                    <tr></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
 
 
 {/block}
@@ -129,8 +189,12 @@
 {* JS kod pro konkretni Presenter *}
 {block scripts}
     {include parent}
-
-
+    <script type="application/javascript">
+        $(document).ready(function(){
+            $('.tabs').tabs();
+            $('#my_tabs_content').show();
+        });
+    </script>
 
 {/block}
 

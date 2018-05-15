@@ -11,6 +11,7 @@
 {/block}
 
 {block content}
+
     <p>
         Mapa eletrická zařízení
     </p>
@@ -22,8 +23,7 @@
 {* JS kod pro konkretni Presenter *}
 {block scripts}
     {include parent}
-
-
+    <script type="application/javascript" src="{$basePath}/lib/js/map.js"></script>
     <script type="application/javascript">
 
         $(document).ready(function() {
