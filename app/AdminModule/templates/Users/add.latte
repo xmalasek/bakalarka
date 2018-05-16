@@ -16,37 +16,43 @@
         <form n:name=insertUserForm class="col s12">
             <div class="row show_types">
                 <div class="input-field col s12 m2">
-                    {input degree}
+                    {input degree class => [validate]}
                     {label degree /}
+                    <span class="helper-text" data-error="Povinné" data-success=""></span>
                 </div>
                 <div class="input-field col s12 m4">
-                    {input name}
+                    {input name class => [validate]}
                     {label name /}
+                    <span class="helper-text" data-error="Povinné" data-success=""></span>
                 </div>
                 <div class="input-field col s12 m6">
-                    {input surname}
+                    {input surname class => [validate]}
                     {label surname /}
+                    <span class="helper-text" data-error="Povinné" data-success=""></span>
                 </div>
             </div>
 
             <div class="row show_types">
                 <div class="input-field col s12">
-                    {input email}
+                    {input email class => [validate]}
                     {label email /}
+                    <span class="helper-text" data-error="Špatný formát emailové adresy" data-success="Formát odpovídá emailové adrese"></span>
                 </div>
             </div>
 
             <div class="row">
                 <div class="input-field col s12">
-                    {input password}
+                    {input password  class => [validate]}
                     {label password /}
+                    <span class="helper-text" data-error="Povinné" data-success=""></span>
                 </div>
             </div>
 
             <div class="row">
                 <div class="input-field col s12">
-                    {input passwordVerify}
+                    {input passwordVerify  class => [validate]}
                     {label passwordVerify /}
+                    <span class="helper-text" data-error="Povinné" data-success=""></span>
                 </div>
             </div>
 

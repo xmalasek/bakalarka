@@ -56,6 +56,13 @@ class RouterFactory
             'id' => null,
             'module' => 'Admin'
         ]);
+        $router[] = new Route('panel/pridani_bodu/', [
+            'presenter' => 'Add',
+            'action' => array(
+                Route::VALUE => 'default',
+            ),
+            'module' => 'Admin'
+        ]);
         $router[] = new Route('panel/elektricke-zarizeni/<action>/[<id>/]', [
             'presenter' => 'Eletric',
             'action' => array(

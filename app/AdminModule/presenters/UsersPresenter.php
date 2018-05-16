@@ -144,4 +144,12 @@ class UsersPresenter extends BasePresenter
         ]);
     }
 
+    public function handleDeleteUser($user_id){
+
+        $this->database->table('users')->where('id', $user_id)->delete();
+        $this->flashMessage('Uživatel byl úspěšně odstraněn.', 'info');
+
+
+    }
+
 }

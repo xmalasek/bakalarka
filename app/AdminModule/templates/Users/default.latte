@@ -26,7 +26,8 @@
                 </p>
                 {*{if $user_admin}*}
                     <a href="{link Users:edit $dbuser->id}" class="secondary-content"><i class="material-icons">edit</i></a>
-                    <a href="TODO hadleDELETE" class="secondary-content" style="margin-right: 35px;"><i class="material-icons">delete</i></a>
+                    <a class="secondary-content modal-trigger"  href="#modal_delete{$dbuser->id}" style="margin-right: 35px;"><i class="material-icons" >delete</i></a>
+                    {*<a href={link Delete! $dbuser->id} class="secondary-content" style="margin-right: 35px;"><i class="material-icons">delete</i></a>*}
                 {*{/if}*}
 
                 {*{elseif $dbuser->id == $user['id']}*}
@@ -36,13 +37,29 @@
             </li>
         </ul>
     {/foreach}
+
+    {foreach $users as $dbuser}
+        <div id="modal_delete{$dbuser->id}" class="modal">
+            <div class="modal-content">
+                <h5>Opravdu chcete smazat uživatele {$dbuser->email}?</h5>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-close waves-effect waves-red btn-flat">Zrušit</a>
+                <a n:href="DeleteUser! $dbuser->id" class="modal-close waves-effect waves-green btn-flat">Potvrdit</a>
+            </div>
+        </div>
+    {/foreach}
 {/block}
 
 
 {* JS kod pro konkretni Presenter *}
 {block scripts}
     {include parent}
-
+    <script type="application/javascript">
+        $(document).ready(function(){
+            $('.modal').modal();
+        });
+    </script>
 
 
 {/block}

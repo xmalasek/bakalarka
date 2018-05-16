@@ -1,0 +1,377 @@
+{block title}
+    Admin - Eletric - eletric - edit
+{/block}
+
+{block content_menu}
+    <ul class="left">
+        <li><a class="waves-effect waves-light" n:href="Eletric:default" ><i class="material-icons" >backspace</i></a></li>
+        <li><a class="waves-effect waves-light" ><i class="material-icons" >search</i></a></li>
+    </ul>
+{/block}
+
+{block content}
+
+<div class="row">
+    <div class="col s12">
+        <ul class="tabs tabs-fixed-width">
+            <li class="tab col s3"><a class="active" href="#tab1">Elektrické zařízení</a></li>
+            <li class="tab col s3"><a href="#tab2">Městský mobiliář</a></li>
+            <li class="tab col s3"><a href="#tab3">Místa zájmu</a></li>
+            <li class="tab col s3"><a href="#tab4">Odpadové hospodářství</a></li>
+        </ul>
+    </div>
+
+    <div style="display: none;" id="my_tabs_content">
+        <div id="tab1" class="col s12">
+            <h4>Přidání souřadnic elektrického zařízení </h4>
+            <div class="row">
+                <form n:name=insertEletricForm class="col s12">
+                    <div class="row ">
+                        <div class="input-field col s12">
+                            {input nazev class => [validate]}
+                            {label nazev /}
+                            <span class="helper-text" data-error="Povinné" data-success=""></span>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="input-field col s6 m6 ">
+                            {input ulice class => [validate]}
+                            {label ulice /}
+                            <span class="helper-text" data-error="Povinné" data-success=""></span>
+                        </div>
+                        <div class="input-field col s6 m6 ">
+                            {input typ class => [validate]}
+                            {label typ /}
+                            <span class="helper-text" data-error="Povinné" data-success=""></span>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="input-field col s6">
+                            {input oznaceni class => [validate]}
+                            {label oznaceni /}
+                            <span class="helper-text" data-error="povinné" data-success=""></span>
+                        </div>
+                        <div class="input-field col s6">
+                            {label pocet /}
+                            <input n:name="pocet" type="number" class="validate" />
+                            <span class="helper-text" data-error="povinné" data-success=""></span>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="input-field col s4 m4 ">
+                            {input svitidlo class => [validate]}
+                            {label svitidlo /}
+                            <span class="helper-text" data-error="povinné" data-success=""></span>
+                        </div>
+                        <div class="input-field col s4 m4 ">
+                            {input stav class => [validate]}
+                            {label stav /}
+                            <span class="helper-text" data-error="povinné" data-success=""></span>
+                        </div>
+                        <div class="input-field col s4 m4 ">
+                            {input stozar class => [validate]}
+                            {label stozar /}
+                            <span class="helper-text" data-error="povinné" data-success=""></span>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="input-field col s12">
+                            {label popis /}
+                            {input popis class => [validate]}
+                            <span class="helper-text" data-error="povinné" data-success=""></span>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="input-field col s6">
+                            {input lat class => [validate]}
+                            {label lat /}
+                            <span class="helper-text" data-error="povinné" data-success=""></span>
+                        </div>
+                        <div class="input-field col s6">
+                            {input lng class => [validate]}
+                            {label lng /}
+                            <span class="helper-text" data-error="povinné" data-success=""></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            {input submit class => [btn, col, s12]}
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="tab2" class="col s12">
+            <h4>Přidat městský mobiliář</h4>
+            <div class="row">
+                <form n:name=insertFurnitureForm class="col s12">
+
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            {input nazev class => [validate]}
+                            {label nazev /}
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="input-field col s6 m6 ">
+                            {input ulice class => [validate]}
+                            {label ulice /}
+                        </div>
+                        <div class="input-field col s6 m6 ">
+                            {input typ class => [validate]}
+                            {label typ /}
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="input-field col s6">
+                            {input oznaceni class => [validate]}
+                            {label oznaceni /}
+                        </div>
+                        <div class="input-field col s6">
+                            {label pocet /}
+                            <input n:name="pocet" type="number" class="validate"/>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="input-field col s6 m6 ">
+                            {input material class => [validate]}
+                            {label material /}
+                        </div>
+                        <div class="input-field col s6 m6 ">
+                            {input stav class => [validate]}
+                            {label stav /}
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="input-field col s12">
+                            {label popis /}
+                            <input n:name="popis" type="text" class="validate" data-length="120"/>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="input-field col s6">
+                            {input lat class => [validate]}
+                            {label lat /}
+                        </div>
+                        <div class="input-field col s6">
+                            {input lng class => [validate]}
+                            {label lng /}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            {input submit class => [btn, col, s12]}
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="tab3" class="col s12">
+            <h4>Přidat místo zájmu</h4>
+            <div class="row">
+                <form n:name=insertInterestForm class="col s12">
+
+                    <div class="row ">
+                        <div class="input-field col s12">
+                            {input nazev class => [validate]}
+                            {label nazev /}
+                            <span class="helper-text" data-error="Povinné" data-success=""></span>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="input-field col s6 m6 ">
+                            {input ulice class => [validate]}
+                            {label ulice /}
+                            <span class="helper-text" data-error="Povinné" data-success=""></span>
+                        </div>
+                        <div class="input-field col s6 m6 ">
+                            {label cp /}
+                            <input n:name="cp" type="number" class="validate"/>
+                            <span class="helper-text" data-error="Povinné" data-success=""></span>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="input-field col s6">
+                            {input typ class => [validate]}
+                            {label typ /}
+                            <span class="helper-text" data-error="Povinné" data-success=""></span>
+                        </div>
+                        <div class="input-field col s6">
+                            {input popis class => [validate]}
+                            {label popis /}
+                            <span class="helper-text" data-error="Povinné" data-success=""></span>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="input-field col s6 m6 ">
+                            {input telefon class => [validate]}
+                            {label telefon /}
+                            <span class="helper-text" data-error="Povinné" data-success=""></span>
+                        </div>
+                        <div class="input-field col s6 m6 ">
+                            {input web class => [validate]}
+                            {label web /}
+                            <span class="helper-text" data-error="Povinné" data-success=""></span>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="input-field col s6">
+                            {input lat class => [validate]}
+                            {label lat /}
+                            <span class="helper-text" data-error="Povinné" data-success=""></span>
+                        </div>
+                        <div class="input-field col s6">
+                            {input lng class => [validate]}
+                            {label lng /}
+                            <span class="helper-text" data-error="Povinné" data-success=""></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            {input submit class => [btn, col, s12]}
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <div id="tab4" class="col s12">
+            <h4>Přidat odpadové hospodářství</h4>
+
+            <div class="row">
+                <form n:name=insertFurnitureForm class="col s12">
+
+
+                    <div class="row ">
+                        <div class="input-field col s12">
+                            {input nazev class => [validate]}
+                            {label nazev /}
+                            <span class="helper-text" data-error="Povinné" data-success=""></span>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="input-field col s6 m6 ">
+                            {input ulice class => [validate]}
+                            {label ulice /}
+                            <span class="helper-text" data-error="Povinné" data-success=""></span>
+                        </div>
+                        <div class="input-field col s6 m6 ">
+                            {input typ class => [validate]}
+                            {label typ /}
+                            <span class="helper-text" data-error="Povinné" data-success=""></span>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="input-field col s6">
+                            {input oznaceni class => [validate]}
+                            {label oznaceni /}
+                            <span class="helper-text" data-error="Povinné" data-success=""></span>
+                        </div>
+                        <div class="input-field col s6">
+                            {label pocet /}
+                            <input n:name="pocet" type="number" class="validate"/>
+                            <span class="helper-text" data-error="Povinné" data-success=""></span>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="input-field col s6 m6 ">
+                            {input material class => [validate]}
+                            {label material /}
+                            <span class="helper-text" data-error="Povinné" data-success=""></span>
+                        </div>
+                        <div class="input-field col s6 m6 ">
+                            {input stav class => [validate]}
+                            {label stav /}
+                            <span class="helper-text" data-error="Povinné" data-success=""></span>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="input-field col s12">
+                            {label popis /}
+                            {input popis class => [validate]}
+                            <span class="helper-text" data-error="Povinné" data-success=""></span>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="input-field col s6">
+                            {input lat class => [validate]}
+                            {label lat /}
+                            <span class="helper-text" data-error="Povinné" data-success=""></span>
+                        </div>
+                        <div class="input-field col s6">
+                            {input lng class => [validate]}
+                            {label lng /}
+                            <span class="helper-text" data-error="Povinné" data-success=""></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            {input submit class => [btn, col, s12]}
+                        </div>
+                    </div>
+
+
+
+                </form>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+        </form>
+    </div>
+
+
+
+{/block}
+
+
+{* JS kod pro konkretni Presenter *}
+{block scripts}
+    {include parent}
+    <script type="application/javascript">
+        $(document).ready(function(){
+            $('.tabs').tabs();
+            $('#my_tabs_content').show();
+        });
+    </script>
+
+
+{/block}
+
+{block head}
+
+    {* CSS kod pro konkretni Presenter *}
+{/block}
