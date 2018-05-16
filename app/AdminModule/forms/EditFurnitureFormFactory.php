@@ -36,7 +36,6 @@ class EditFurnitureFormFactory
             'Zastávka BUS' => 'Zastávka BUS',
             'Stojan na kola' => 'Stojan na kolo',
             'Informační tabule' => 'Informační tabule',
-            'Informační mapa' => 'Informační mapa',
         ])
             ->setPrompt('Zvolte typ')
             ->setRequired('Typ musi byt vyplnen!');
