@@ -34,8 +34,18 @@
 
         function getUsers() {
 
+            var greenIcon = L.icon({
+                iconUrl: '/verze01/www/picture/icons/ikona.png',
+
+                // iconSize:     [38, 95], // size of the icon
+                iconAnchor:   [21, 94], // point of the icon which will correspond to marker's location
+                popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+            });
+
             {foreach $eletric as $device}
                 if ({$device->error_id}!= null) {
+
+
 
                 L.marker([{$device -> lat}, {$device -> lng}]).addTo(map)
 
@@ -48,7 +58,7 @@
 
                 }else{
 
-                L.marker([{$device -> lat}, {$device -> lng}],{ opacity: 0.5}).addTo(map)
+                L.marker([{$device -> lat}, {$device -> lng}],{ icon:greenIcon}).addTo(map)
 
                     .bindPopup(
                             {*{syntax off}'{/syntax}<div style="text-align: center; background: #99ebff; margin-left: auto; margin-right: auto;">{syntax off}'{/syntax}+*}

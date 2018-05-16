@@ -19,9 +19,18 @@ map = new L.Map('map', {
 });
 
 
-// L.marker([49.3130650, 16.4777650]).addTo(map)
-//     .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-//     .openPopup();
+
+var greenIcon = L.icon({
+    iconUrl: '/verze01/www/picture/icons/ou.png',
+
+    iconSize:     [40, 85], // size of the icon
+    iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+
+L.marker([49.3130650, 16.4777650], {icon: greenIcon}).addTo(map)
+    .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+    .openPopup();
 
 
 $(window).resize(function () {
