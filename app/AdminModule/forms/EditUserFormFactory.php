@@ -23,9 +23,13 @@ class EditUserFormFactory
 
 //        $form->addSelect('role', 'Role');
 
+        $form->addPassword('passwordVerifyOld', 'Staré heslo');
+
         $form->addPassword('password', 'Nové heslo');
 
-        $form->addPassword('passwordVerifyOld', 'Současné heslo');
+        $form->addPassword('passwordVerify', 'Nové heslo pro ověření')
+            ->setRequired('Kontrolní heslo musí být vyplněno!')
+            ->addRule(Form::EQUAL, 'Hesla se neshodují', $form['password']);
 
         $form->addEmail('email', 'Email')
             ->setRequired('E-mail nesmí být prázdný!');

@@ -80,6 +80,7 @@ class UsersPresenter extends BasePresenter
                 }
             }
             unset($values->passwordVerifyOld);
+            unset($values->passwordVerify);
 
             if (strlen($values->password) == 0) {
                 unset($values->password);
