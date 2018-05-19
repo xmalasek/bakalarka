@@ -16,96 +16,83 @@
             <ul class="tabs tabs-fixed-width">
                 <li class="tab col s3"><a class="active" href="#tab1">Elektrické zařízení</a></li>
                 <li class="tab col s3"><a href="#tab2">Městský mobiliář</a></li>
-                <li class="tab col s3"><a href="#tab3">Místa zájmu</a></li>
-                <li class="tab col s3"><a href="#tab4">Odpadové hospodářství</a></li>
+                <li class="tab col s3"><a href="#tab3">Odpadové hospodářství</a></li>
             </ul>
         </div>
         <div style="display: none;" id="my_tabs_content">
             <div id="tab1" class="col s12">
-                {*<h5>Závady na elektrických zařízení</h5>*}
-
                 <table class="centered highlight">
-
                     <thead>
                     <tr>
                         <th>ID závady</th>
                         <th>Popis závady</th>
+                        <th>Závadu nahlásil</th>
                         <th>Název zařízení</th>
                         <th>ID zařízení</th>
                         <th>Označení</th>
                         <th></th>
                         <th></th>
                         <th></th>
-
                     </tr>
                     </thead>
-
                     <tbody>
                     {foreach $eletric as $device}
                         <tr>
                             <td>{$device -> id_error}</td>
                             <td>{$device -> description}</td>
-                            <td>{$device -> nazev}</td>
+                            <td><a href="mailto:{$device -> email}">{$device -> email}</a></td>
                             <td>{$device -> id_eletric}</td>
+                            <td>{$device -> nazev}</td>
                             <td>{$device -> oznaceni}</td>
-                            <td><a class="waves-effect waves-light" n:href="Delete! $device->id_eletric"><i class="material-icons" >delete</i></a></td>
-                            <td><a class="waves-effect waves-light" n:href="Info $device->id_error"><i class="material-icons" >info</i></a></td>
-
+                            <td><a class="waves-effect waves-light modal-trigger" href="#modal_ele_delete{$device->id_eletric}"><i class="material-icons" >delete</i></a></td>
+                            <td><a class="waves-effect waves-light" n:href="InfoEle $device->id_error"><i class="material-icons" >info</i></a></td>
                         </tr>
-
                     {/foreach}
                     <tr></tr>
                     </tbody>
                 </table>
             </div>
+
             <div id="tab2" class="col s12">
-                <h5>Závady na městském mobiliáři</h5>
-
-
                 <table class="centered highlight">
-
                     <thead>
                     <tr>
                         <th>ID závady</th>
                         <th>Popis závady</th>
+                        <th>Závadu nahlásil</th>
                         <th>Název zařízení</th>
                         <th>ID zařízení</th>
                         <th>Označení</th>
                         <th></th>
                         <th></th>
                         <th></th>
-
                     </tr>
                     </thead>
-
                     <tbody>
                     {foreach $furniture as $furn}
                         <tr>
                             <td>{$furn -> id_error}</td>
                             <td>{$furn -> description}</td>
-                            <td>{$furn -> nazev}</td>
+                            <td><a href="mailto:{$furn -> email}">{$furn -> email}</a></td>
                             <td>{$furn -> id_furniture}</td>
-                            <td>{$furn -> oznaceni}</td>
-                            <td><a class="waves-effect waves-light" n:href="Delete! $furn->id_furniture"><i class="material-icons" >delete</i></a></td>
-                            <td><a class="waves-effect waves-light" n:href="Info $furn->id_error"><i class="material-icons" >info</i></a></td>
-
+                            <td>{$furn -> nazev}</td>
+                            <td>{$furn -> ulice}</td>
+                            <td><a class="waves-effect waves-light modal-trigger" href="#modal_furn_delete{$furn->id_furniture}"><i class="material-icons" >delete</i></a></td>
+                            <td><a class="waves-effect waves-light" n:href="InfoFur $furn->id_error"><i class="material-icons" >info</i></a></td>
                         </tr>
-
                     {/foreach}
                     <tr></tr>
                     </tbody>
                 </table>
             </div>
+
             <div id="tab3" class="col s12">
-                <h5>Závady na místech zájmu</h5>
-
-
                 <table class="centered highlight">
-
                     <thead>
                     <tr>
                         <th>ID závady</th>
                         <th>Popis závady</th>
+                        <th>Závadu nahlásil</th>
                         <th>Název zařízení</th>
                         <th>ID zařízení</th>
                         <th>Označení</th>
@@ -117,53 +104,16 @@
                     </thead>
 
                     <tbody>
-                    {foreach $interest as $int}
+                    {foreach $waste as $wast}
                         <tr>
-                            <td>{$int -> id_error}</td>
-                            <td>{$int -> description}</td>
-                            <td>{$int -> nazev}</td>
-                            <td>{$int -> id_interest}</td>
-
-                            <td><a class="waves-effect waves-light" n:href="Delete! $int->id_interest"><i class="material-icons" >delete</i></a></td>
-                            <td><a class="waves-effect waves-light" n:href="Info $int->id_error"><i class="material-icons" >info</i></a></td>
-
-                        </tr>
-                    {/foreach}
-                    <tr></tr>
-                    </tbody>
-                </table>
-            </div>
-            <div id="tab4" class="col s12">
-                <h5>Závady na místech zájmu</h5>
-
-
-                <table class="centered highlight">
-
-                    <thead>
-                    <tr>
-                        <th>ID závady</th>
-                        <th>Popis závady</th>
-                        <th>Název zařízení</th>
-                        <th>ID zařízení</th>
-                        <th>Označení</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-
-                    </tr>
-                    </thead>
-
-                    <tbody>
-                    {foreach $interest as $int}
-                        <tr>
-                            <td>{$int -> id_error}</td>
-                            <td>{$int -> description}</td>
-                            <td>{$int -> nazev}</td>
-                            <td>{$int -> id_interest}</td>
-
-                            <td><a class="waves-effect waves-light" n:href="Delete! $int->id_interest"><i class="material-icons" >delete</i></a></td>
-                            <td><a class="waves-effect waves-light" n:href="Info $int->id_error"><i class="material-icons" >info</i></a></td>
-
+                            <td>{$wast -> id_error}</td>
+                            <td>{$wast -> description}</td>
+                            <td><a href="mailto:{$wast -> email}">{$wast -> email}</td>
+                            <td>{$wast -> id_waste}</td>
+                            <td>{$wast -> nazev}</td>
+                            <td>{$wast -> ulice}</td>
+                            <td><a class="waves-effect waves-light modal-trigger" href="#modal_wast_delete{$wast->id_waste}"><i class="material-icons" >delete</i></a></td>
+                            <td><a class="waves-effect waves-light" n:href="InfoWas $wast->id_error"><i class="material-icons" >info</i></a></td>
                         </tr>
                     {/foreach}
                     <tr></tr>
@@ -173,7 +123,39 @@
         </div>
     </div>
 
-
+    {foreach $eletric as $device}
+        <div id="modal_ele_delete{$device->id_eletric}" class="modal">
+            <div class="modal-content">
+                <h4>Opravdu chcete smazat zařízení?</h4>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-close waves-effect waves-red btn-flat">Zrušit</a>
+                <a n:href="DeleteEletric! $device->id_eletric" class="modal-close waves-effect waves-green btn-flat">Potvrdit</a>
+            </div>
+        </div>
+    {/foreach}
+    {foreach $furniture as $furn}
+        <div id="modal_furn_delete{$furn->id_furniture}" class="modal">
+            <div class="modal-content">
+                <h4>Opravdu chcete smazat zařízení?</h4>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-close waves-effect waves-red btn-flat">Zrušit</a>
+                <a n:href="DeleteFurniture! $furn->id_furniture" class="modal-close waves-effect waves-green btn-flat">Potvrdit</a>
+            </div>
+        </div>
+    {/foreach}
+    {foreach $waste as $wast}
+        <div id="modal_wast_delete{$wast->id_waste}" class="modal">
+            <div class="modal-content">
+                <h4>Opravdu chcete smazat zařízení?</h4>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-close waves-effect waves-red btn-flat">Zrušit</a>
+                <a n:href="DeleteWaste! $wast->id_waste" class="modal-close waves-effect waves-green btn-flat">Potvrdit</a>
+            </div>
+        </div>
+    {/foreach}
 
 
 
@@ -192,6 +174,7 @@
         $(document).ready(function(){
             $('.tabs').tabs();
             $('#my_tabs_content').show();
+            $('.modal').modal();
         });
     </script>
 

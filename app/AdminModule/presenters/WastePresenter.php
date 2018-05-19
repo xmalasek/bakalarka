@@ -67,11 +67,7 @@ class WastePresenter extends BasePresenter
         $form['lat']->setValue($_POST["lat"]);
         $form['lng']->setValue($_POST["lng"]);
         $form->onSuccess[] = [$this, 'insertDeviceSucceeded'];
-
-//        $this->flashMessage('Položka byla přidána.');
         return $form;
-
-
     }
 
     protected function createComponentInsertFaultForm(){
@@ -79,14 +75,9 @@ class WastePresenter extends BasePresenter
         $form = (new InsertFaultFormFactory()) -> create();
         $form->onSuccess[] = [$this, 'insertWasteFaultSucceeded'];
         return $form;
-
     }
 
-
-
     public function insertDeviceSucceeded($form, $values){
-
-
 
         $this->database->table('waste')->insert([
             'nazev' => $values->nazev ,
@@ -101,19 +92,16 @@ class WastePresenter extends BasePresenter
             'lng' => $values->lng,
 
         ]);
-
-
-
         $this->redirect('Waste:');
-
-
     }
 
     public function insertWasteFaultSucceeded($form, $values){
 
         $data=
             ['description' => $values->description ,
-                'datum' => $values->datum];
+                'datum' => $values->datum,
+                'email' => $values->email,
+            ];
 
         $error_id = $this->database->table('error')->insert($data)->id_error;
 

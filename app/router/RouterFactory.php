@@ -82,7 +82,9 @@ class RouterFactory
             'action' => array(
                 Route::VALUE => 'default',
                 Route::FILTER_TABLE => array(
-                    'informace' => 'info',
+                    'informace-elektricke' => 'infoEle',
+                    'informace-mobiliar' => 'infoFur',
+                    'informace-odpad' => 'infoWas',
                     'seznam' => 'show',
                 ),
                 Route::FILTER_STRICT => true

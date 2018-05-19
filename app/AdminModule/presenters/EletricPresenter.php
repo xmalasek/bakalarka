@@ -5,6 +5,7 @@ namespace AdminModule;
 use Nette;
 use Nette\Application\Responses\JsonResponse;
 use Nette\Utils\Json;
+use function PHPSTORM_META\type;
 use Tracy\Debugger;
 
 class EletricPresenter extends BasePresenter
@@ -51,14 +52,24 @@ class EletricPresenter extends BasePresenter
     }
 
     public function renderInfo($id){
+        $this->template->eletric = $this->database->table('eletric')->where('id_eletric', $id);
+//        $device = $this->database->table('eletric')->where('id_eletric', $id);
+//
+//        if (!$device) {
+//            $this->flashMessage('Položka nebyla nalezena.', 'fail');
+////            $this->error('Příspěvek nebyl nalezen');
+//            $this->redirect('Eletric:default');
+//        }else{
+//            $this->template->eletric = $device;
+//        }
+    }
 
-        $device = $this->database->table('eletric')->where('id_eletric', $id);
+    public function actionInfo($id){
+        $device = $this->database->table('eletric')->get($id);
 
         if (!$device) {
-            $this->error('Příspěvek nebyl nalezen');
-            $this->redirect('Eletric:default');
-        }else{
-            $this->template->eletric = $device;
+            $this->flashMessage('Položka nebyla nalezena.', 'fail');
+            $this->redirect(':Admin:Eletric:default');
         }
     }
 
@@ -88,8 +99,6 @@ class EletricPresenter extends BasePresenter
 
     public function insertDeviceSucceeded($form, $values){
 
-
-
         $this->database->table('eletric')->insert([
             'nazev' => $values->nazev ,
             'ulice' => $values->ulice,
@@ -104,19 +113,17 @@ class EletricPresenter extends BasePresenter
             'lng' => $values->lng,
 
         ]);
-
-
-
-        $this->redirect('Eletric:');
-
-
+        $this->flashMessage('Položka byla úspěšně přidána.', 'info');
+        $this->redirect('Eletric:default');
     }
 
     public function insertEletricFaultSucceeded($form, $values){
 
         $data=
             ['description' => $values->description ,
-            'datum' => $values->datum];
+            'datum' => $values->datum,
+            'email' => $values->email,
+            ];
 
         $error_id = $this->database->table('error')->insert($data)->id_error;
 
@@ -125,7 +132,7 @@ class EletricPresenter extends BasePresenter
             ->update([
                 'error_id' => $error_id
             ]);
-
+       $this->flashMessage('Závada byla nahlášena.', 'info');
        $this->redirect('Eletric:default');
 
     }
@@ -158,7 +165,7 @@ class EletricPresenter extends BasePresenter
 
             ]);
 
-        $this->flashMessage('Položka byla úspěšně editována.');
+        $this->flashMessage('Položka byla úspěšně editována.', 'info');
 
     }
 
@@ -166,7 +173,8 @@ class EletricPresenter extends BasePresenter
 
         $values = $this->database->table('eletric')->get($id);
         if (!$values) {
-            $this->error('Příspěvek nebyl nalezen');
+            $this->flashMessage('Položka nebyla nalezena.', 'fail');
+            $this->redirect(':Admin:Eletric:default');
         }
 
         $this['editEletricForm']->setDefaults([
@@ -183,7 +191,6 @@ class EletricPresenter extends BasePresenter
             'lng' => $values->lng,
 
         ]);
-
 
     }
 

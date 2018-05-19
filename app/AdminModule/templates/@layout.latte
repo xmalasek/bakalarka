@@ -32,16 +32,7 @@
 </head>
 
 <body>
-	{*<script type="application/javascript">*}
-		{*$(document).ready(function(){*}
-			{*{foreach $flashes as $flash}*}
-				{*form_toast({$flash->message}, {$flash->type});*}
-			{*{/foreach}*}
-		{*});*}
-	{*</script>*}
 	<div>
-
-
 		<ul id="slide-out" class="sidenav sidenav-fixed">
 			<li>
 				<div class="user-view">
@@ -101,12 +92,9 @@
 			<nav class="indigo darken-4">
 				<div class="nav-wrapper">
 					<div class="col s12">
-
 						{include content_menu}
-
-
 						<a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-						<a n:href="Homepage:" class="brand-logo center">Eletrická zařízení</a>
+						<a n:href="Homepage:" class="brand-logo center">Obec Čebín</a>
 						<ul class="right">
 							<li><a class="waves-effect waves-light" href="{link Sign:out}"><i class="material-icons">exit_to_app</i></a></li>
 						</ul>
@@ -119,8 +107,6 @@
 			<div class="row">
 				<div class="col s12">
                     {include content}
-
-
 				</div>
 			</div>
 		</main>
@@ -134,34 +120,29 @@
 
 		<script type="application/javascript">
             $(document).ready(function(){
-
-
-
                 $('.sidenav').sidenav();
                 $('.collapsible').collapsible();
                 $('select').formSelect();
 
+                var toastHTML = '';
+                var icon = '';
+                {foreach $flashes as $flash}
+					toastHTML = '<span style="padding-left: 10px;"> {$flash->message|noescape}</span>';
+					{switch $flash->type}
+						{case warn}
+						icon = '<i class="material-icons yellow-text">warning</i>';
+						{case fail}
+						icon = '<i class="material-icons red-text">error_outline</i>';
+						{case info}
+						icon = '<i class="material-icons green-text">cloud_done</i>';
+						{default}
+						icon = '<i class="material-icons blue-text">info_outline</i>';
+					{/switch}
+					toastHTML = icon + toastHTML;
+					M.toast({ html: toastHTML,});
+                {/foreach}
+
             });
-
-            // function form_toast(msg, type) {
-            //     var icon = "";
-            //     switch(type) {
-            //         case 'warn':
-            //             icon = '<i class="material-icons">warning</i>';
-            //             break;
-            //         case 'fail':
-            //             icon = '<i class="material-icons">error_outline</i>';
-            //             break;
-            //         case 'info':
-            //             icon = '<i class="material-icons">done</i>';
-            //             break;
-            //         default:
-            //
-            //     }
-            //     var toastHTML = '<span>I am toast content</span>'.icon;
-            //     M.toast({ html: toastHTML});
-            // }
-
 
 		</script>
 

@@ -108,7 +108,9 @@ class FurniturePresenter extends BasePresenter
 
         $data=
             ['description' => $values->description ,
-                'datum' => $values->datum];
+                'datum' => $values->datum,
+                'email' => $values->email,
+            ];
 
         $error_id = $this->database->table('error')->insert($data)->id_error;
 
