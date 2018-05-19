@@ -20,7 +20,17 @@ class UsersPresenter extends BasePresenter
 
     protected function createComponentInsertUserForm(){
 
+        $dbRoles = $this->database->table('users_roles')->order('id ASC');
+        if (!$dbRoles)
+        {
+            //FIXME ERROR zaznamenat chybu
+        }
+        $roles = [];
+        foreach ($dbRoles as $role) {
+            $roles[$role->id] = $role->name;
+        }
         $form = (new InsertUserFormFactory()) -> create();
+        $form['role']->setItems($roles);
         $form->onSuccess[] = [$this, 'insertUserSucceeded'];
         return $form;
     }
@@ -38,7 +48,7 @@ class UsersPresenter extends BasePresenter
             $this->database->table('users')->insert([
                 'email' => $values->email,
                 'password' => $values->password,
-                //                'role' => FIXME,
+                'role' => $values->role,
                 'degree' => $values->degree,
                 'name' => $values->name,
                 'surname' => $values->surname
@@ -53,7 +63,16 @@ class UsersPresenter extends BasePresenter
 
     protected function createComponentEditUserForm(){
 
+        $dbRoles = $this->database->table('users_roles')->order('id ASC');
+        if (!$dbRoles) {
+            //FIXME ERROR zaznamenat chybu
+        }
+        $roles = [];
+        foreach ($dbRoles as $role) {
+            $roles[$role->id] = $role->name;
+        }
         $form = (new EditUserFormFactory()) -> create();
+        $form['role']->setItems($roles);
         $form->onSuccess[] = [$this, 'editUserSucceeded'];
         return $form;
     }
@@ -80,7 +99,6 @@ class UsersPresenter extends BasePresenter
                 }
             }
             unset($values->passwordVerifyOld);
-            unset($values->passwordVerify);
 
             if (strlen($values->password) == 0) {
                 unset($values->password);
@@ -127,7 +145,7 @@ class UsersPresenter extends BasePresenter
             'name' => $user->name,
             'surname' => $user->surname,
             'email' => $user->email,
-//           TODO 'role' => 1
+            'role' => $user->role
         ]);
 
     }
@@ -141,7 +159,7 @@ class UsersPresenter extends BasePresenter
     public function actionAdd()
     {
         $this['insertUserForm']->setDefaults([
-//           TODO 'role' => 1
+            'role' => 1
         ]);
     }
 

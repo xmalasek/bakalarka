@@ -26,6 +26,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
                 'email' => $user->getIdentity()->email,
                 'name' => $user->getIdentity()->name,
                 'surname' => $user->getIdentity()->surname,
+
             );
             $this->template->user_editor = $this->JeEditor();
             $this->template->user_admin = $this->JeAdministrator();

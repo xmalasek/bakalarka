@@ -21,7 +21,7 @@ class InsertUserFormFactory
         $form->addText('surname', 'Příjmení')
             ->setRequired('Příjmení nesmí být prázdné!');
 
-//        $form->addSelect('role', 'Role');
+        $form->addSelect('role', 'Role');
 
         $form->addPassword('password', 'Nové heslo')
             ->setRequired('Heslo musí být vyplněno!');
