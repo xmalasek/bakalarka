@@ -1,5 +1,5 @@
 {block title}
-    Front - Waste - waste
+    Front - Interest - interest
 {/block}
 
 {block content_menu}
@@ -7,9 +7,11 @@
 {/block}
 
 {block content}
-    <p>
-        Koše + mapa
-    </p>
+    <center>
+        <h4>
+            Mapa míst zájmu
+        </h4>
+    </center>
 
     <div id="map"></div>
 
@@ -18,6 +20,254 @@
 {* JS kod pro konkretni Presenter *}
 {block scripts}
     {include parent}
+    <script type="application/javascript">
+
+        $(document).ready(function() {
+            $.ajaxSetup({ cache:false});
+            $('#map').css('height', ($(window).height() - 200));
+            getUsers();
+        });
+
+        function getUsers() {
+
+            var kos = L.icon({
+                iconUrl: {$basePath}+"/picture/icons/waste/kos.png",
+                //iconSize:     [38, 95], // size of the icon
+                iconAnchor:   [25, 70], // point of the icon which will correspond to marker's location
+                popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+            });
+            var kos_error = L.icon({
+                iconUrl: {$basePath}+"/picture/icons/waste/kos_error.png",
+                //iconSize:     [38, 95], // size of the icon
+                iconAnchor:   [25, 70], // point of the icon which will correspond to marker's location
+                popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+            });
+
+
+            var psikos = L.icon({
+                iconUrl: {$basePath}+"/picture/icons/waste/psi_kos.png",
+                //iconSize:     [38, 95], // size of the icon
+                iconAnchor:   [25, 70], // point of the icon which will correspond to marker's location
+                popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+            });
+            var psikos_error = L.icon({
+                iconUrl: {$basePath}+"/picture/icons/waste/psi_kos_error.png",
+                //iconSize:     [38, 95], // size of the icon
+                iconAnchor:   [25, 70], // point of the icon which will correspond to marker's location
+                popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+            });
+
+            var plast = L.icon({
+                iconUrl: {$basePath}+"/picture/icons/waste/plast.png",
+                //iconSize:     [38, 95], // size of the icon
+                iconAnchor:   [25, 70], // point of the icon which will correspond to marker's location
+                popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+            });
+            var plast_error = L.icon({
+                iconUrl: {$basePath}+"/picture/icons/waste/plast_error.png",
+                //iconSize:     [38, 95], // size of the icon
+                iconAnchor:   [25, 70], // point of the icon which will correspond to marker's location
+                popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+            });
+
+
+            var sklo = L.icon({
+                iconUrl: {$basePath}+"/picture/icons/waste/sklo.png",
+                //iconSize:     [38, 95], // size of the icon
+                iconAnchor:   [25, 70], // point of the icon which will correspond to marker's location
+                popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+            });
+            var sklo_error = L.icon({
+                iconUrl: {$basePath}+"/picture/icons/waste/sklo_error.png",
+                //iconSize:     [38, 95], // size of the icon
+                iconAnchor:   [25, 70], // point of the icon which will correspond to marker's location
+                popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+            });
+
+            var papir = L.icon({
+                iconUrl: {$basePath}+"/picture/icons/waste/papir.png",
+                //iconSize:     [38, 95], // size of the icon
+                iconAnchor:   [25, 70], // point of the icon which will correspond to marker's location
+                popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+            });
+            var papir_error = L.icon({
+                iconUrl: {$basePath}+"/picture/icons/waste/papir_error.png",
+                //iconSize:     [38, 95], // size of the icon
+                iconAnchor:   [25, 70], // point of the icon which will correspond to marker's location
+                popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+            });
+
+            var odpad = L.icon({
+                iconUrl: {$basePath}+"/picture/icons/waste/domovni_odpad.png",
+                //iconSize:     [38, 95], // size of the icon
+                iconAnchor:   [25, 70], // point of the icon which will correspond to marker's location
+                popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+            });
+            var odpad_error = L.icon({
+                iconUrl: {$basePath}+"/picture/icons/waste/domovni_odpad_error.png",
+                //iconSize:     [38, 95], // size of the icon
+                iconAnchor:   [25, 70], // point of the icon which will correspond to marker's location
+                popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+            });
+
+            var olej = L.icon({
+                iconUrl: {$basePath}+"/picture/icons/waste/olej.png",
+                //iconSize:     [38, 95], // size of the icon
+                iconAnchor:   [25, 70], // point of the icon which will correspond to marker's location
+                popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+            });
+            var olej_error = L.icon({
+                iconUrl: {$basePath}+"/picture/icons/waste/olej_error.png",
+                //iconSize:     [38, 95], // size of the icon
+                iconAnchor:   [25, 70], // point of the icon which will correspond to marker's location
+                popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+            });
+
+
+            {foreach $waste as $device}
+
+            switch({$device->typ}) {
+                case "Odpadkový koš":
+                    if ({$device->error_id} != null) {
+
+                    L.marker([{$device -> lat}, {$device -> lng}],{ icon:kos_error}).addTo(map)
+                        .bindPopup(
+                                {syntax off}'{/syntax} <b>Název: </b> {$device->nazev|noescape} <br> <b>Ulice: </b>{$device -> ulice|noescape} <br> <b>Typ: </b>{$device -> typ|noescape} {syntax off}'{/syntax}
+                        );
+                } else {
+                    L.marker([{$device -> lat}, {$device -> lng}],{ icon:kos}).addTo(map)
+                        .bindPopup(
+                                {syntax off}'{/syntax} <b>Název:</b> {$device->nazev|noescape} <br> <b>Ulice:</b> {$device -> ulice|noescape}{syntax off}'{/syntax}+
+                                {syntax off}'{/syntax} <br><br><a class="waves-effect waves-light btn" href="fault/{$device->id_waste}"><i class="material-icons right">add</i>Nahlásit závadu</a>{syntax off}'{/syntax}
+                        );
+                }
+                    break;
+                case "Psí koš":
+                    if ({$device->error_id}!= null) {
+                    L.marker([{$device -> lat}, {$device -> lng}],{ icon:psikos_error}).addTo(map)
+                        .bindPopup(
+                                {syntax off}'{/syntax} <b>Název: </b> {$device->nazev|noescape} <br> <b>Ulice: </b>{$device -> ulice|noescape} <br> <b>Typ: </b>{$device -> typ|noescape} {syntax off}'{/syntax}
+                        );
+                }else{
+                    L.marker([{$device -> lat}, {$device -> lng}],{ icon:psikos}).addTo(map)
+                        .bindPopup(
+                                {syntax off}'{/syntax} <b>Název:</b> {$device->nazev|noescape} <br> <b>Ulice:</b> {$device -> ulice|noescape}{syntax off}'{/syntax}+
+                                {syntax off}'{/syntax} <br><br><a class="waves-effect waves-light btn" href="fault/{$device->id_waste}"><i class="material-icons right">add</i>Nahlásit závadu</a>{syntax off}'{/syntax}
+                        );
+                }
+                    break;
+                case "Kontejner na plast":
+                    if ({$device->error_id}!= null) {
+                    L.marker([{$device -> lat}, {$device -> lng}],{ icon:plast_error}).addTo(map)
+                        .bindPopup(
+                                {syntax off}'{/syntax} <b>Název: </b> {$device->nazev|noescape} <br> <b>Ulice: </b>{$device -> ulice|noescape} <br> <b>Typ: </b>{$device -> typ|noescape} {syntax off}'{/syntax}
+                        );
+                }else{
+                    L.marker([{$device -> lat}, {$device -> lng}],{ icon:plast}).addTo(map)
+                        .bindPopup(
+                                {syntax off}'{/syntax} <b>Název:</b> {$device->nazev|noescape} <br> <b>Ulice:</b> {$device -> ulice|noescape}{syntax off}'{/syntax}+
+                                {syntax off}'{/syntax} <br><br><a class="waves-effect waves-light btn" href="fault/{$device->id_waste}"><i class="material-icons right">add</i>Nahlásit závadu</a>{syntax off}'{/syntax}
+                        );
+                }
+                    break;
+                case "Kontejner na sklo":
+                    if ({$device->error_id}!= null) {
+                    L.marker([{$device -> lat}, {$device -> lng}],{ icon:sklo_error}).addTo(map)
+                        .bindPopup(
+                                {syntax off}'{/syntax} <b>Název: </b> {$device->nazev|noescape} <br> <b>Ulice: </b>{$device -> ulice|noescape} <br> <b>Typ: </b>{$device -> typ|noescape} {syntax off}'{/syntax}
+                        );
+                }else{
+                    L.marker([{$device -> lat}, {$device -> lng}],{ icon:sklo}).addTo(map)
+                        .bindPopup(
+                                {syntax off}'{/syntax} <b>Název:</b> {$device->nazev|noescape} <br> <b>Ulice:</b> {$device -> ulice|noescape}{syntax off}'{/syntax}+
+                                {syntax off}'{/syntax} <br><br><a class="waves-effect waves-light btn" href="fault/{$device->id_waste}"><i class="material-icons right">add</i>Nahlásit závadu</a>{syntax off}'{/syntax}
+                        );
+                }
+                    break;
+                case "Kontejner na papír":
+                    if ({$device->error_id}!= null) {
+                    L.marker([{$device -> lat}, {$device -> lng}],{ icon:papir_error}).addTo(map)
+                        .bindPopup(
+                                {syntax off}'{/syntax} <b>Název: </b> {$device->nazev|noescape} <br> <b>Ulice: </b>{$device -> ulice|noescape} <br> <b>Typ: </b>{$device -> typ|noescape} {syntax off}'{/syntax}
+                        );
+                }else{
+                    L.marker([{$device -> lat}, {$device -> lng}],{ icon:papir}).addTo(map)
+                        .bindPopup(
+                                {syntax off}'{/syntax} <b>Název:</b> {$device->nazev|noescape} <br> <b>Ulice:</b> {$device -> ulice|noescape}{syntax off}'{/syntax}+
+                                {syntax off}'{/syntax} <br><br><a class="waves-effect waves-light btn" href="fault/{$device->id_waste}"><i class="material-icons right">add</i>Nahlásit závadu</a>{syntax off}'{/syntax}
+                        );
+                }
+                    break;
+                case "Kontejner na domovní odpad":
+                    if ({$device->error_id}!= null) {
+                    L.marker([{$device -> lat}, {$device -> lng}],{ icon:odpad_error}).addTo(map)
+                        .bindPopup(
+                                {syntax off}'{/syntax} <b>Název: </b> {$device->nazev|noescape} <br> <b>Ulice: </b>{$device -> ulice|noescape} <br> <b>Typ: </b>{$device -> typ|noescape} {syntax off}'{/syntax}
+                        );
+                }else{
+                    L.marker([{$device -> lat}, {$device -> lng}],{ icon:odpad}).addTo(map)
+                        .bindPopup(
+                                {syntax off}'{/syntax} <b>Název:</b> {$device->nazev|noescape} <br> <b>Ulice:</b> {$device -> ulice|noescape}{syntax off}'{/syntax}+
+                                {syntax off}'{/syntax} <br><br><a class="waves-effect waves-light btn" href="fault/{$device->id_waste}"><i class="material-icons right">add</i>Nahlásit závadu</a>{syntax off}'{/syntax}
+                        );
+                }
+                    break;
+                case "Kontejner na olej":
+                    if ({$device->error_id}!= null) {
+                    L.marker([{$device -> lat}, {$device -> lng}],{ icon:olej_error}).addTo(map)
+                        .bindPopup(
+                                {syntax off}'{/syntax} <b>Název: </b> {$device->nazev|noescape} <br> <b>Ulice: </b>{$device -> ulice|noescape} <br> <b>Typ: </b>{$device -> typ|noescape} {syntax off}'{/syntax}
+                        );
+                }else{
+                    L.marker([{$device -> lat}, {$device -> lng}],{ icon:olej}).addTo(map)
+                        .bindPopup(
+                                {syntax off}'{/syntax} <b>Název:</b> {$device->nazev|noescape} <br> <b>Ulice:</b> {$device -> ulice|noescape}{syntax off}'{/syntax}+
+                                {syntax off}'{/syntax} <br><br><a class="waves-effect waves-light btn" href="fault/{$device->id_waste}"><i class="material-icons right">add</i>Nahlásit závadu</a>{syntax off}'{/syntax}
+                        );
+                }
+                    break;
+                default:
+            }
+            {/foreach}
+
+        }
+
+
+        function onMapClick(e) {
+            var markerLocation = new L.LatLng(e.latlng.lat, e.latlng.lng);
+            var marker = new L.Marker(markerLocation);
+            newUser.clearLayers();
+            newUser.addLayer(marker);
+
+            // var latitude = e.latlng.lat.toFixed(7);
+            // var longitude = e.latlng.lat.toFixed(7);
+
+            var form =
+                '<div class="markerDetail">'+
+                '<form action="add" method="post">'+
+                '<input style="display: none;" type="text" id="lat" name="lat" value="'+e.latlng.lat.toFixed(7)+'" />'+
+                '<input style="display: none;" type="text" id="lng" name="lng" value="'+e.latlng.lng.toFixed(7)+'" /><br><br>'+
+                '<button class="btn waves-effect waves-light" type="submit" name="action" onclick="">Přidat bod<i class="material-icons right">add</i>\n' +
+                '</form>'+
+                '</div>';
+
+        //TODO linkovani na add + lat +lng
+            {*var form =*}
+            {*'<div class="markerDetail">'+*}
+            {*'<a class="waves-effect waves-light btn" href="add/{ latitude}"><i class="material-icons right">cloud</i>button</a>' +*}
+            {*'</div>';*}
+            {*{link Electric}:add ['lng' => '16.4587965', 'lat' => '42.4654654']}*}
+
+            marker.bindPopup(form).openPopup();
+
+            $(".leaflet-popup-close-button").click(function() {
+                cancelRegistration();
+            });
+
+        }
+
+
+    </script>
 
 
 {/block}

@@ -7,9 +7,11 @@
 {/block}
 
 {block content}
-    <p>
-        Městský mobiliář
-    </p>
+    <center>
+        <h4>
+            Mapa městského mobiliáře
+        </h4>
+    </center>
 
     <div id="map"></div>
 
@@ -28,28 +30,147 @@
 
         function getUsers() {
 
+            var lavicka = L.icon({
+                iconUrl: {$basePath}+"/picture/icons/furniture/lavicka.png",
+                //iconSize:     [38, 95], // size of the icon
+                iconAnchor:   [25, 70], // point of the icon which will correspond to marker's location
+                popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+            });
+            var lavicka_error = L.icon({
+                iconUrl: {$basePath}+"/picture/icons/furniture/lavicka_error.png",
+                //iconSize:     [38, 95], // size of the icon
+                iconAnchor:   [25, 70], // point of the icon which will correspond to marker's location
+                popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+            });
+
+
+            var zastavka = L.icon({
+                iconUrl: {$basePath}+"/picture/icons/furniture/bus.png",
+                //iconSize:     [38, 95], // size of the icon
+                iconAnchor:   [25, 70], // point of the icon which will correspond to marker's location
+                popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+            });
+            var zastavka_error = L.icon({
+                iconUrl: {$basePath}+"/picture/icons/furniture/bus_error.png",
+                //iconSize:     [38, 95], // size of the icon
+                iconAnchor:   [25, 70], // point of the icon which will correspond to marker's location
+                popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+            });
+
+            var stojan = L.icon({
+                iconUrl: {$basePath}+"/picture/icons/furniture/kolo.png",
+                //iconSize:     [38, 95], // size of the icon
+                iconAnchor:   [25, 70], // point of the icon which will correspond to marker's location
+                popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+            });
+            var stojan_error = L.icon({
+                iconUrl: {$basePath}+"/picture/icons/furniture/kolo_error.png",
+                //iconSize:     [38, 95], // size of the icon
+                iconAnchor:   [25, 70], // point of the icon which will correspond to marker's location
+                popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+            });
+
+            var tabule = L.icon({
+                iconUrl: {$basePath}+"/picture/icons/furniture/info_tabule.png",
+                //iconSize:     [38, 95], // size of the icon
+                iconAnchor:   [25, 70], // point of the icon which will correspond to marker's location
+                popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+            });
+            var tabule_error = L.icon({
+                iconUrl: {$basePath}+"/picture/icons/furniture/info_tabule_error.png",
+                //iconSize:     [38, 95], // size of the icon
+                iconAnchor:   [25, 70], // point of the icon which will correspond to marker's location
+                popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+            });
+
+            var hriste = L.icon({
+                iconUrl: {$basePath}+"/picture/icons/furniture/hriste.png",
+                //iconSize:     [38, 95], // size of the icon
+                iconAnchor:   [25, 70], // point of the icon which will correspond to marker's location
+                popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+            });
+            var hriste_error = L.icon({
+                iconUrl: {$basePath}+"/picture/icons/furniture/hriste_error.png",
+                //iconSize:     [38, 95], // size of the icon
+                iconAnchor:   [25, 70], // point of the icon which will correspond to marker's location
+                popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+            });
+
             {foreach $furniture as $device}
-            if ({$device->error_id}!= null) {
 
-                L.marker([{$device -> lat}, {$device -> lng}]).addTo(map)
+            switch({$device->typ}) {
+                case "Lavička":
+                    if ({$device->error_id} != null) {
 
-                    .bindPopup(
-                            {*{syntax off}'{/syntax}<div style="text-align: center; margin-left: auto; margin-right: auto;">{syntax off}'{/syntax}+*}
-                            {syntax off}'{/syntax} <b>Název: </b> {$device->nazev|noescape} <br> <b>Ulice: </b>{$device -> ulice|noescape} <br> <b>Typ: </b>{$device -> typ|noescape} {syntax off}'{/syntax}
-                            {*{syntax off}'{/syntax}<br><br><a class="waves-effect waves-light btn small" href="fault/{$device->id_eletric}"><i class="material-icons right">add</i>nahlásit závadu</a>{syntax off}'{/syntax});*}
-                            {*{syntax off}'{/syntax}</div>{syntax off}'{/syntax});*}
-                    );
-
-            }else{
-
-                L.marker([{$device -> lat}, {$device -> lng}],{ opacity: 0.5}).addTo(map)
-
-                    .bindPopup(
-                            {*{syntax off}'{/syntax}<div style="text-align: center; background: #99ebff; margin-left: auto; margin-right: auto;">{syntax off}'{/syntax}+*}
-                            {syntax off}'{/syntax} <b>Název:</b> {$device->nazev|noescape} <br> <b>Ulice:</b> {$device -> ulice|noescape}{syntax off}'{/syntax}+
-                            {syntax off}'{/syntax}<a class="waves-effect waves-light btn" href="fault/{$device->id_furniture}"><i class="material-icons right">add</i>Nahlásit závadu</a>{syntax off}'{/syntax}
-                            {*{syntax off}'{/syntax}</div>{syntax off}'{/syntax}*}
-                    );
+                    L.marker([{$device -> lat}, {$device -> lng}],{ icon:lavicka_error}).addTo(map)
+                        .bindPopup(
+                                {syntax off}'{/syntax} <b>Název: </b> {$device->nazev|noescape} <br> <b>Ulice: </b>{$device -> ulice|noescape} <br> <b>Typ: </b>{$device -> typ|noescape} {syntax off}'{/syntax}
+                        );
+                } else {
+                    L.marker([{$device -> lat}, {$device -> lng}],{ icon:lavicka}).addTo(map)
+                        .bindPopup(
+                                {syntax off}'{/syntax} <b>Název:</b> {$device->nazev|noescape} <br> <b>Ulice:</b> {$device -> ulice|noescape}{syntax off}'{/syntax}+
+                                {syntax off}'{/syntax} <br><br><a class="waves-effect waves-light btn" href="fault/{$device->id_furniture}"><i class="material-icons right">add</i>Nahlásit závadu</a>{syntax off}'{/syntax}
+                        );
+                }
+                    break;
+                case "Zastávka BUS":
+                    if ({$device->error_id}!= null) {
+                    L.marker([{$device -> lat}, {$device -> lng}],{ icon:zastavka_error}).addTo(map)
+                        .bindPopup(
+                                {syntax off}'{/syntax} <b>Název: </b> {$device->nazev|noescape} <br> <b>Ulice: </b>{$device -> ulice|noescape} <br> <b>Typ: </b>{$device -> typ|noescape} {syntax off}'{/syntax}
+                        );
+                }else{
+                    L.marker([{$device -> lat}, {$device -> lng}],{ icon:zastavka}).addTo(map)
+                        .bindPopup(
+                                {syntax off}'{/syntax} <b>Název:</b> {$device->nazev|noescape} <br> <b>Ulice:</b> {$device -> ulice|noescape}{syntax off}'{/syntax}+
+                                {syntax off}'{/syntax} <br><br><a class="waves-effect waves-light btn" href="fault/{$device->id_furniture}"><i class="material-icons right">add</i>Nahlásit závadu</a>{syntax off}'{/syntax}
+                        );
+                }
+                    break;
+                case "Stojan na kola":
+                    if ({$device->error_id}!= null) {
+                    L.marker([{$device -> lat}, {$device -> lng}],{ icon:stojan_error}).addTo(map)
+                        .bindPopup(
+                                {syntax off}'{/syntax} <b>Název: </b> {$device->nazev|noescape} <br> <b>Ulice: </b>{$device -> ulice|noescape} <br> <b>Typ: </b>{$device -> typ|noescape} {syntax off}'{/syntax}
+                        );
+                }else{
+                    L.marker([{$device -> lat}, {$device -> lng}],{ icon:stojan}).addTo(map)
+                        .bindPopup(
+                                {syntax off}'{/syntax} <b>Název:</b> {$device->nazev|noescape} <br> <b>Ulice:</b> {$device -> ulice|noescape}{syntax off}'{/syntax}+
+                                {syntax off}'{/syntax} <br><br><a class="waves-effect waves-light btn" href="fault/{$device->id_furniture}"><i class="material-icons right">add</i>Nahlásit závadu</a>{syntax off}'{/syntax}
+                        );
+                }
+                    break;
+                case "Informační tabule":
+                    if ({$device->error_id}!= null) {
+                    L.marker([{$device -> lat}, {$device -> lng}],{ icon:tabule_error}).addTo(map)
+                        .bindPopup(
+                                {syntax off}'{/syntax} <b>Název: </b> {$device->nazev|noescape} <br> <b>Ulice: </b>{$device -> ulice|noescape} <br> <b>Typ: </b>{$device -> typ|noescape} {syntax off}'{/syntax}
+                        );
+                }else{
+                    L.marker([{$device -> lat}, {$device -> lng}],{ icon:tabule}).addTo(map)
+                        .bindPopup(
+                                {syntax off}'{/syntax} <b>Název:</b> {$device->nazev|noescape} <br> <b>Ulice:</b> {$device -> ulice|noescape}{syntax off}'{/syntax}+
+                                {syntax off}'{/syntax} <br><br><a class="waves-effect waves-light btn" href="fault/{$device->id_furniture}"><i class="material-icons right">add</i>Nahlásit závadu</a>{syntax off}'{/syntax}
+                        );
+                }
+                    break;
+                case "Dětské hřiště":
+                    if ({$device->error_id}!= null) {
+                    L.marker([{$device -> lat}, {$device -> lng}],{ icon:hriste_error}).addTo(map)
+                        .bindPopup(
+                                {syntax off}'{/syntax} <b>Název: </b> {$device->nazev|noescape} <br> <b>Ulice: </b>{$device -> ulice|noescape} <br> <b>Typ: </b>{$device -> typ|noescape} {syntax off}'{/syntax}
+                        );
+                }else{
+                    L.marker([{$device -> lat}, {$device -> lng}],{ icon:hriste}).addTo(map)
+                        .bindPopup(
+                                {syntax off}'{/syntax} <b>Název:</b> {$device->nazev|noescape} <br> <b>Ulice:</b> {$device -> ulice|noescape}{syntax off}'{/syntax}+
+                                {syntax off}'{/syntax} <br><br><a class="waves-effect waves-light btn" href="fault/{$device->id_furniture}"><i class="material-icons right">add</i>Nahlásit závadu</a>{syntax off}'{/syntax}
+                        );
+                }
+                    break;
+                default:
             }
             {/foreach}
 
