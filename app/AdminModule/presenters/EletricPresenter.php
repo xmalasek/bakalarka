@@ -21,7 +21,7 @@ class EletricPresenter extends BasePresenter
 
     public function renderDefault()
     {
-        $this->template->eletric = $this->database->table('eletric');
+        $this->myRenderDefault(null);
     }
 
     public function renderShow()
@@ -127,6 +127,32 @@ class EletricPresenter extends BasePresenter
        $this->redirect('Eletric:default');
 
     }
+
+    protected function createComponentFiltrEletricForm(){
+
+        $form = (new FiltrEletricFormFactory()) -> create();
+        $form->onSuccess[] = [$this, 'filtrDeviceSucceeded'];
+
+        return $form;
+    }
+
+    private function myRenderDefault($value) {
+        if(!isset($this->template->eletric))
+        {
+            if(!$value)
+            {
+                $this->template->eletric = $this->database->table('eletric');
+            }
+            else {
+                $this->template->eletric = $this->database->table('eletric')->where('ulice', $value);
+            }
+        }
+    }
+
+    public function filtrDeviceSucceeded($form, $values){
+        $this->myRenderDefault($values->ulice);
+    }
+
 
     protected function createComponentEditEletricForm(){
 
