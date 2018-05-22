@@ -4,8 +4,7 @@ parameters:
 application:
 	errorPresenter: Error
 	mapping:
-	    *: *Module\*Presenter
-
+	    *: \*Module\*Presenter
 
 session:
 	expiration: 14 days

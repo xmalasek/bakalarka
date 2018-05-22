@@ -1,18 +1,19 @@
 {block title}
-    Admin - Interest - interest - info
+    Front - Eletric - info
 {/block}
 
 {block content_menu}
     <ul class="left">
-        <li><a class="waves-effect waves-light" n:href="Interest:show" ><i class="material-icons" >backspace</i></a></li>
+        <li><a class="waves-effect waves-light" n:href="Eletric:" ><i class="material-icons" >backspace</i></a></li>
     </ul>
 {/block}
 
 {block content}
     <script type="application/javascript" src="{$basePath}/lib/js/map.js"></script>
+
 <table class="highlight">
 
-{foreach $interest as $device}
+{foreach $eletric as $device}
     <h3>{$device -> nazev}</h3>
 
     <tr>
@@ -24,24 +25,32 @@
         <td>{$device -> ulice}</td>
     </tr>
     <tr>
-        <th>Číslo popisné</th>
-        <td>{$device -> cp}</td>
-    </tr>
-    <tr>
         <th>Typ</th>
         <td>{$device -> typ}</td>
     </tr>
     <tr>
+        <th>Svítidlo</th>
+        <td>{$device -> svitidlo}</td>
+    </tr>
+    <tr>
+        <th>Označení</th>
+        <td>{$device -> oznaceni}</td>
+    </tr>
+    <tr>
+        <th>Počet</th>
+        <td>{$device -> pocet}</td>
+    </tr>
+    <tr>
+        <th>Stav</th>
+        <td>{$device -> stav}</td>
+    </tr>
+    <tr>
+        <th>Stožár</th>
+        <td>{$device -> stozar}</td>
+    </tr>
+    <tr>
         <th>Popis</th>
         <td>{$device -> popis}</td>
-    </tr>
-    <tr>
-        <th>Telefon</th>
-        <td>{$device -> telefon}</td>
-    </tr>
-    <tr>
-        <th>Web</th>
-        <td>{$device -> web}</td>
     </tr>
 
 </tr>
@@ -62,7 +71,9 @@
 {block scripts}
 
 
+
 <script type="application/javascript">
+
 
     var map, newUser, users, mapquest, firstLoad;
 
@@ -78,7 +89,7 @@
     });
 
     map = new L.Map('my_map_info', {
-        {foreach $interest as $device}
+        {foreach $eletric as $device}
         center: new L.LatLng({$device -> lat}, {$device -> lng}),
         zoom: 18,
         layers: [mapquest, users, newUser]
@@ -100,7 +111,7 @@
 
 
         function getDevice() {
-            {foreach $interest as $device}
+            {foreach $eletric as $device}
             L.marker([{$device -> lat}, {$device -> lng}]).addTo(map)
                 .bindPopup("<div style='text-align: center; margin-left: auto; margin-right: auto;'>" +
                         {syntax off}'{/syntax} <b>Název:</b> {$device->nazev|noescape} <br> <b>Ulice:</b>{$device -> ulice|noescape}{syntax off}'{/syntax}+

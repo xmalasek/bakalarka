@@ -34,6 +34,10 @@ class InterestPresenter extends Nette\Application\UI\Presenter
 
     }
 
+    public function renderInfo($id){
+        $this->template->interest = $this->database->table('interest')->where('id_interest', $id);
+    }
+
 
     public function actionFault($id){
 

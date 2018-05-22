@@ -10,24 +10,20 @@
 
 	<title>{ifset title}{include title|stripHtml} | {/ifset}</title>
 
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link type="text/css" rel="stylesheet" href="{$basePath}/lib/css/materialize.css"  media="screen,projection"/>
-	<link type="text/css" rel="stylesheet" href="{$basePath}/lib/css/style.css"  media="screen,projection"/>
-    <link type="text/css" rel="stylesheet" href="lib/leaflet/plugins/leaflet.markercluster/MarkerCluster.css" />
-    <link type="text/css" rel="stylesheet" href="lib/leaflet/plugins/leaflet.markercluster/MarkerCluster.Default.css" />
-
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    {*<script type="text/javascript" src="{$basePath}/lib/js/jquery.js"></script>*}
-	<script type="text/javascript" src="{$basePath}/lib/js/materialize.js"></script>
-    {*<script type="text/javascript" src="{$basePath}/lib/js/jquery.nette.js"></script>*}
-	<script src="https://nette.github.io/resources/js/netteForms.min.js"></script>
-
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="{$basePath}/lib/css/materialize.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="{$basePath}/lib/css/style.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="{$basePath}/lib/leaflet/plugins/leaflet.markercluster/MarkerCluster.css" />
+    <link type="text/css" rel="stylesheet" href="{$basePath}/lib/leaflet/plugins/leaflet.markercluster/MarkerCluster.Default.css" />
     <link rel="stylesheet" href="{$basePath}/lib/leaflet/leaflet.css" />
-    <script src="{$basePath}/lib/leaflet/leaflet.js"></script>
 
-    <script type="text/javascript" src="{$basePath}/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{$basePath}/lib/js/materialize.js"></script>
+    <script src="https://nette.github.io/resources/js/netteForms.min.js"></script>
+    <script src="{$basePath}/lib/leaflet/leaflet.js"></script>
     <script type="text/javascript" src="{$basePath}/lib/leaflet/plugins/leaflet.markercluster/leaflet.markercluster.js"></script>
-    {*<script src='https://www.google.com/recaptcha/api.js'></script>*}
+
+
     {include head}
 </head>
 
@@ -60,9 +56,7 @@
                     <ul class="left">
                         {include content_menu}
                     </ul>
-
                     <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-
                     <a n:href="Homepage:" class="brand-logo center">Obec Čebín</a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
                         <li><a href="{$basePath}/panel/"><i class="material-icons">account_box</i></a></li>
@@ -80,27 +74,6 @@
             </div>
         </div>
     </main>
-
-     <!--
-
-    <footer class="page-footer blue-grey lighten-2">
-        <div class="container">
-            <div class="row">
-                <div class="col l6 s12">
-                    <h5 class="white-text">Bakalářská práce</h5>
-                    <p class="grey-text text-lighten-4">Obsahem tohoto webu je bakalářská práce na témea: Webová aplikace pro nahlašovaní záavad s obecním majetkem.</p>
-                </div>
-            </div>
-        </div>
-        <div class="footer-copyright">
-            <div class="container">
-                Vytvořil Adam Malášek
-            </div>
-        </div>
-    </footer>
-
-    -->
-
     </div>
 
 

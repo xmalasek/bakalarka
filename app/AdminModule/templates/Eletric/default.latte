@@ -6,16 +6,27 @@
 <ul class="left">
     <li><a class="waves-effect waves-light" onclick=" initRegistration(); return false;" ><i class="material-icons right" >add_location</i></a></li>
     <li><a class="waves-effect waves-light" n:href="Show" ><i class="material-icons" >import_export</i></a></li>
-    <li><a class="waves-effect waves-light" n:href="Fault"><i class="material-icons" >search</i></a></li>
 </ul>
 {/block}
 
 {block content}
+
+        <select>
+            <option value="" disabled selected>Zobraz typ zařízení</option>
+            <option value="">Elektro</option>
+            <option value="">Rozhlas</option>
+            <option value="3">Option 3</option>
+        </select>
+        <label>Materialize Select</label>
+
 <center>
     <h4>
         Mapa eletrických zařízení
     </h4>
 </center>
+
+
+
     <div id="map"></div>
 
 {/block}

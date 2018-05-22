@@ -28,6 +28,10 @@ class EletricPresenter extends Nette\Application\UI\Presenter
 
     }
 
+    public function renderInfo($id){
+        $this->template->eletric = $this->database->table('eletric')->where('id_eletric', $id);
+    }
+
     public function renderFault()
     {
 
@@ -55,7 +59,9 @@ class EletricPresenter extends Nette\Application\UI\Presenter
 
         $data=
             ['description' => $values->description ,
-                'datum' => $values->datum];
+                'datum' => $values->datum,
+                'email' => $values->email,
+            ];
 
         $error_id = $this->database->table('error')->insert($data)->id_error;
 

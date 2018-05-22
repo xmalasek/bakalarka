@@ -44,6 +44,11 @@ class FurniturePresenter extends Nette\Application\UI\Presenter
 
     }
 
+    public function renderInfo($id){
+        $this->template->furniture = $this->database->table('furniture')->where('id_furniture', $id);
+    }
+
+
     protected function createComponentInsertFaultForm(){
 
         $form = (new InsertFaultFormFactory()) -> create();
@@ -56,7 +61,9 @@ class FurniturePresenter extends Nette\Application\UI\Presenter
 
         $data=
             ['description' => $values->description ,
-                'datum' => $values->datum];
+                'datum' => $values->datum,
+                'email' => $values->email
+                ];
 
         $error_id = $this->database->table('error')->insert($data)->id_error;
 

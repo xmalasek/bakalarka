@@ -16,13 +16,18 @@
         <a class="waves-effect waves-light btn green" href="{link Users:add}"><i class="material-icons right">person_add</i>Přidat uživatele</a>
     {/if}
 
+
     {foreach $users as $dbuser}
         <ul class="collection">
             <li class="collection-item avatar">
                 <img src="http://materializecss.com/images/yuna.jpg" alt="" class="circle">
                 <span class="title">{$dbuser->degree} {$dbuser->name} {$dbuser->surname}</span>
                 <p>{$dbuser->email}<br>
-                    {*TODO ROLE*}
+                {if $dbuser->role == 1}
+                <p>Administrátor<br>
+                {else}
+                <p>Editor<br>
+                {/if}
                 </p>
                 {*{if $user_admin}*}
                     <a href="{link Users:edit $dbuser->id}" class="secondary-content"><i class="material-icons">edit</i></a>

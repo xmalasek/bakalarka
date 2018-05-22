@@ -43,6 +43,10 @@ class WastePresenter extends Nette\Application\UI\Presenter
 
     }
 
+    public function renderInfo($id){
+        $this->template->waste = $this->database->table('waste')->where('id_waste', $id);
+    }
+
     protected function createComponentInsertFaultForm(){
 
         $form = (new InsertFaultFormFactory()) -> create();
@@ -55,7 +59,9 @@ class WastePresenter extends Nette\Application\UI\Presenter
 
         $data=
             ['description' => $values->description ,
-                'datum' => $values->datum];
+                'datum' => $values->datum,
+                'email' => $values->email
+            ];
 
         $error_id = $this->database->table('error')->insert($data)->id_error;
 

@@ -104,12 +104,14 @@
 
                     L.marker([{$device -> lat}, {$device -> lng}],{ icon:lavicka_error}).addTo(map)
                         .bindPopup(
-                                {syntax off}'{/syntax} <b>Název: </b> {$device->nazev|noescape} <br> <b>Ulice: </b>{$device -> ulice|noescape} <br> <b>Typ: </b>{$device -> typ|noescape} {syntax off}'{/syntax}
+                                {syntax off}'{/syntax} <b>Název: </b> {$device->nazev|noescape} <br> <b>Ulice: </b>{$device -> ulice|noescape} <br> <b>Typ: </b>{$device -> typ|noescape} <br><b>Nahlášena závada!</b>{syntax off}'{/syntax}+
+                                {syntax off}'{/syntax} <br><br><a class="waves-effect waves-light btn" href="info/{$device->id_furniture}"><i class="material-icons right">info</i>Info</a>{syntax off}'{/syntax}
                         );
                 } else {
                     L.marker([{$device -> lat}, {$device -> lng}],{ icon:lavicka}).addTo(map)
                         .bindPopup(
-                                {syntax off}'{/syntax} <b>Název:</b> {$device->nazev|noescape} <br> <b>Ulice:</b> {$device -> ulice|noescape}{syntax off}'{/syntax}+
+                                {syntax off}'{/syntax} <b>Název:</b> {$device->nazev|noescape} <br> <b>Ulice:</b> {$device -> ulice|noescape} <br> <b>Typ: </b>{$device -> typ|noescape}{syntax off}'{/syntax}+
+                                {syntax off}'{/syntax} <br><br><a class="waves-effect waves-light btn" href="info/{$device->id_furniture}"><i class="material-icons right">info</i>Info</a>{syntax off}'{/syntax}+
                                 {syntax off}'{/syntax} <br><br><a class="waves-effect waves-light btn" href="fault/{$device->id_furniture}"><i class="material-icons right">add</i>Nahlásit závadu</a>{syntax off}'{/syntax}
                         );
                 }
@@ -118,12 +120,14 @@
                     if ({$device->error_id}!= null) {
                     L.marker([{$device -> lat}, {$device -> lng}],{ icon:zastavka_error}).addTo(map)
                         .bindPopup(
-                                {syntax off}'{/syntax} <b>Název: </b> {$device->nazev|noescape} <br> <b>Ulice: </b>{$device -> ulice|noescape} <br> <b>Typ: </b>{$device -> typ|noescape} {syntax off}'{/syntax}
+                                {syntax off}'{/syntax} <b>Název: </b> {$device->nazev|noescape} <br> <b>Ulice: </b>{$device -> ulice|noescape} <br> <b>Typ: </b>{$device -> typ|noescape} <br><b>Nahlášena závada!</b>{syntax off}'{/syntax}+
+                                {syntax off}'{/syntax} <br><br><a class="waves-effect waves-light btn" href="info/{$device->id_furniture}"><i class="material-icons right">info</i>Info</a>{syntax off}'{/syntax}
                         );
                 }else{
                     L.marker([{$device -> lat}, {$device -> lng}],{ icon:zastavka}).addTo(map)
                         .bindPopup(
-                                {syntax off}'{/syntax} <b>Název:</b> {$device->nazev|noescape} <br> <b>Ulice:</b> {$device -> ulice|noescape}{syntax off}'{/syntax}+
+                                {syntax off}'{/syntax} <b>Název:</b> {$device->nazev|noescape} <br> <b>Ulice:</b> {$device -> ulice|noescape} <br> <b>Typ: </b>{$device -> typ|noescape}{syntax off}'{/syntax}+
+                                {syntax off}'{/syntax} <br><br><a class="waves-effect waves-light btn" href="info/{$device->id_furniture}"><i class="material-icons right">info</i>Info</a>{syntax off}'{/syntax}+
                                 {syntax off}'{/syntax} <br><br><a class="waves-effect waves-light btn" href="fault/{$device->id_furniture}"><i class="material-icons right">add</i>Nahlásit závadu</a>{syntax off}'{/syntax}
                         );
                 }
@@ -132,12 +136,14 @@
                     if ({$device->error_id}!= null) {
                     L.marker([{$device -> lat}, {$device -> lng}],{ icon:stojan_error}).addTo(map)
                         .bindPopup(
-                                {syntax off}'{/syntax} <b>Název: </b> {$device->nazev|noescape} <br> <b>Ulice: </b>{$device -> ulice|noescape} <br> <b>Typ: </b>{$device -> typ|noescape} {syntax off}'{/syntax}
+                                {syntax off}'{/syntax} <b>Název: </b> {$device->nazev|noescape} <br> <b>Ulice: </b>{$device -> ulice|noescape} <br> <b>Typ: </b>{$device -> typ|noescape}<br><b>Nahlášena závada!</b> {syntax off}'{/syntax}+
+                                {syntax off}'{/syntax} <br><br><a class="waves-effect waves-light btn" href="info/{$device->id_furniture}"><i class="material-icons right">info</i>Info</a>{syntax off}'{/syntax}
                         );
                 }else{
                     L.marker([{$device -> lat}, {$device -> lng}],{ icon:stojan}).addTo(map)
                         .bindPopup(
                                 {syntax off}'{/syntax} <b>Název:</b> {$device->nazev|noescape} <br> <b>Ulice:</b> {$device -> ulice|noescape}{syntax off}'{/syntax}+
+                                {syntax off}'{/syntax} <br><br><a class="waves-effect waves-light btn" href="info/{$device->id_furniture}"><i class="material-icons right">info</i>Info</a>{syntax off}'{/syntax}+
                                 {syntax off}'{/syntax} <br><br><a class="waves-effect waves-light btn" href="fault/{$device->id_furniture}"><i class="material-icons right">add</i>Nahlásit závadu</a>{syntax off}'{/syntax}
                         );
                 }
@@ -146,13 +152,16 @@
                     if ({$device->error_id}!= null) {
                     L.marker([{$device -> lat}, {$device -> lng}],{ icon:tabule_error}).addTo(map)
                         .bindPopup(
-                                {syntax off}'{/syntax} <b>Název: </b> {$device->nazev|noescape} <br> <b>Ulice: </b>{$device -> ulice|noescape} <br> <b>Typ: </b>{$device -> typ|noescape} {syntax off}'{/syntax}
+                                {syntax off}'{/syntax} <b>Název: </b> {$device->nazev|noescape} <br> <b>Ulice: </b>{$device -> ulice|noescape} <br> <b>Typ: </b>{$device -> typ|noescape} <br><b>Nahlášena závada!</b>{syntax off}'{/syntax}+
+                                {syntax off}'{/syntax} <br><br><a class="waves-effect waves-light btn" href="info/{$device->id_furniture}"><i class="material-icons right">info</i>Info</a>{syntax off}'{/syntax}
                         );
                 }else{
                     L.marker([{$device -> lat}, {$device -> lng}],{ icon:tabule}).addTo(map)
                         .bindPopup(
                                 {syntax off}'{/syntax} <b>Název:</b> {$device->nazev|noescape} <br> <b>Ulice:</b> {$device -> ulice|noescape}{syntax off}'{/syntax}+
+                                {syntax off}'{/syntax} <br><br><a class="waves-effect waves-light btn" href="info/{$device->id_furniture}"><i class="material-icons right">info</i>Info</a>{syntax off}'{/syntax}+
                                 {syntax off}'{/syntax} <br><br><a class="waves-effect waves-light btn" href="fault/{$device->id_furniture}"><i class="material-icons right">add</i>Nahlásit závadu</a>{syntax off}'{/syntax}
+
                         );
                 }
                     break;
@@ -160,12 +169,14 @@
                     if ({$device->error_id}!= null) {
                     L.marker([{$device -> lat}, {$device -> lng}],{ icon:hriste_error}).addTo(map)
                         .bindPopup(
-                                {syntax off}'{/syntax} <b>Název: </b> {$device->nazev|noescape} <br> <b>Ulice: </b>{$device -> ulice|noescape} <br> <b>Typ: </b>{$device -> typ|noescape} {syntax off}'{/syntax}
+                                {syntax off}'{/syntax} <b>Název: </b> {$device->nazev|noescape} <br> <b>Ulice: </b>{$device -> ulice|noescape} <br> <b>Typ: </b>{$device -> typ|noescape} <br><b>Nahlášena závada!</b> {syntax off}'{/syntax}+
+                                {syntax off}'{/syntax} <br><br><a class="waves-effect waves-light btn" href="info/{$device->id_furniture}"><i class="material-icons right">info</i>Info</a>{syntax off}'{/syntax}
                         );
                 }else{
                     L.marker([{$device -> lat}, {$device -> lng}],{ icon:hriste}).addTo(map)
                         .bindPopup(
                                 {syntax off}'{/syntax} <b>Název:</b> {$device->nazev|noescape} <br> <b>Ulice:</b> {$device -> ulice|noescape}{syntax off}'{/syntax}+
+                                {syntax off}'{/syntax} <br><br><a class="waves-effect waves-light btn" href="info/{$device->id_furniture}"><i class="material-icons right">info</i>Info</a>{syntax off}'{/syntax}+
                                 {syntax off}'{/syntax} <br><br><a class="waves-effect waves-light btn" href="fault/{$device->id_furniture}"><i class="material-icons right">add</i>Nahlásit závadu</a>{syntax off}'{/syntax}
                         );
                 }

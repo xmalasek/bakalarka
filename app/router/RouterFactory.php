@@ -43,7 +43,6 @@ class RouterFactory
             'id' => null,
             'module' => 'Admin'
         ]);
-//        TODO add metody pro vsechno
         $router[] = new Route('panel/odhlaseni/', [
             'presenter' => 'Sign',
             'action' => 'out',
@@ -134,7 +133,7 @@ class RouterFactory
             'id' => null,
             'module' => 'Admin'
         ]);
-// todo pridat dalsi tranky
+
         $router[] = new Route('panel/<presenter>/<action>/[<id>/]', [
             'presenter' => 'Homepage',
             'action' => 'default',
@@ -143,6 +142,84 @@ class RouterFactory
         ]);
 
         /* Front module */
+
+        $router[] = new Route('/eletric/info', [
+            'presenter' => 'Eletric',
+            'action' => 'info',
+            'id' => null,
+            'module' => 'Front'
+        ]);
+
+        $router[] = new Route('/furniture/info', [
+            'presenter' => 'Furniture',
+            'action' => 'info',
+            'id' => null,
+            'module' => 'Front'
+        ]);
+
+        $router[] = new Route('/interest/info', [
+            'presenter' => 'Interest',
+            'action' => 'info',
+            'id' => null,
+            'module' => 'Front'
+        ]);
+
+        $router[] = new Route('/waste/info', [
+            'presenter' => 'Waste',
+            'action' => 'info',
+            'id' => null,
+            'module' => 'Front'
+        ]);
+
+        $router[] = new Route('elektricke-zarizeni/<action>/[<id>/]', [
+            'presenter' => 'Eletric',
+            'action' => array(
+                Route::VALUE => 'default',
+                Route::FILTER_TABLE => array(
+                    'nahlasit-zavadu' => 'fault',
+                    'informace' => 'info',
+                )
+            ),
+            'id' => null,
+            'module' => 'Front'
+        ]);
+
+        $router[] = new Route('mestsky-mobiliar/<action>/[<id>/]', [
+            'presenter' => 'Furniture',
+            'action' => array(
+                Route::VALUE => 'default',
+                Route::FILTER_TABLE => array(
+                    'nahlasit-zavadu' => 'fault',
+                    'informace' => 'info',
+                )
+            ),
+            'id' => null,
+            'module' => 'Front'
+        ]);
+        $router[] = new Route('mista-zajmu/<action>/[<id>/]', [
+            'presenter' => 'Interest',
+            'action' => array(
+                Route::VALUE => 'default',
+                Route::FILTER_TABLE => array(
+                    'nahlasit-zavadu' => 'fault',
+                    'informace' => 'info',
+                )
+            ),
+            'id' => null,
+            'module' => 'Front'
+        ]);
+        $router[] = new Route('odpadove-hospodarstvi/<action>/[<id>/]', [
+            'presenter' => 'Waste',
+            'action' => array(
+                Route::VALUE => 'default',
+                Route::FILTER_TABLE => array(
+                    'nahlasit-zavadu' => 'fault',
+                    'informace' => 'info',
+                )
+            ),
+            'id' => null,
+            'module' => 'Front'
+        ]);
 
         $router[] = new Route('<presenter>/<action>/[<id>/]', [
             'presenter' => 'Homepage',

@@ -1,5 +1,5 @@
 {block title}
-    Front - Waste - waste - addFault
+    Front - Eletric - eletric - addFault
 {/block}
 
 {block content_menu}
@@ -16,28 +16,33 @@
     <div class="row">
         <form n:name=insertFaultForm class="col s12">
 
-            <div class="row show_types">
+            <div class="row ">
                 <div class="input-field col s12">
                     {input description class => [validate]}
                     {label description /}
-                    <span class="helper-text" data-error="Povinné" data-success=""></span>
+                    <span class="helper-text" data-error="povinné" data-success=""></span>
                 </div>
             </div>
 
 
-            <div class="row show_types">
+            <div class="row ">
                 <div class="input-field col s6">
-                    {label datum /}
+                    {label datum  /}
                     <input n:name="datum" type="text" class="datepicker validate"/>
-                    <span class="helper-text" data-error="Povinné" data-success=""></span>
+                    <span class="helper-text" data-error="povinné" data-success=""></span>
                 </div>
                 <div class="input-field col s6">
+                    {input id_device}
+                    {label id_device /}
+                </div>
+            </div>
+            <div class="row ">
+                <div class="input-field col s12">
                     {input email class => [validate]}
                     {label email /}
-                    <span class="helper-text" data-error="Špatný formát emailové adresy" data-success="Formát odpovídá emailové adrese"></span>
+                    <span class="helper-text" data-error="špatný formát emailové adresy" data-success="formát odpovídá emailové adrese"></span>
                 </div>
             </div>
-
             <div class="row">
                 <div class="input-field col s12">
                     {input submit class => [btn, col, s12]}
@@ -48,26 +53,17 @@
     </div>
 
 
-
 {/block}
 
 
 {* JS kod pro konkretni Presenter *}
 {block scripts}
     {include parent}
-<script type="application/javascript">
-
-    $('.datepicker').pickadate({
-    selectMonths: true,
-    selectYears: 15
-    });
-
-    $(document).ready(function(){
-        $(".hide_type_1").hide();
-    });
-
-
-</script>
+    <script type="application/javascript">
+        $(document).ready(function(){
+            $('.datepicker').datepicker();
+        });
+    </script>
 
 {/block}
 
