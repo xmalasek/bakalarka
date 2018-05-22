@@ -66,10 +66,13 @@ class EditEletricFormFactory
         $form->addText('lat', 'Latitude')
             ->setRequired('Povinné!');
 
-
         $form->addText('lng', 'Longitude')
             ->setRequired('Povinné!');
 
+        $form->addUpload('avatar')
+            ->setRequired(FALSE)
+            ->addRule(Form::IMAGE, 'Soubor musí být JPEG, PNG nebo GIF.')
+            ->addRule(Form::MAX_FILE_SIZE, 'Maximální velikost souboru je 10MB.', 10000 * 1024 /* v bytech */);
 
 
         $form->addSubmit('submit', 'Potvrdit');

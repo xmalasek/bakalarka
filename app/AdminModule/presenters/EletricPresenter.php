@@ -7,6 +7,7 @@ use Nette\Application\Responses\JsonResponse;
 use Nette\Utils\Json;
 use function PHPSTORM_META\type;
 use Tracy\Debugger;
+use Nette\Utils\FileSystem;
 
 class EletricPresenter extends BasePresenter
 {
@@ -162,7 +163,23 @@ class EletricPresenter extends BasePresenter
         return $form;
     }
 
-    public function updateDeviceSucceeded($form, $values){
+    public function updateDeviceSucceeded($form, $values)
+    {
+        $eletric = $this->database->table('eletric')->get($this->getParameter('id'));
+        $avatar = $values->avatar;
+        if($avatar->isImage() and $avatar->isOk()) {
+            if (!is_null($eletric->avatar)) {
+                FileSystem::delete('admin/upload/eletric/'.$eletric->avatar);
+            }
+
+            $file_ext=strtolower(mb_substr($avatar->getSanitizedName(), strrpos($avatar->getSanitizedName(), ".")));
+            $file_name = $eletric->id_eletric . $file_ext;
+            $avatar->move('admin/upload/eletric/'. $file_name);
+            $values->avatar = $file_name;
+        }
+        else {
+            $values->avatar = $eletric->avatar;
+        }
 
         $this->database->table('eletric')
             ->where('id_eletric', $this->getParameter('id')) // must be called before update()
@@ -179,6 +196,7 @@ class EletricPresenter extends BasePresenter
                 'popis' => $values->popis,
                 'lat' => $values->lat,
                 'lng' => $values->lng,
+                'avatar' => $values->avatar
 
             ]);
 
@@ -209,13 +227,26 @@ class EletricPresenter extends BasePresenter
 
         ]);
 
+        if(is_null($values->avatar)) {
+            $this->template->avatar_path = '';
+        }
+        else {
+            $this->template->avatar_path = '/admin/upload/eletric/'.$values->avatar;
+        }
+
+
+
     }
 
     public function handleDelete($deviceId){
 
+        $eletric = $this->database->table('eletric')->get($deviceId);
+        if(!is_null($eletric->avatar))
+        {
+            FileSystem::delete('admin/upload/eletric/'.$eletric->avatar);
+        }
         $this->database->table('eletric')->where('id_eletric', $deviceId)->delete();
         $this->flashMessage('Zařízení bylo úspěšně odstraněno.', 'info');
-
     }
 
 
