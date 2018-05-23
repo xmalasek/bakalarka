@@ -3,6 +3,7 @@
 namespace AdminModule;
 
 use Nette;
+use Nette\Utils\FileSystem;
 
 
 class WastePresenter extends BasePresenter
@@ -18,7 +19,7 @@ class WastePresenter extends BasePresenter
 
     public function renderDefault()
     {
-        $this->template->waste = $this->database->table('waste');
+        $this->myRenderDefault(null);
     }
 
     public function renderShow()
@@ -125,6 +126,22 @@ class WastePresenter extends BasePresenter
 
     public function updateDeviceSucceeded($form, $values){
 
+        $waste = $this->database->table('waste')->get($this->getParameter('id'));
+        $avatar = $values->avatar;
+        if($avatar->isImage() and $avatar->isOk()) {
+            if (!is_null($waste->avatar)) {
+                FileSystem::delete('admin/upload/waste/'.$waste->avatar);
+            }
+
+            $file_ext=strtolower(mb_substr($avatar->getSanitizedName(), strrpos($avatar->getSanitizedName(), ".")));
+            $file_name = $waste->id_waste . $file_ext;
+            $avatar->move('admin/upload/waste/'. $file_name);
+            $values->avatar = $file_name;
+        }
+        else {
+            $values->avatar = $waste->avatar;
+        }
+
         $this->database->table('waste')
             ->where('id_waste', $this->getParameter('id')) // must be called before update()
             ->update([
@@ -167,14 +184,50 @@ class WastePresenter extends BasePresenter
 
         ]);
 
+        if(is_null($values->avatar)) {
+            $this->template->avatar_path = '';
+        }
+        else {
+            $this->template->avatar_path = '/admin/upload/waste/'.$values->avatar;
+        }
+
 
     }
 
     public function handleDelete($deviceId){
 
+        $waste = $this->database->table('waste')->get($deviceId);
+        if(!is_null($waste->avatar))
+        {
+            FileSystem::delete('admin/upload/waste/'.$waste->avatar);
+        }
         $this->database->table('waste')->where('id_waste', $deviceId)->delete();
         $this->flashMessage('Zařízení bylo úspěšně odstraněno.', 'info');
+    }
 
+    protected function createComponentFiltrWasteForm(){
+
+        $form = (new FiltrWasteFormFactory()) -> create();
+        $form->onSuccess[] = [$this, 'filtrDeviceSucceeded'];
+
+        return $form;
+    }
+
+    private function myRenderDefault($value) {
+        if(!isset($this->template->waste))
+        {
+            if(!$value)
+            {
+                $this->template->waste = $this->database->table('waste');
+            }
+            else {
+                $this->template->waste = $this->database->table('waste')->where('ulice', $value);
+            }
+        }
+    }
+
+    public function filtrDeviceSucceeded($form, $values){
+        $this->myRenderDefault($values->ulice);
     }
 
 }

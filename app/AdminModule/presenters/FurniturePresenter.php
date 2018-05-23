@@ -3,6 +3,7 @@
 namespace AdminModule;
 
 use Nette;
+use Nette\Utils\FileSystem;
 
 
 class FurniturePresenter extends BasePresenter
@@ -19,7 +20,7 @@ class FurniturePresenter extends BasePresenter
 
     public function renderDefault()
     {
-        $this->template->furniture = $this->database->table('furniture');
+        $this->myRenderDefault(null);
     }
 
     public function renderShow()
@@ -43,6 +44,7 @@ class FurniturePresenter extends BasePresenter
             $this->redirect('Eletric:default');
         }else{
             $this->template->furniture = $device;
+
         }
     }
 
@@ -136,6 +138,22 @@ class FurniturePresenter extends BasePresenter
     //update furniture device
     public function updateDeviceSucceeded($form, $values){
 
+        $furniture= $this->database->table('furniture')->get($this->getParameter('id'));
+        $avatar = $values->avatar;
+        if($avatar->isImage() and $avatar->isOk()) {
+            if (!is_null($furniture->avatar)) {
+                FileSystem::delete('admin/upload/furniture/'.$furniture->avatar);
+            }
+
+            $file_ext=strtolower(mb_substr($avatar->getSanitizedName(), strrpos($avatar->getSanitizedName(), ".")));
+            $file_name = $furniture->id_furniture . $file_ext;
+            $avatar->move('admin/upload/furniture/'. $file_name);
+            $values->avatar = $file_name;
+        }
+        else {
+            $values->avatar = $furniture->avatar;
+        }
+
         $this->database->table('furniture')
             ->where('id_furniture', $this->getParameter('id'))
             ->update([
@@ -150,8 +168,12 @@ class FurniturePresenter extends BasePresenter
                 'popis' => $values->popis,
                 'lat' => $values->lat,
                 'lng' => $values->lng,
+                'avatar' => $values->avatar
+
 
             ]);
+
+
 
         $this->flashMessage('Položka byla úspěšně editována.');
 
@@ -162,7 +184,8 @@ class FurniturePresenter extends BasePresenter
 
         $values = $this->database->table('furniture')->get($id);
         if (!$values) {
-            $this->error('Příspěvek nebyl nalezen');
+            $this->flashMessage('Položka nebyla nalezena.', 'fail');
+            $this->redirect(':Admin:Furniture:default');
         }
 
         $this['editFurnitureForm']->setDefaults([
@@ -180,16 +203,52 @@ class FurniturePresenter extends BasePresenter
 
         ]);
 
+        if(is_null($values->avatar)) {
+            $this->template->avatar_path = '';
+        }
+        else {
+            $this->template->avatar_path = '/admin/upload/furniture/'.$values->avatar;
+        }
+
 
     }
 
     public function handleDelete($deviceId){
 
+        $furniture = $this->database->table('furniture')->get($deviceId);
+        if(!is_null($furniture->avatar))
+        {
+            FileSystem::delete('admin/upload/furniture/'.$furniture->avatar);
+        }
         $this->database->table('furniture')->where('id_furniture', $deviceId)->delete();
-        $this->flashMessage('Zařízení bylo úspěšně odstraněno.', 'success');
+        $this->flashMessage('Zařízení bylo úspěšně odstraněno.', 'info');
 
     }
 
+    protected function createComponentFiltrFurnitureForm(){
+
+        $form = (new FiltrFurnitureFormFactory()) -> create();
+        $form->onSuccess[] = [$this, 'filtrDeviceSucceeded'];
+
+        return $form;
+    }
+
+    private function myRenderDefault($value) {
+        if(!isset($this->template->furniture))
+        {
+            if(!$value)
+            {
+                $this->template->furniture = $this->database->table('furniture');
+            }
+            else {
+                $this->template->furniture = $this->database->table('furniture')->where('ulice', $value);
+            }
+        }
+    }
+
+    public function filtrDeviceSucceeded($form, $values){
+        $this->myRenderDefault($values->ulice);
+    }
 
 
 

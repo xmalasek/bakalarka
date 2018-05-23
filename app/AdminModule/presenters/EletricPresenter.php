@@ -53,17 +53,27 @@ class EletricPresenter extends BasePresenter
     }
 
     public function renderInfo($id){
-        $this->template->eletric = $this->database->table('eletric')->where('id_eletric', $id);
-    }
 
-    public function actionInfo($id){
-        $device = $this->database->table('eletric')->get($id);
+        $device = $this->database->table('eletric')->where('id_eletric', $id);
 
         if (!$device) {
-            $this->flashMessage('Položka nebyla nalezena.', 'fail');
-            $this->redirect(':Admin:Eletric:default');
+            $this->error('Příspěvek nebyl nalezen');
+            $this->redirect('Eletric:default');
+        }else{
+            $this->template->eletric = $device;
+
         }
+
     }
+
+//    public function actionInfo($id){
+//        $device = $this->database->table('eletric')->get($id);
+//
+//        if (!$device) {
+//            $this->flashMessage('Položka nebyla nalezena.', 'fail');
+//            $this->redirect(':Admin:Eletric:default');
+//        }
+//    }
 
 
     protected function createComponentInsertEletricForm(){

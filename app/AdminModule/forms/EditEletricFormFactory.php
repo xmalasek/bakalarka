@@ -21,6 +21,12 @@ class EditEletricFormFactory
         $form->addSelect('ulice', 'Ulice', [
             'V dědině' => 'V Dědině',
             'Hlavní' => 'Hlavní',
+            'Horka' => 'Horka',
+            'Nová' => 'Nová',
+            'Dálka' => 'Dálka',
+            'Kukýrna' => 'Kukýrna',
+            'Drásovská' => 'Drásovská',
+            'U nádraží' => 'U nádraží',
         ])
             ->setPrompt('Zvolte ulici')
             ->setRequired('Ulice musi byt vyplnena!');
