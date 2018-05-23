@@ -1,10 +1,10 @@
 <?php
 
-namespace AdminModule;
+namespace FrontModule;
 
 use Nette\Application\UI\Form;
 
-class FiltrEletricFormFactory
+class FiltrInterestFormFactory
 {
     /**
      * @return Form

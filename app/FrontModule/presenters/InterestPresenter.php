@@ -18,7 +18,7 @@ class InterestPresenter extends Nette\Application\UI\Presenter
 
     public function renderDefault()
     {
-        $this->template->interest = $this->database->table('interest');
+        $this->myRenderDefault(null);
     }
 
     public function renderShow()
@@ -71,5 +71,30 @@ class InterestPresenter extends Nette\Application\UI\Presenter
 
         $this->redirect('Interest:default');
 
+    }
+
+    protected function createComponentFiltrInterestForm(){
+
+        $form = (new FiltrInterestFormFactory()) -> create();
+        $form->onSuccess[] = [$this, 'filtrDeviceSucceeded'];
+
+        return $form;
+    }
+
+    private function myRenderDefault($value) {
+        if(!isset($this->template->interest))
+        {
+            if(!$value)
+            {
+                $this->template->interest = $this->database->table('interest');
+            }
+            else {
+                $this->template->interest = $this->database->table('interest')->where('ulice', $value);
+            }
+        }
+    }
+
+    public function filtrDeviceSucceeded($form, $values){
+        $this->myRenderDefault($values->ulice);
     }
 }

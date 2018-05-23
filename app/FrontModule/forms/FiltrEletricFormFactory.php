@@ -1,6 +1,6 @@
 <?php
 
-namespace AdminModule;
+namespace FrontModule;
 
 use Nette\Application\UI\Form;
 

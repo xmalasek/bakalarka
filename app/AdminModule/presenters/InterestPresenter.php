@@ -133,21 +133,21 @@ class InterestPresenter extends BasePresenter
 
     public function updateDeviceSucceeded($form, $values){
 
-        $interest = $this->database->table('interest')->get($this->getParameter('id'));
-        $avatar = $values->avatar;
-        if($avatar->isImage() and $avatar->isOk()) {
-            if (!is_null($interest->avatar)) {
-                FileSystem::delete('admin/upload/interest/'.$interest->avatar);
-            }
-
-            $file_ext=strtolower(mb_substr($avatar->getSanitizedName(), strrpos($avatar->getSanitizedName(), ".")));
-            $file_name = $interest->id_interest . $file_ext;
-            $avatar->move('admin/upload/interest/'. $file_name);
-            $values->avatar = $file_name;
-        }
-        else {
-            $values->avatar = $interest->avatar;
-        }
+//        $interest = $this->database->table('interest')->get($this->getParameter('id'));
+//        $avatar = $values->avatar;
+//        if($avatar->isImage() and $avatar->isOk()) {
+//            if (!is_null($interest->avatar)) {
+//                FileSystem::delete('admin/upload/interest/'.$interest->avatar);
+//            }
+//
+//            $file_ext=strtolower(mb_substr($avatar->getSanitizedName(), strrpos($avatar->getSanitizedName(), ".")));
+//            $file_name = $interest->id_interest . $file_ext;
+//            $avatar->move('admin/upload/interest/'. $file_name);
+//            $values->avatar = $file_name;
+//        }
+//        else {
+//            $values->avatar = $interest->avatar;
+//        }
 
         $this->database->table('interest')
             ->where('id_interest', $this->getParameter('id'))
@@ -193,23 +193,23 @@ class InterestPresenter extends BasePresenter
 
         ]);
 
-        if(is_null($values->avatar)) {
-            $this->template->avatar_path = '';
-        }
-        else {
-            $this->template->avatar_path = '/admin/upload/interest/'.$values->avatar;
-        }
+//        if(is_null($values->avatar)) {
+//            $this->template->avatar_path = '';
+//        }
+//        else {
+//            $this->template->avatar_path = '/admin/upload/interest/'.$values->avatar;
+//        }
 
 
     }
 
     public function handleDelete($deviceId){
 
-        $interest = $this->database->table('interest')->get($deviceId);
-        if(!is_null($interest->avatar))
-        {
-            FileSystem::delete('admin/upload/interest/'.$interest->avatar);
-        }
+//        $interest = $this->database->table('interest')->get($deviceId);
+//        if(!is_null($interest->avatar))
+//        {
+//            FileSystem::delete('admin/upload/interest/'.$interest->avatar);
+//        }
         $this->database->table('interest')->where('id_interest', $deviceId)->delete();
         $this->flashMessage('Zařízení bylo úspěšně odstraněno.', 'info');
     }

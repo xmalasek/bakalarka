@@ -156,6 +156,7 @@ class WastePresenter extends BasePresenter
                 'popis' => $values->popis,
                 'lat' => $values->lat,
                 'lng' => $values->lng,
+                'avatar' => $values->avatar
 
             ]);
 

@@ -18,7 +18,7 @@ class WastePresenter extends Nette\Application\UI\Presenter
 
     public function renderDefault()
     {
-        $this->template->waste = $this->database->table('waste');
+        $this->myRenderDefault(null);
     }
 
     public function renderShow()
@@ -74,4 +74,30 @@ class WastePresenter extends Nette\Application\UI\Presenter
         $this->redirect('Waste:default');
 
     }
+
+    protected function createComponentFiltrWasteForm(){
+
+        $form = (new FiltrWasteFormFactory()) -> create();
+        $form->onSuccess[] = [$this, 'filtrDeviceSucceeded'];
+
+        return $form;
+    }
+
+    private function myRenderDefault($value) {
+        if(!isset($this->template->waste))
+        {
+            if(!$value)
+            {
+                $this->template->waste = $this->database->table('waste');
+            }
+            else {
+                $this->template->waste = $this->database->table('waste')->where('ulice', $value);
+            }
+        }
+    }
+
+    public function filtrDeviceSucceeded($form, $values){
+        $this->myRenderDefault($values->ulice);
+    }
+
 }

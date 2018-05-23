@@ -19,7 +19,7 @@ class FurniturePresenter extends Nette\Application\UI\Presenter
 
     public function renderDefault()
     {
-        $this->template->furniture = $this->database->table('furniture');
+        $this->myRenderDefault(null);
     }
 
     public function renderShow()
@@ -75,6 +75,31 @@ class FurniturePresenter extends Nette\Application\UI\Presenter
 
         $this->redirect('Furniture:default');
 
+    }
+
+    protected function createComponentFiltrFurnitureForm(){
+
+        $form = (new FiltrFurnitureFormFactory()) -> create();
+        $form->onSuccess[] = [$this, 'filtrDeviceSucceeded'];
+
+        return $form;
+    }
+
+    private function myRenderDefault($value) {
+        if(!isset($this->template->furniture))
+        {
+            if(!$value)
+            {
+                $this->template->furniture = $this->database->table('furniture');
+            }
+            else {
+                $this->template->furniture = $this->database->table('furniture')->where('ulice', $value);
+            }
+        }
+    }
+
+    public function filtrDeviceSucceeded($form, $values){
+        $this->myRenderDefault($values->ulice);
     }
 
 

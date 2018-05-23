@@ -7,11 +7,22 @@
 {/block}
 
 {block content}
-    <center>
-        <h4>
-            Mapa odpadového hospodářství.
-        </h4>
-    </center>
+    <form n:name=filtrWasteForm class="col s12">
+        <div class="row">
+            <div class="input-field col m6">
+                {input ulice }
+                {label ulice /}
+            </div>
+            <div class="input-field col m6">
+                {input submit class => [btn, col, s12]}
+            </div>
+        </div>
+    </form>
+
+
+    <h4 class="center-align">
+        Odpadové hospodářství
+    </h4>
 
     <div id="map"></div>
 
